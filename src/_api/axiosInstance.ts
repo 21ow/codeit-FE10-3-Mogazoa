@@ -1,4 +1,6 @@
 import axios from 'axios';
+import NO_TOKEN_ENDPOINTS from './constant/noTokenEndPoints';
+import isAuthRequired from './util/isAuthRequired';
 import { getAccessToken, _LOGIN_NEED_MESSAGE_ } from './storage/authStorage';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -12,15 +14,21 @@ const axiosInstance = axios.create({
   },
 });
 
-const NO_TOKEN_ENDPOINTS = ['/auth/signUp', '/auth/signIn', '/oauthApps'];
-
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = getAccessToken();
     //dino@gmail.com, 12341234
     //임시 토큰
     // const token =
     //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzMyLCJ0ZWFtSWQiOiIxMC0zIiwiaWF0IjoxNzM0NTEzNTUyLCJpc3MiOiJzcC1tb2dhem9hIn0.tbvOoiH-iTR1CZW5rhjJW5KSr2Go8cxGwqRWxLGwqZ8';
+
+    const path = config.url || '';
+    const method = config?.method || '';
+
+    if (!isAuthRequired(path, method)) {
+      return config;
+    }
+
+    const token = getAccessToken();
 
     if (!token && config.url && !NO_TOKEN_ENDPOINTS.includes(config.url)) {
       throw new Error(`Failed to getAccessToken(), ${_LOGIN_NEED_MESSAGE_}`);
