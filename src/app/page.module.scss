@@ -1,0 +1,7 @@
+@use '@/assets/variables' as *;
+.homeTag {
+  background-color: $green;
+  color: $red;
+  border: $border-red;
+  border-radius: $radi;
+}
