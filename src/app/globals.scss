@@ -1,6 +1,5 @@
-@use '@/_asset/variables.scss' as *;
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
-@import '@/_asset/reset.scss';
+@import '@/asset/reset.scss';
 
 body {
   font-family: Pretendard;
