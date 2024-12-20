@@ -1,13 +1,13 @@
 import axiosInstance from './axiosInstance';
-import localStorage from '@/_api/storage/localStorage';
-import sessionStorage from '@/_api/storage/sessionStorage';
+import localStorage from '@/api/storage/localStorage';
+import sessionStorage from '@/api/storage/sessionStorage';
 import {
   SignUpRequest,
   SignInRequest,
   SocialSignInRequest,
   SocialSignUpRequest,
   AuthResponse,
-} from '@/_api/type/Auth';
+} from '@/api/type/Auth';
 
 /*** '회원가입' 요청 ***/
 export const postSignUp = async (
