@@ -12,36 +12,54 @@ type Props = {
 
 const Input = forwardRef<HTMLInputElement, Props>(
   ({ id, title, error, ...props }, ref) => {
-    const [filePreview, setFilePreview] = useState<string | null>(null); //zustand로 마이그레이션
+    const [filePreviews, setFilePreviews] = useState<string[] | null>(null); //zustand로 마이그레이션
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (!file) return;
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      console.log(files);
+      if (!files) return;
 
-      if (file.size > 5 * 1024 * 1024) {
-        //에러 처리 추가
-        setFilePreview(null);
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFilePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      const fileArray = Array.from(files);
+
+      const validFiles = fileArray.filter(
+        (file) => file.size <= 5 * 1024 * 1024
+        //5MB 일 경우 에러 처리
+      );
+
+      const filePromises = validFiles.map(
+        (file) =>
+          new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.onerror = reject;
+          })
+      );
+
+      Promise.all(filePromises)
+        .then((fileUrls) => {
+          setFilePreviews(fileUrls);
+        })
+        .catch((error) => {
+          console.error('파일 읽기 에러:', error);
+        });
     };
+
     return (
       <div>
         {title && <label htmlFor={id}>{title}</label>}
-        <input
-          ref={ref}
-          accept="image/*"
-          onChange={handleFileChange}
-          {...props}
-        />
+        <input ref={ref} onChange={handleFileChange} {...props} />
         {error && <span>{error}</span>}
-        {filePreview && (
-          <Image src={filePreview} alt="preview" width={100} height={100} /> //alt 파일명으로 변경
-        )}
+        {filePreviews &&
+          filePreviews.map((preview, index) => (
+            <Image
+              key={index}
+              src={preview}
+              alt={`preview-${index}`}
+              width={100}
+              height={100}
+            />
+          ))}
       </div>
     );
   }
