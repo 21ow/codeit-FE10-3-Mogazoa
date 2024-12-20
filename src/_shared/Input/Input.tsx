@@ -3,15 +3,17 @@
 import React, { forwardRef } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
+import styles from './Input.module.scss';
 
 type Props = {
-  id?: string;
+  type: string;
+  id: string;
   title?: string;
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = forwardRef<HTMLInputElement, Props>(
-  ({ id, title, error, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement | null, Props>(
+  ({ type, id, title, error, ...props }, ref) => {
     const [filePreviews, setFilePreviews] = useState<string[] | null>(null); //zustand로 마이그레이션
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,8 +49,19 @@ const Input = forwardRef<HTMLInputElement, Props>(
 
     return (
       <div>
-        {title && <label htmlFor={id}>{title}</label>}
-        <input ref={ref} onChange={handleFileChange} {...props} />
+        {type === 'file' ? (
+          <label htmlFor={id}>파일 선택</label>
+        ) : (
+          title && <label htmlFor={id}>{title}</label>
+        )}
+        <input
+          type={type}
+          id={id}
+          ref={ref}
+          onChange={handleFileChange}
+          {...props}
+          className={styles.input}
+        />
         {error && <span>{error}</span>}
         {filePreviews &&
           filePreviews.map((preview, index) => (
