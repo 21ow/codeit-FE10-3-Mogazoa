@@ -13,7 +13,7 @@ const Page = () => {
       />
       <Button
         label="Click button"
-        onClick={() => console.log('안녕하세요?')}
+        onClick={() => console.log('안녕하십니까')}
         className={styles.customButton2}
       />
     </div>
