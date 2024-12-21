@@ -1,6 +1,6 @@
 import axiosInstance from './axiosInstance';
-import sessionStorage from '@/_api/storage/sessionStorage';
-import { CategoryResponse } from '@/_api/type/Category';
+import sessionStorage from '@/api/storage/sessionStorage';
+import { CategoryResponse } from '@/api/type/Category';
 
 /*** 상품 카테고리 조회 ***/
 export const getCategories = async (): Promise<CategoryResponse[]> => {

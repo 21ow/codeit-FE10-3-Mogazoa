@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance';
-import sessionStorage from '@/_api/storage/sessionStorage';
+import sessionStorage from '@/api/storage/sessionStorage';
 import { FollowRequest, FollowResponse } from './type/Follow';
 
 /*** 유저 팔로우 ***/
