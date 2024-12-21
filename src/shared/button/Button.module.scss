@@ -27,6 +27,6 @@
   font-weight: $font-weight;
 }
 
-.button {
+.mainButton {
   @include button-style();
 }
