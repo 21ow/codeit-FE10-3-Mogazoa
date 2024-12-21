@@ -1,6 +1,6 @@
 import localStorage from './localStorage';
 import sessionStorage from './sessionStorage';
-import { AuthResponse } from '@/_api/type/Auth';
+import { AuthResponse } from '@/api/type/Auth';
 
 /*** 로그인 메세지 ***/
 export const _LOGIN_NEED_MESSAGE_ = '로그인이 필요한 서비스입니다.';
