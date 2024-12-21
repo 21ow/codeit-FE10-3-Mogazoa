@@ -10,10 +10,11 @@ type InputProps = {
   id: string;
   title?: string;
   formError?: string;
+  className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement | null, InputProps>(
-  ({ type, id, title, formError, ...props }, ref) => {
+  ({ type, id, title, formError, className, ...props }, ref) => {
     const [filePreviews, setFilePreviews] = useState<string[] | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
@@ -92,7 +93,9 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           ref={ref}
           onChange={type === 'file' ? handleFileChange : undefined}
           className={
-            formError ? `${styles.input} ${styles.error}` : styles.input
+            formError
+              ? `${styles.input} ${className} ${styles.error}`
+              : `${styles.input} ${className}`
           }
           {...props}
         />

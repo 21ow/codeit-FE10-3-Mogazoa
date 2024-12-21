@@ -6,11 +6,12 @@ import styles from './TextArea.module.scss';
 
 type TextAreaProps = {
   id: string;
+  className?: string;
   error?: string;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const TextArea = forwardRef<HTMLTextAreaElement | null, TextAreaProps>(
-  ({ id, error, ...props }, ref) => {
+  ({ id, className, error, ...props }, ref) => {
     const [text, setText] = useState<string>('');
 
     const handleTextCounter = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,7 +25,7 @@ const TextArea = forwardRef<HTMLTextAreaElement | null, TextAreaProps>(
           ref={ref}
           onChange={handleTextCounter}
           {...props}
-          className={styles.textarea}
+          className={`${styles.textarea} ${className}`}
         />
 
         {/* 리액트 훅 폼 에러 */}
