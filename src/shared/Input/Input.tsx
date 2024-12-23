@@ -52,7 +52,9 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
       type: string,
       id: string
     ) => {
-      const handlers: { [key: string]: Function } = {
+      const handlers: {
+        [key: string]: (e: React.ChangeEvent<HTMLInputElement>) => void;
+      } = {
         file: handleFileChange,
         text_nickname: handleTextCounter,
       };
