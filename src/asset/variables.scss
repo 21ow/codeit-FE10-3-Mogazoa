@@ -28,7 +28,7 @@ $border-red: 1px solid $red;
 $border-black: 1px solid $mood-black;
 $border-blue: 1px solid $blue;
 
-$pad-input: 23px 20px;
+$pad-input: 20px;
 $pad-button: 24px 288px;
 $pad-search: 16px 20px;
 $pad-menu: 15px 20px;
@@ -36,3 +36,23 @@ $pad-category: 4px 10px;
 $pad-category-small: 4px 8px;
 $pad-compare: 8px 10px;
 $pad-statistics: 30px 74px;
+
+@mixin innerLayout-style(
+  $position: absolute,
+  $top: none,
+  $bottom: none,
+  $left: none,
+  $right: none,
+  $transform: none,
+  $color: $dark-gray,
+  $background-color: $dim-black
+) {
+  position: $position;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+  transform: $transform;
+  color: $color;
+  background-color: $background-color;
+}

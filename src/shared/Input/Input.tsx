@@ -1,150 +1,104 @@
 'use client';
 
-import React, { forwardRef, useState } from 'react';
-import Image from 'next/image';
-import FileLabel from './component/FileLabel';
+import React, { forwardRef } from 'react';
+import useInput from './hook/useInput';
+import useTextCounter from '@/hook/useTextCounter';
+import Label from './component/Label';
+import PwToggleBtn from './component/PwToggleBtn';
+import TextCount from '../TextCount';
+import InfoMessage from './component/InfoMessage';
+import ErrorMessage from './component/ErrorMessage';
+import FilePreview from './component/FilePreview';
 import styles from './Input.module.scss';
 
 type InputProps = {
   type: string;
   id: string;
   title?: string;
-  formError?: string;
+  maxLength?: number;
+  formErrorMessage?: string | null;
   className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement | null, InputProps>(
-  ({ type, id, title, formError, className, ...props }, ref) => {
-    const [filePreviews, setFilePreviews] = useState<string[] | null>(null);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [showPassword, setShowPassword] = useState(false);
+  (
+    { type, id, title, maxLength, formErrorMessage, className, ...props },
+    ref
+  ) => {
+    const {
+      showPassword,
+      filePreviews,
+      inputKey,
+      fileErrorMessage,
+      handleTogglePassword,
+      handleFileChange,
+      handleDeleteImg,
+    } = useInput();
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      if (!files) return;
+    const { text, handleTextCounter } = useTextCounter(maxLength);
 
-      const fileList = Array.from(files);
-
-      const validFiles = fileList.filter(
-        (file) => file.size <= 5 * 1024 * 1024
-      );
-      const invalidFiles = fileList.filter(
-        (file) => file.size > 5 * 1024 * 1024
-      );
-
-      if (invalidFiles.length > 0) {
-        setErrorMessage('5MB 이하의 파일을 선택해주세요.');
-        return;
-      }
-
-      setErrorMessage(null);
-      const filePromises = validFiles.map(
-        (file) =>
-          new Promise<string>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => resolve(reader.result as string);
-            reader.onerror = () =>
-              reject('파일을 읽는 중 오류가 발생했습니다. 다시 시도해주세요.');
-          })
-      );
-
-      Promise.all(filePromises)
-        .then((fileUrls) => {
-          setFilePreviews(fileUrls);
-        })
-        .catch((error) => {
-          console.error('파일 읽기 에러:', error);
-          setErrorMessage(error);
-        });
-    };
-
-    type InfoMessageType = {
-      nickname: string;
-      password: string;
-    };
-
-    const INFO_MESSAGE: InfoMessageType = {
-      nickname: '최대 10자 가능',
-      password: '최소 8자 이상',
-    };
-
-    const handleTogglePassword = () => {
-      setShowPassword((prev) => !prev);
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement>,
+      type: string,
+      id: string
+    ) => {
+      const handlers: { [key: string]: Function } = {
+        file: handleFileChange,
+        text_nickname: handleTextCounter,
+      };
+      const key = type === 'text' && id === 'nickname' ? 'text_nickname' : type;
+      handlers[key]?.(e);
     };
 
     return (
-      <div className={styles.inputContainer}>
-        {/* Label */}
-        {type === 'file' ? (
-          <FileLabel id={id} />
-        ) : (
-          title && (
-            <label htmlFor={id} className={styles.label}>
-              {title}
-            </label>
-          )
-        )}
+      <div
+        className={
+          type === 'file'
+            ? `${styles.inputContainer} ${styles.fileInput}`
+            : styles.inputContainer
+        }
+      >
+        <Label type={type} id={id} title={title} />
 
-        {/* Input */}
-        <input
-          type={showPassword ? 'text' : type}
-          id={id}
-          ref={ref}
-          onChange={type === 'file' ? handleFileChange : undefined}
-          className={
-            formError
-              ? `${styles.input} ${className} ${styles.error}`
-              : `${styles.input} ${className}`
-          }
-          {...props}
-        />
+        <div className={styles.pwWrapper}>
+          <input
+            key={inputKey}
+            type={showPassword ? 'text' : type}
+            id={id}
+            ref={ref}
+            maxLength={maxLength}
+            onChange={(e) => handleChange(e, type, id)}
+            className={
+              formErrorMessage
+                ? `${styles.input} ${className} ${styles.errorStatus}`
+                : `${styles.input} ${className}`
+            }
+            {...props}
+          />
 
-        {/* 비밀번호 토글 */}
-        {type === 'password' ? (
-          <button type="button" onClick={handleTogglePassword}>
-            {showPassword ? (
-              <Image
-                src={'/icon/ic-invisibility.svg'}
-                alt={'비밀번호 숨기기 버튼'}
-                width={100}
-                height={100}
-              />
-            ) : (
-              <Image
-                src={'/icon/ic-visibility.svg'}
-                alt={'비밀번호 보기 버튼'}
-                width={100}
-                height={100}
-              />
-            )}
-          </button>
-        ) : null}
-
-        {/* 최소, 최대 글자수 알림 */}
-        <div className={styles.infoMessage}>
-          {INFO_MESSAGE[id as keyof InfoMessageType]}
+          <PwToggleBtn
+            type={type}
+            showPassword={showPassword}
+            handleTogglePassword={handleTogglePassword}
+          />
+          <TextCount
+            text={text}
+            maxLength={maxLength}
+            className={styles.textCount}
+          />
         </div>
 
-        {/* 리액트 훅 폼 에러 */}
-        {formError && (
-          <div className={styles.formErrorMessage}>{formError}</div>
-        )}
+        <InfoMessage id={id} />
 
-        {/* 파일 에러 */}
-        {errorMessage && <div>{errorMessage}</div>}
+        <ErrorMessage
+          formError={formErrorMessage}
+          fileError={fileErrorMessage}
+        />
 
-        {/* 이미지 프리뷰 */}
-        {filePreviews &&
-          filePreviews.map((preview, index) => (
-            <Image
-              key={index}
-              src={preview}
-              alt={`preview-${index}`}
-              width={100}
-              height={100}
-            />
-          ))}
+        <FilePreview
+          filePreviews={filePreviews}
+          handleDeleteImg={handleDeleteImg}
+        />
       </div>
     );
   }

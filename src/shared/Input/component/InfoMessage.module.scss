@@ -1,0 +1,5 @@
+@use './ErrorMessage.module.scss' as message;
+
+.infoMessage {
+  @include message.message-style($color: $dark-gray);
+}
