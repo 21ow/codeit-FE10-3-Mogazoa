@@ -6,7 +6,7 @@ import useTextCounter from '@/hook/useTextCounter';
 import Label from './component/Label';
 import PwToggleBtn from './component/PwToggleBtn';
 import TextCount from '../TextCount';
-import InfoMessage from './component/InfoMessage';
+// import InfoMessage from './component/InfoMessage';
 import ErrorMessage from './component/ErrorMessage';
 import FilePreview from './component/FilePreview';
 import styles from './Input.module.scss';
@@ -14,15 +14,25 @@ import styles from './Input.module.scss';
 type InputProps = {
   type: string;
   id: string;
-  title?: string;
+  label?: string;
   maxLength?: number;
+  multiple?: boolean;
   formErrorMessage?: string | null;
   className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement | null, InputProps>(
   (
-    { type, id, title, maxLength, formErrorMessage, className, ...props },
+    {
+      type,
+      id,
+      label,
+      maxLength,
+      multiple,
+      formErrorMessage,
+      className,
+      ...props
+    },
     ref
   ) => {
     const {
@@ -33,7 +43,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
       handleTogglePassword,
       handleFileChange,
       handleDeleteImg,
-    } = useInput();
+    } = useInput(multiple);
 
     const { text, handleTextCounter } = useTextCounter(maxLength);
 
@@ -58,7 +68,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             : styles.inputContainer
         }
       >
-        <Label type={type} id={id} title={title} />
+        <Label type={type} id={id} label={label} />
         <div className={styles.pwWrapper}>
           <input
             key={inputKey}
@@ -67,6 +77,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             ref={ref}
             maxLength={maxLength}
             onChange={(e) => handleChange(e, type, id)}
+            multiple={multiple}
             className={
               formErrorMessage
                 ? `${styles.input} ${className} ${styles.errorStatus}`
@@ -85,7 +96,9 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             className={styles.textCount}
           />
         </div>
-        <InfoMessage id={id} />
+
+        {/* 디자인 변경 고려*/}
+        {/* <InfoMessage id={id} /> */}
         <ErrorMessage
           formError={formErrorMessage}
           fileError={fileErrorMessage}

@@ -4,10 +4,10 @@ import styles from './Label.module.scss';
 type LabelProps = {
   type: string;
   id: string;
-  title?: string;
+  label?: string;
 };
 
-const Label = ({ type, id, title }: LabelProps) => {
+const Label = ({ type, id, label }: LabelProps) => {
   return type === 'file' ? (
     <label htmlFor={id} className={styles.fileLabel}>
       <Image
@@ -18,9 +18,9 @@ const Label = ({ type, id, title }: LabelProps) => {
       />
     </label>
   ) : (
-    title && (
+    label && (
       <label htmlFor={id} className={styles.label}>
-        {title}
+        {label}
       </label>
     )
   );
