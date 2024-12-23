@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import localStorage from '@/api/storage/localStorage';
 import sessionStorage from '@/api/storage/sessionStorage';
 import {

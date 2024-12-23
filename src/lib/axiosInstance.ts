@@ -1,7 +1,10 @@
 import axios from 'axios';
-import NO_TOKEN_ENDPOINTS from './constant/noTokenEndPoints';
-import isAuthRequired from './util/isAuthRequired';
-import { getAccessToken, _LOGIN_NEED_MESSAGE_ } from './storage/authStorage';
+import NO_TOKEN_ENDPOINTS from '@/api/constant/noTokenEndPoints';
+import isAuthRequired from '@/api/util/isAuthRequired';
+import {
+  getAccessToken,
+  _LOGIN_NEED_MESSAGE_,
+} from '@/api/storage/authStorage';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

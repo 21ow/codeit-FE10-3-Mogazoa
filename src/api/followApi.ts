@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from '@/api/storage/sessionStorage';
 import { FollowRequest, FollowResponse } from './type/Follow';
 

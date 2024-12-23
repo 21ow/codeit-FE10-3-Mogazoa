@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import localStorage from './storage/localStorage';
 import { OauthRequest, OauthResponse } from './type/Oauth';
 

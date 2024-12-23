@@ -1,5 +1,5 @@
 import axios from 'axios';
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from './storage/sessionStorage';
 import {
   ReviewRequest,
