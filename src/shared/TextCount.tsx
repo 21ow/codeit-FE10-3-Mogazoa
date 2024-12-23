@@ -1,5 +1,3 @@
-import styles from './TextCount.module.scss';
-
 type TextCountProps = {
   text: string;
   maxLength?: number;
