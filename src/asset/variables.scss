@@ -39,10 +39,10 @@ $pad-statistics: 30px 74px;
 
 @mixin innerLayout-style(
   $position: absolute,
-  $top: none,
-  $bottom: none,
-  $left: none,
-  $right: none,
+  $top: auto,
+  $bottom: auto,
+  $left: auto,
+  $right: auto,
   $transform: none,
   $color: $dark-gray,
   $background-color: $dim-black
