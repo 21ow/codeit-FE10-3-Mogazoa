@@ -59,7 +59,6 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
         }
       >
         <Label type={type} id={id} title={title} />
-
         <div className={styles.pwWrapper}>
           <input
             key={inputKey}
@@ -75,7 +74,6 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             }
             {...props}
           />
-
           <PwToggleBtn
             type={type}
             showPassword={showPassword}
@@ -87,14 +85,11 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             className={styles.textCount}
           />
         </div>
-
         <InfoMessage id={id} />
-
         <ErrorMessage
           formError={formErrorMessage}
           fileError={fileErrorMessage}
         />
-
         <FilePreview
           filePreviews={filePreviews}
           handleDeleteImg={handleDeleteImg}
