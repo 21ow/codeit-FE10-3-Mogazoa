@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useInput = (multiple: boolean | undefined) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,8 +63,6 @@ const useInput = (multiple: boolean | undefined) => {
         console.error('파일 읽기 에러:', error);
         setFileErrorMessage(error);
       });
-
-    console.log('파일 리스트: ', files);
   };
 
   const handleDeleteImg = (index: number) => {
@@ -72,8 +70,6 @@ const useInput = (multiple: boolean | undefined) => {
     setFileErrorMessage(null);
     setInputKey((prevKey) => prevKey + 1);
   };
-
-  useEffect(() => console.log('파일 프리뷰: ', filePreviews));
 
   return {
     showPassword,
