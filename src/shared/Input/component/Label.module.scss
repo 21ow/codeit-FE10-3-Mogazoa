@@ -1,0 +1,16 @@
+@use '../Input.module.scss' as input;
+
+@mixin label-style($color: $white, $font-size: 16px, $font-weight: 400) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+.label {
+  @include label-style();
+}
+
+.fileLabel {
+  @include input.input-style($width: 160px, $height: 160px, $padding: 63px);
+  cursor: pointer;
+}

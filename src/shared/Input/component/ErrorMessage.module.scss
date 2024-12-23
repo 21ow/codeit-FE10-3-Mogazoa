@@ -1,0 +1,11 @@
+@use '@/asset/variables' as *;
+
+@mixin message-style($color: $red, $font-size: 14px, $font-weight: 400) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+.errorMessage {
+  @include message-style();
+}
