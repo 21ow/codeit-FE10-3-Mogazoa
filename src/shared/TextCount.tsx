@@ -1,3 +1,5 @@
+'use client';
+
 type TextCountProps = {
   text: string;
   maxLength?: number;

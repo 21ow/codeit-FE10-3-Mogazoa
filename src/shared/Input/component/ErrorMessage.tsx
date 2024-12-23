@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './ErrorMessage.module.scss';
 
 type ErrorMessageProps = {

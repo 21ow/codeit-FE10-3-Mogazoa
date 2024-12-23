@@ -1,3 +1,5 @@
+'use client';
+
 import { InfoMessageType, INFO_MESSAGE } from '../constant/infoMessage';
 import styles from './InfoMessage.module.scss';
 
