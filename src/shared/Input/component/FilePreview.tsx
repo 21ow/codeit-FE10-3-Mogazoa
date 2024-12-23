@@ -20,8 +20,7 @@ const FilePreview = ({
             <Image
               src={preview}
               alt={`${index + 1}`}
-              layout="fill"
-              objectFit="cover"
+              fill
               className={styles.filePreviews}
             />
             <button
@@ -32,8 +31,7 @@ const FilePreview = ({
               <Image
                 src={'/icon/ic-close.svg'}
                 alt="삭제 버튼"
-                layout="fill"
-                objectFit="cover"
+                fill
                 className={styles.deleteIcon}
               />
             </button>

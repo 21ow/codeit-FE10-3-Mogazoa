@@ -18,6 +18,10 @@
 
 .filePreviewsWrapper {
   @include imgWrapper-style($width: 160px, $height: 160px);
+
+  > img {
+    object-fit: cover;
+  }
 }
 
 // .filePreviews {
