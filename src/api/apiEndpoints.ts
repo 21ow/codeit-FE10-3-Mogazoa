@@ -75,7 +75,7 @@ const apiEndpoints: Record<string, ApiEndpoint> = {
       auth: false,
     },
   },
-  usersFollowing: {
+  usersFollowees: {
     get: {
       url: (userId: string, cursor?: string) =>
         cursor === undefined
@@ -252,7 +252,7 @@ const apiEndpoints: Record<string, ApiEndpoint> = {
   },
   authSignIn: {
     post: {
-      url: `auth/signIn`,
+      url: `/auth/signIn`,
       storageKey: 'signIn',
       storageType: 'session',
       auth: false,
