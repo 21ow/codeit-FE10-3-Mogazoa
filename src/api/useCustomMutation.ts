@@ -4,11 +4,11 @@ import apiEndpoints from './apiEndpoints';
 import { createRequest, onError, generateUrl } from './util/httpUtils';
 import { useMutation } from 'react-query';
 
-const useCustomMutation = (
+const useCustomMutation = <T>(
   endpointKey: string,
   method: 'post' | 'patch' | 'delete',
-  params?: Record<string, string>,
-  data?: Record<string, object>
+  data: Record<string, string | number>,
+  params?: Record<string, string>
 ) => {
   const endpoint = apiEndpoints[endpointKey];
   const apiConfig = endpoint[method];
@@ -19,7 +19,7 @@ const useCustomMutation = (
 
   const url = generateUrl({ apiConfig, params });
 
-  const fetchData = async <T>(): Promise<T> => {
+  const fetchData = async (): Promise<T> => {
     const response = await createRequest<T>({ method, url, data });
     return response?.data;
   };

@@ -11,13 +11,14 @@ type GenerateUrlProps = {
 type createRequestProps = {
   method: 'get' | 'post' | 'patch' | 'delete';
   url: string;
-  data?: Record<string, object>;
+  data?: Record<string, string | number>;
 };
 
 export const generateUrl = ({ apiConfig, params }: GenerateUrlProps) => {
   if (typeof apiConfig.url === 'function') {
     return apiConfig.url(...Object.values(params || {}));
   }
+
   return apiConfig.url;
 };
 

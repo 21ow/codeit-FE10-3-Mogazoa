@@ -18,7 +18,7 @@ const useCustomQuery = <T>(
 
   const url = generateUrl({ apiConfig, params });
 
-  const fetchData = async <T>(): Promise<T> => {
+  const fetchData = async (): Promise<T> => {
     const response = await createRequest<T>({ method: 'get', url });
     return response?.data;
   };
