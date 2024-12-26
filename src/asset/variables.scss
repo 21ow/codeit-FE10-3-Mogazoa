@@ -1,9 +1,9 @@
-$black-500: #17171c;
+$black-500: #17171c; //dard
 $black-450: #1c1c22; //배경
 $black-400: #181d26;
 $black-350: #252530;
-$black-300: #2e2e3a;
-$black-200: #353542;
+$black-300: #2e2e3a; //light
+$black-200: #353542; //mood
 
 $dark-gray: #6e6e82;
 $gray: #9fa6b2;
@@ -26,7 +26,7 @@ $radius-modal: 16px;
 
 $border-none: none;
 $border-red: 1px solid $red;
-$border-black: 1px solid $mood-black;
+$border-black: 1px solid $black-200;
 $border-blue: 1px solid $blue;
 
 $pad-input: 20px;
@@ -46,7 +46,7 @@ $pad-statistics: 30px 74px;
   $right: auto,
   $transform: none,
   $color: $dark-gray,
-  $background-color: $dim-black
+  $background-color: $black-350
 ) {
   position: $position;
   top: $top;
