@@ -1,7 +1,7 @@
 'use client';
 
 type TextCountProps = {
-  text: string;
+  text: number;
   maxLength?: number;
   className?: string;
 };
@@ -10,7 +10,7 @@ const TextCount = ({ text, maxLength, className }: TextCountProps) => {
   return (
     maxLength && (
       <div className={className}>
-        {text.length}/{maxLength}
+        {text}/{maxLength}
       </div>
     )
   );

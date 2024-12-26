@@ -2,17 +2,12 @@
 
 import { useState } from 'react';
 
-const useInput = (multiple: boolean | undefined) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [filePreviews, setFilePreviews] = useState<string[]>([]);
+const useImageUpload = (multiple: boolean | undefined) => {
   const [inputKey, setInputKey] = useState<number>(0);
+  const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const [fileErrorMessage, setFileErrorMessage] = useState<string | null>(null);
 
   const MAX_FILES = multiple ? 4 : 1;
-
-  const handleTogglePassword = () => {
-    setShowPassword((prev) => !prev);
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -72,14 +67,12 @@ const useInput = (multiple: boolean | undefined) => {
   };
 
   return {
-    showPassword,
     filePreviews,
     inputKey,
     fileErrorMessage,
-    handleTogglePassword,
     handleFileChange,
     handleDeleteImg,
   };
 };
 
-export default useInput;
+export default useImageUpload;
