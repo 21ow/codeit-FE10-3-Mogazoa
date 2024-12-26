@@ -31,7 +31,8 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
     },
     ref
   ) => {
-    const { showPassword, handleTogglePassword } = usePasswordToggle();
+    const { inputRef, showPassword, handleTogglePassword } =
+      usePasswordToggle();
 
     const {
       filePreviews,
@@ -63,7 +64,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             key={inputKey}
             type={showPassword ? 'text' : type}
             id={id}
-            ref={ref}
+            ref={type === 'file' ? ref : inputRef}
             maxLength={maxLength}
             onChange={(e) =>
               type === 'file' ? handleFileChange(e) : handleTextCounter(e)
