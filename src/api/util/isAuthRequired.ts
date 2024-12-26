@@ -1,11 +1,20 @@
-import NO_TOKEN_ENDPOINTS from '../constant/noTokenEndPoints';
+export const NO_TOKEN_ENDPOINTS = [
+  '/auth/',
+  '/categories',
+  '/oauthApps',
+  '/products',
+];
 
-const isAuthRequired = (path: string, method: string): boolean => {
-  if (path === '/users/me') {
+export const isAuthRequired = (
+  path: string,
+  method: string,
+  userId?: string
+): boolean => {
+  if (path === '/users/me' || path === `/users/${userId}`) {
     return true;
   }
 
-  if (path.startsWith('/users/')) {
+  if (path.startsWith('/users/') && path !== `/users/${userId}`) {
     return false;
   }
 
@@ -15,5 +24,3 @@ const isAuthRequired = (path: string, method: string): boolean => {
 
   return !NO_TOKEN_ENDPOINTS.some((endpoint) => path.startsWith(endpoint));
 };
-
-export default isAuthRequired;

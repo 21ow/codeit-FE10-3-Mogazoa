@@ -1,7 +1,7 @@
 import axios from 'axios';
-import NO_TOKEN_ENDPOINTS from './constant/noTokenEndPoints';
-import isAuthRequired from './util/isAuthRequired';
-import { getAccessToken, _LOGIN_NEED_MESSAGE_ } from './storage/authStorage';
+
+import { isAuthRequired, NO_TOKEN_ENDPOINTS } from '@/api/util/isAuthRequired';
+import { getAccessToken, _LOGIN_NEED_MESSAGE_ } from '@/api/authStorage';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -23,6 +23,11 @@ axiosInstance.interceptors.request.use(
 
     const path = config.url || '';
     const method = config?.method || '';
+
+    if (config.data instanceof FormData) {
+      config.headers['Content-Type'] = 'multipart/form-data';
+      return config;
+    }
 
     if (!isAuthRequired(path, method)) {
       return config;
