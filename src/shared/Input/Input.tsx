@@ -1,31 +1,27 @@
 'use client';
 
 import React, { forwardRef } from 'react';
-import useInput from './hook/useInput';
+import classNames from 'classnames';
+import { useId } from 'react';
+import usePasswordToggle from './hook/usePasswordToggle';
+import useImageUpload from './hook/useImageUpload';
 import useTextCounter from '@/hook/useTextCounter';
 import Label from './component/Label';
 import PwToggleBtn from './component/PwToggleBtn';
 import TextCount from '../TextCount';
-// import InfoMessage from './component/InfoMessage';
 import ErrorMessage from './component/ErrorMessage';
 import FilePreview from './component/FilePreview';
 import styles from './Input.module.scss';
 
 type InputProps = {
-  type: string;
-  id: string;
   label?: string;
-  maxLength?: number;
-  multiple?: boolean;
   formErrorMessage?: string | null;
-  className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement | null, InputProps>(
   (
     {
-      type,
-      id,
+      type = 'text',
       label,
       maxLength,
       multiple,
@@ -35,32 +31,24 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
     },
     ref
   ) => {
+    const { inputRef, showPassword, handleTogglePassword } =
+      usePasswordToggle();
+
     const {
-      showPassword,
       filePreviews,
       inputKey,
       fileErrorMessage,
-      handleTogglePassword,
       handleFileChange,
       handleDeleteImg,
-    } = useInput(multiple);
+    } = useImageUpload(multiple);
+
+    const id = useId();
 
     const { text, handleTextCounter } = useTextCounter(maxLength);
 
-    const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement>,
-      type: string,
-      id: string
-    ) => {
-      const handlers: {
-        [key: string]: (e: React.ChangeEvent<HTMLInputElement>) => void;
-      } = {
-        file: handleFileChange,
-        text_nickname: handleTextCounter,
-      };
-      const key = type === 'text' && id === 'nickname' ? 'text_nickname' : type;
-      handlers[key]?.(e);
-    };
+    const inputClassName = classNames(styles.input, className, {
+      [styles.errorStatus]: formErrorMessage,
+    });
 
     return (
       <div
@@ -71,20 +59,18 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
         }
       >
         <Label type={type} id={id} label={label} />
-        <div className={styles.pwWrapper}>
+        <div className={styles.inputWrapper}>
           <input
             key={inputKey}
             type={showPassword ? 'text' : type}
             id={id}
-            ref={ref}
+            ref={type === 'file' ? ref : inputRef}
             maxLength={maxLength}
-            onChange={(e) => handleChange(e, type, id)}
-            multiple={multiple}
-            className={
-              formErrorMessage
-                ? `${styles.input} ${className} ${styles.errorStatus}`
-                : `${styles.input} ${className}`
+            onChange={(e) =>
+              type === 'file' ? handleFileChange(e) : handleTextCounter(e)
             }
+            multiple={multiple}
+            className={inputClassName}
             {...props}
           />
           <PwToggleBtn
@@ -99,8 +85,6 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           />
         </div>
 
-        {/* 디자인 변경 고려*/}
-        {/* <InfoMessage id={id} /> */}
         <ErrorMessage
           formError={formErrorMessage}
           fileError={fileErrorMessage}
