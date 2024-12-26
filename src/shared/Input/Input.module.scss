@@ -1,0 +1,60 @@
+@use '@/asset/variables' as *;
+
+@mixin input-style(
+  $color: $white,
+  $font-size: 16px,
+  $font-weight: 400,
+  $background-color: $dim-black,
+  $width: 100%,
+  $height: 70px,
+  $padding: $pad-input,
+  $outline: $border-black,
+  $border-radius: $radius-common
+) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  background-color: $background-color;
+  width: $width;
+  height: $height;
+  padding: $padding;
+  outline: $outline;
+  border-radius: $border-radius;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &.fileInput {
+    flex-direction: row;
+  }
+}
+
+.pwWrapper {
+  position: relative;
+}
+
+.input {
+  @include input-style();
+  &:focus {
+    outline: $border-blue;
+  }
+
+  &[type='file'] {
+    display: none;
+  }
+}
+
+.errorStatus {
+  outline: $border-red;
+}
+
+.textCount {
+  @include innerLayout-style(
+    $top: 50%,
+    $right: 20px,
+    $transform: translateY(-50%)
+  );
+}

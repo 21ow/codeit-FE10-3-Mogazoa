@@ -1,0 +1,14 @@
+@use '../Input/Input.module.scss' as input;
+
+.textareaWrapper {
+  position: relative;
+}
+
+.textarea {
+  @include input.input-style($height: 160px);
+  resize: none;
+}
+
+.textCount {
+  @include innerLayout-style($bottom: 20px, $right: 20px);
+}
