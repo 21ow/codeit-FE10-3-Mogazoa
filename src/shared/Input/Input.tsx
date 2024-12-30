@@ -90,6 +90,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           fileError={fileErrorMessage}
         />
         <FilePreview
+          type={type}
           filePreviews={filePreviews}
           handleDeleteImg={handleDeleteImg}
         />

@@ -9,6 +9,7 @@
   $height: 70px,
   $padding: $pad-input,
   $outline: $border-black,
+  $focus-outline: $border-blue,
   $border-radius: $radius-common
 ) {
   color: $color;
@@ -20,6 +21,14 @@
   padding: $padding;
   outline: $outline;
   border-radius: $border-radius;
+
+  &:focus {
+    outline: $focus-outline;
+  }
+
+  &[type='file'] {
+    display: none;
+  }
 }
 
 .inputContainer {
@@ -34,17 +43,6 @@
 
 .inputWrapper {
   position: relative;
-}
-
-.input {
-  @include input-style();
-  &:focus {
-    outline: $border-blue;
-  }
-
-  &[type='file'] {
-    display: none;
-  }
 }
 
 .errorStatus {

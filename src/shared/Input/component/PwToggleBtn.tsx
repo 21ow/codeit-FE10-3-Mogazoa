@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import styles from './PwToggleBtn.module.scss';
+import { HTMLInputTypeAttribute } from 'react';
 
 type PassowrdProps = {
-  type: string;
+  type: HTMLInputTypeAttribute;
   showPassword: boolean;
   handleTogglePassword: () => void;
 };
