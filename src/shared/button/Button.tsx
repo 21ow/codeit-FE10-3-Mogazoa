@@ -1,10 +1,8 @@
-'use client';
-
 import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: React.ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -21,6 +19,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'button';
+Button.displayName = 'Button';
 
 export default Button;
