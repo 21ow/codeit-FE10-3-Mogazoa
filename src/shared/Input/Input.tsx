@@ -47,7 +47,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
 
     const { text, handleTextCounter } = useTextCounter(maxLength);
 
-    const inputClassName = classNames(styles.input, className, {
+    const inputClassName = classNames(className || styles.input, {
       [styles.errorStatus]: formErrorMessage,
     });
 
