@@ -4,23 +4,23 @@ import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
+  children: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ label, className = '', ...props }, ref) => {
+  ({ children, className = '', ...props }, ref) => {
     return (
       <button
         ref={ref}
         className={`${styles.maButton} ${className}`}
         {...props}
       >
-        {label}
+        {children}
       </button>
     );
   }
 );
 
-Button.displayName = 'hihi';
+Button.displayName = 'button';
 
 export default Button;
