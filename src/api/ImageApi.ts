@@ -1,6 +1,5 @@
-import axios from 'axios';
+import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from './storage/sessionStorage';
-import { getAccessToken, _LOGIN_NEED_MESSAGE_ } from './storage/authStorage';
 import { ImageRequest, ImageResponse } from './type/Image';
 
 /*** 이미지 업로드
@@ -9,11 +8,6 @@ import { ImageRequest, ImageResponse } from './type/Image';
 export const postImagesUpload = async (
   data: ImageRequest
 ): Promise<ImageResponse> => {
-  const token = getAccessToken();
-  if (!token) {
-    throw new Error(`Failed to getAccessToken(), ${_LOGIN_NEED_MESSAGE_}`);
-  }
-
   // create formdata
   const formData = new FormData();
   formData.append('image', data.file);
@@ -22,12 +16,7 @@ export const postImagesUpload = async (
   console.log('POST - postImagesUpload(): ', URL);
 
   try {
-    const res = await axios.post(URL, formData, {
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await axiosInstance.post(URL, formData);
 
     if (res.status === 200 || res.status === 201) {
       const resData = res.data as ImageResponse;
