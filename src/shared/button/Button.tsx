@@ -1,30 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styles from './Button.module.scss';
 
-interface ButtonProps {
-  className?: string;
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  label,
-  onClick,
-  disabled = false,
-  className = '',
-}) => {
-  return (
-    <button
-      className={`${styles.maButton} ${className}`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {label}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className = '', ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={`${styles.maButton} ${className}`}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = 'button';
 
 export default Button;
