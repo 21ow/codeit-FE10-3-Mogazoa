@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
+import { mergeRefs } from 'react-merge-refs';
 import { useId } from 'react';
 import usePasswordToggle from './hook/usePasswordToggle';
 import useImageUpload from './hook/useImageUpload';
@@ -31,7 +32,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
     },
     ref
   ) => {
-    const { inputRef, showPassword, handleTogglePassword } =
+    const { toggleRef, showPassword, handleTogglePassword } =
       usePasswordToggle();
 
     const {
@@ -64,7 +65,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             key={inputKey}
             type={showPassword ? 'text' : type}
             id={id}
-            ref={type === 'file' ? ref : inputRef}
+            ref={mergeRefs([ref, toggleRef])}
             maxLength={maxLength}
             onChange={(e) =>
               type === 'file' ? handleFileChange(e) : handleTextCounter(e)
