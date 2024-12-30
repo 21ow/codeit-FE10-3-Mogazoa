@@ -4,7 +4,11 @@ import Input from '../Input/Input';
 import Image from 'next/image';
 import styles from './Navigation.module.scss';
 
-const Navigation = () => {
+type NavigationProps = {
+  children: React.ReactNode;
+};
+
+const Navigation = ({ children }: NavigationProps) => {
   return (
     <div className={styles.navigation}>
       <Link href="#" className={styles.logo}>
@@ -27,15 +31,7 @@ const Navigation = () => {
           />
         </div>
 
-        <Link href="#" className={styles.link}>
-          상품 등록하기
-        </Link>
-        <Link href="#" className={styles.link}>
-          비교하기
-        </Link>
-        <Link href="#" className={styles.link}>
-          내 프로필
-        </Link>
+        {children}
       </div>
     </div>
   );
