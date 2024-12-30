@@ -1,8 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import styles from './PwToggleBtn.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
+import Image from 'next/image';
+import Button from '@/shared/button/Button';
+import styles from './PwToggleBtn.module.scss';
 
 type PassowrdProps = {
   type: HTMLInputTypeAttribute;
@@ -16,7 +17,7 @@ const PwToggleBtn = ({
   handleTogglePassword,
 }: PassowrdProps) => {
   return type === 'password' ? (
-    <button
+    <Button
       type="button"
       onClick={handleTogglePassword}
       className={styles.toggleBtn}
@@ -36,7 +37,7 @@ const PwToggleBtn = ({
           height={24}
         />
       )}
-    </button>
+    </Button>
   ) : null;
 };
 

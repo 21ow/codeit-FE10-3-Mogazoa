@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Button from '@/shared/button/Button';
 import styles from './FilePreview.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
 
@@ -27,7 +28,7 @@ const FilePreview = ({
                 fill
                 className={styles.filePreviews}
               />
-              <button
+              <Button
                 type="button"
                 className={styles.deleteBtn}
                 onClick={() => handleDeleteImg(index)}
@@ -38,7 +39,7 @@ const FilePreview = ({
                   fill
                   className={styles.deleteIcon}
                 />
-              </button>
+              </Button>
             </div>
           ))}
       </div>
