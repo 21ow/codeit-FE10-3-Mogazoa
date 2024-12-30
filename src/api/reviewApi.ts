@@ -1,5 +1,4 @@
-import axios from 'axios';
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from './storage/sessionStorage';
 import {
   ReviewRequest,
@@ -90,7 +89,7 @@ export const deleteReviews = async (
   console.log('DELETE - deleteReviewsId(): ', URL);
 
   try {
-    const res = await axios.delete(URL);
+    const res = await axiosInstance.delete(URL);
 
     if (res.status === 200 || res.status === 201) {
       const resData = res.data as DeleteReviewResponse;
@@ -120,7 +119,7 @@ export const patchReviews = async (
   console.log('PATCH - patchReviewsId(): ', URL);
 
   try {
-    const res = await axios.patch(URL, data);
+    const res = await axiosInstance.patch(URL, data);
 
     if (res.status === 200 || res.status === 201) {
       const resData = res.data as ReviewResponse;

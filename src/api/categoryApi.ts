@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from '@/api/storage/sessionStorage';
 import { CategoryResponse } from '@/api/type/Category';
 
