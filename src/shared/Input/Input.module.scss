@@ -45,6 +45,10 @@
   position: relative;
 }
 
+.input {
+  @include input-style();
+}
+
 .errorStatus {
   outline: $border-red;
 }
