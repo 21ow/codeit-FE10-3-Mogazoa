@@ -12,6 +12,8 @@
   height: 100px;
   border: 1px solid $black-350;
   padding: 0 120px;
+  z-index: 1;
+  background-color: $black-450;
 }
 
 .logo {
