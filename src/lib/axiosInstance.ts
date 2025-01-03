@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { isAuthRequired, NO_TOKEN_ENDPOINTS } from '@/api/util/isAuthRequired';
 import { _LOGIN_NEED_MESSAGE_ } from '@/api/storage/authStorage';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = 'https://mogazoa-api.vercel.app/10-3';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,

@@ -11,33 +11,45 @@ import {
 
 /*** 상품 목록 조회 ***/
 export const getProducts = async (
-  keyword = '',
-  category = 1,
-  order = 'recent',
-  cursor = 1
-): Promise<GetProductResponse> => {
-  const URL = `/products`;
-  console.log('GET - getProducts(): ', URL);
+  keyword: string = '',
+  category: number = 0,
+  order: string = 'recent',
+  cursor: number = 0
+): Promise<GetProductResponse | null> => {
+  let URL = `/products?order=${order}&cursor=${cursor}`;
 
-  const params: GetProductRequest = { keyword, category, order, cursor };
+  if (keyword.trim() !== '') {
+    URL += `&keyword=${keyword}`;
+  }
+
+  if (category > 0) {
+    URL += `&category=${category}`;
+  }
+
+  console.log('GET - getProducts(): ', URL);
 
   try {
     const res = await axiosInstance.get(URL, {
-      params,
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (res.status === 200 || res.status === 201) {
       const resData = res.data as GetProductResponse;
       sessionStorage.setItem(`getProducts`, resData);
+
       return resData;
     } else {
-      throw new Error(
-        `Failed to getProducts() res.status: ${res.status}, res.data: ${res.data}`
-      );
+      throw new Error('Failed to getProducts()');
     }
   } catch (error) {
+    console.error('Error to getProducts():', error);
     throw error;
   }
+
+  return null;
 };
 
 /*** 상품 생성 ***/
