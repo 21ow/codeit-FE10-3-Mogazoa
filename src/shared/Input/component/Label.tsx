@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import styles from './Label.module.scss';
+import { HTMLInputTypeAttribute } from 'react';
 
 type LabelProps = {
-  type: string;
+  type: HTMLInputTypeAttribute;
   id: string;
   label?: string;
 };

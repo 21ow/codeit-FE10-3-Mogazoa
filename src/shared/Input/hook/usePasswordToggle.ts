@@ -4,17 +4,17 @@ import { useState, useRef } from 'react';
 
 const usePasswordToggle = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const toggleRef = useRef<HTMLInputElement | null>(null);
 
   const handleTogglePassword = () => {
     setShowPassword((prev) => !prev);
-    if (inputRef.current) {
-      inputRef.current.focus();
+    if (toggleRef.current) {
+      toggleRef.current.focus();
     }
   };
 
   return {
-    inputRef,
+    toggleRef,
     showPassword,
     handleTogglePassword,
   };
