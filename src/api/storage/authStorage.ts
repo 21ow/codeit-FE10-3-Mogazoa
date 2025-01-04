@@ -13,7 +13,7 @@ export const checkSignUp = () => {
 
 /*** 로그인 정보 얻기 ***/
 export const checkSignIn = () => {
-  const res = sessionStorage.getItem(`postAuthSignIn`) as AuthResponse | null;
+  const res = localStorage.getItem(`postAuthSignIn`) as AuthResponse | null;
   return res;
 };
 
