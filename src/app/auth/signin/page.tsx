@@ -10,7 +10,7 @@ type LoginFormData = {
   password: string;
 };
 
-const Login = () => {
+const Signin = () => {
   const {
     register,
     handleSubmit,
@@ -46,9 +46,11 @@ const Login = () => {
           },
         })}
       />
-      <Button type="submit">로그인</Button>
+      <Button type="submit" className={styles.button}>
+        로그인
+      </Button>
     </form>
   );
 };
 
-export default Login;
+export default Signin;
