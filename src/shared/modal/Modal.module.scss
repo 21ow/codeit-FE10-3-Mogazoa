@@ -13,21 +13,42 @@
   z-index: 1000;
 }
 
+@mixin container-style(
+  $background-color: $black-450,
+  $border-radius: $radius-modal,
+  $padding: 20px 20px,
+  $min-width: 295px,
+  $display: flex,
+  $flex-direction: column,
+  $justify-content: center
+) {
+  background-color: $background-color;
+  border-radius: $border-radius;
+  padding: $padding;
+  min-width: $min-width;
+  display: $display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+}
+
 .container {
-  background-color: $black-450;
-  border-radius: 12px;
-  padding: 12px 12px;
-  min-width: 295px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include container-style();
+}
+
+@mixin content-style(
+  $display: flex,
+  $flex-direction: column,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include content-style();
 }
 
 @keyframes fadeIn {
