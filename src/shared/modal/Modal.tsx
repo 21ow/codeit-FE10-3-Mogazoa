@@ -72,10 +72,9 @@ const Modal = ({
         ref={modalRef}
         className={`${customModalContainerStyle ? customModalContainerStyle : styles.container} ${isVisible ? styles.visible : styles.hidden}`}
       >
-        {customHeader ||
-          (headerText && (
-            <ModalHeader headerText={headerText} onClose={onClose} />
-          ))}
+        {customHeader || (
+          <ModalHeader headerText={headerText} onClose={onClose} />
+        )}
         <div
           className={`${customModalContentStyle ? customModalContentStyle : styles.content}`}
         >
