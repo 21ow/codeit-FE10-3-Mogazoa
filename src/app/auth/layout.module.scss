@@ -1,0 +1,15 @@
+.favoriteWrapper {
+  display: flex;
+  gap: 5px;
+}
+
+.favorite,
+.compare {
+  fill: $white;
+  width: 24px;
+  height: 24px;
+}
+
+.auth {
+  display: flex;
+}
