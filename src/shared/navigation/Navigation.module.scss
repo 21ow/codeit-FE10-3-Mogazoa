@@ -14,6 +14,7 @@
   padding: 0 120px;
   z-index: 1;
   background-color: $black-450;
+  font-weight: 500;
 }
 
 .logo {
@@ -24,7 +25,7 @@
 .explore {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 30px;
 
   > a {
     display: flex;
