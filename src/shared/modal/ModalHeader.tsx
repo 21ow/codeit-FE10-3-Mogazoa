@@ -1,6 +1,5 @@
-import Image from 'next/image';
-import CloseIcon from '../../../public/icon/ic-close.svg';
 import styles from './ModalHeader.module.scss';
+import Image from 'next/image';
 
 interface ModalHeaderProps {
   headerText?: string;
@@ -12,7 +11,13 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({ headerText, onClose }) => {
     <div className={styles.container}>
       <p>{headerText}</p>
       <button type="button" onClick={onClose}>
-        <Image src={CloseIcon} alt="close" />
+        <Image
+          src={'/icon/ic-close.svg'}
+          width={24}
+          height={24}
+          alt="닫기"
+          className={styles.closeIcon}
+        />
       </button>
     </div>
   );

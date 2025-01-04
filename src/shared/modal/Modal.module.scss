@@ -1,3 +1,5 @@
+@use '@/asset/variables' as *;
+
 .overlay {
   display: flex;
   justify-content: center;
@@ -12,7 +14,7 @@
 }
 
 .container {
-  background-color: variables.$deep-black;
+  background-color: $black-450;
   border-radius: 12px;
   padding: 12px 12px;
   min-width: 295px;
