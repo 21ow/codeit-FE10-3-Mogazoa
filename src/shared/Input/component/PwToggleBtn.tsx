@@ -4,6 +4,7 @@ import { HTMLInputTypeAttribute } from 'react';
 import Image from 'next/image';
 import Button from '@/shared/button/Button';
 import styles from './PwToggleBtn.module.scss';
+import { HTMLInputTypeAttribute } from 'react';
 
 type PassowrdProps = {
   type: HTMLInputTypeAttribute;
