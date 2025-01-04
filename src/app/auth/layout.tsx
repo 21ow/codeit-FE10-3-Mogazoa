@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import AddItem from '/public/icon/ic-add-item.svg';
 import Compare from '/public/icon/ic-compare.svg';
 import Navigation from '@/shared/navigation/Navigation';
-import styles from './layout.module.scss';
 import Link from 'next/link';
+import styles from './layout.module.scss';
 
 type LayoutProps = {
   children: ReactNode;
