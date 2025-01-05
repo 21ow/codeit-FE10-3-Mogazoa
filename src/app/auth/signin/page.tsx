@@ -9,6 +9,7 @@ import { postSignIn } from '@/api/authApi';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import SocialSignin from '../component/SocialSignin';
+import Link from 'next/link';
 import styles from './page.module.scss';
 
 const Signin = () => {
@@ -24,13 +25,11 @@ const Signin = () => {
     mutationFn: postSignIn,
     onSuccess: (data) => {
       localStorage.setItem('signinToken', data.accessToken);
-      alert('로그인 성공!');
       router.push('/home');
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
       console.error(message);
-      alert('로그인 실패. 다시 시도해 주세요.');
     },
   });
 
@@ -39,7 +38,7 @@ const Signin = () => {
   };
 
   return (
-    <>
+    <div className={styles.signinWrapper}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
@@ -72,6 +71,10 @@ const Signin = () => {
           로그인
         </Button>
       </form>
+      <div className={styles.accountActions}>
+        <Link href="#">비밀번호 재설정</Link>
+        <Link href="/auth/signup">회원가입</Link>
+      </div>
       <div className={styles.socialSiginin}>
         <div className={styles.socialTitle}>SNS로 바로 시작하기</div>
         <div className={styles.socialWrapper}>
@@ -79,7 +82,7 @@ const Signin = () => {
           <SocialSignin src={'/icon/ic-kakaotalk.svg'} social="카카오톡" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
