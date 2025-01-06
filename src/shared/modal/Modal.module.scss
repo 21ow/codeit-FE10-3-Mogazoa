@@ -1,3 +1,5 @@
+@use '@/asset/variables' as *;
+
 .overlay {
   display: flex;
   justify-content: center;
@@ -11,21 +13,49 @@
   z-index: 1000;
 }
 
+@mixin container-style($background-color: $black-450,
+  $border-radius: $radius-modal,
+  $padding: 20px 20px,
+  $min-width: 295px,
+  $display: flex,
+  $flex-direction: column,
+  $justify-content: center) {
+  background-color: $background-color;
+  border-radius: $border-radius;
+  padding: $padding;
+  min-width: $min-width;
+  display: $display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+}
+
 .container {
-  background-color: variables.$deep-black;
-  border-radius: 12px;
-  padding: 12px 12px;
-  min-width: 295px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include container-style();
+}
+
+@mixin content-style(
+  $display: flex,
+  $flex-direction: column,
+  $justify-content: center,
+  $align-items: center,
+  $color: $white,
+  $font-size: 24px,
+  $font-style: normal,
+  $font-weight: 600,
+  $line-height: normal) {
+  display: $display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  color: $color;
+  font-size: $font-size;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  line-height: $line-height;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include content-style();
 }
 
 @keyframes fadeIn {
@@ -33,6 +63,7 @@
     transform: translateY(-20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -44,6 +75,7 @@
     transform: translateY(0);
     opacity: 1;
   }
+
   to {
     transform: translateY(-20px);
     opacity: 0;
