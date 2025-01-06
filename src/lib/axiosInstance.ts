@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    //dino@gmail.com, 12341234
+    //dino@email.com, 12341234
     //임시 토큰
     const token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzMyLCJ0ZWFtSWQiOiIxMC0zIiwiaWF0IjoxNzM0NTEzNTUyLCJpc3MiOiJzcC1tb2dhem9hIn0.tbvOoiH-iTR1CZW5rhjJW5KSr2Go8cxGwqRWxLGwqZ8';
