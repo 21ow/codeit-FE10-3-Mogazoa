@@ -1,8 +1,8 @@
 import { useEffect, useRef, ReactNode } from 'react';
-import styles from './index.module.scss';
+import styles from './Modal.module.scss';
 import ModalHeader from './ModalHeader';
 
-export interface ModalProps {
+interface ModalProps {
   headerText?: string;
   children?: ReactNode;
   customModalContainerStyle?: string;
@@ -70,13 +70,14 @@ const Modal = ({
     >
       <div
         ref={modalRef}
-        className={`${styles.container} ${isVisible ? styles.visible : styles.hidden} ${customModalContainerStyle}`}
+        className={`${customModalContainerStyle ? customModalContainerStyle : styles.container} ${isVisible ? styles.visible : styles.hidden}`}
       >
-        {customHeader ||
-          (headerText && (
-            <ModalHeader headerText={headerText} onClose={onClose} />
-          ))}
-        <div className={`${styles.content} ${customModalContentStyle}`}>
+        {customHeader || (
+          <ModalHeader headerText={headerText} onClose={onClose} />
+        )}
+        <div
+          className={`${customModalContentStyle ? customModalContentStyle : styles.content}`}
+        >
           {children}
         </div>
       </div>
