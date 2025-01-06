@@ -11,7 +11,7 @@ const RootPage = () => {
     const token = getAccessToken();
 
     if (!token) {
-      router.push('/auth/signin');
+      router.push('/signin');
     } else {
       router.push('/home');
     }
