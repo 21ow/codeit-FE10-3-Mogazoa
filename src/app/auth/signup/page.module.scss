@@ -43,6 +43,10 @@
     $padding: 0
   );
 
+  &:hover {
+    background: linear-gradient(90deg, #3a7bc7, #3c50e0);
+  }
+
   @include tablet {
     height: 55px;
     font-size: 16px;
