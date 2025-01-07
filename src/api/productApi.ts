@@ -29,12 +29,7 @@ export const getProducts = async (
   console.log('GET - getProducts(): ', URL);
 
   try {
-    const res = await axiosInstance.get(URL, {
-      headers: {
-        accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await axiosInstance.get(URL, {});
 
     if (res.status === 200 || res.status === 201) {
       const resData = res.data as GetProductResponse;
