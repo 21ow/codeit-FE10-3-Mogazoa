@@ -1,21 +1,21 @@
 export type GetProductRequest = {
-  keyword: string;
-  category: number;
+  keyword?: string;
+  category?: number;
   order: string;
-  cursor: number;
+  cursor?: number;
 };
 
 export type Product = {
   id: number;
   name: string;
-  image: string;
-  rating: number;
-  createdAt: string;
-  updatedAt: string;
-  writerId: number;
-  categoryId: number;
-  favoriteCount: number;
-  reviewCount: number;
+  image?: string;
+  rating?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  writerId?: number;
+  categoryId?: number;
+  favoriteCount?: number;
+  reviewCount?: number;
 };
 
 export type GetProductResponse = {
