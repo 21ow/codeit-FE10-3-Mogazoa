@@ -1,0 +1,16 @@
+.topWrapper {
+  display: grid; /* 그리드 레이아웃 사용 */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* 두 줄 이상 대응 */
+  gap: 16px;
+}
+.mainTitle {
+  color: $white;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}

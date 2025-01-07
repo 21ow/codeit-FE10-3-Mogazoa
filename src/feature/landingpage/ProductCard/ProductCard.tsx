@@ -27,10 +27,12 @@ const ProductCard = ({
           <div className={styles.contentTitle}>{name}</div>
           <div className={styles.productInfo}>
             <div className={styles.productInfoInner}>
+              <p className={styles.reviewCount}>리뷰</p>
               <p className={styles.reviewCount}>{reviewCount}</p>
+              <p className={styles.favoriteCount}>찜</p>
               <p className={styles.favoriteCount}>{favoriteCount}</p>
-              <p className={styles.raTing}>{rating}</p>
             </div>
+            <p className={styles.raTing}>{rating}</p>
           </div>
         </div>
       </div>

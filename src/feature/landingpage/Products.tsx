@@ -1,59 +1,13 @@
-'use client';
-
-import { useCallback, useEffect, useState } from 'react';
-import { getProducts } from '@/api/productApi';
-import ProductCard from '@/feature/landingpage/ProductCard/ProductCard';
-import { Product, GetProductResponse } from '@/api/type/Product';
+import BestProducts from '@/feature/landingpage/ProductsPage/BestProducts';
+import RatingProducts from '@/feature/landingpage/ProductsPage/RatingProducts';
 import styles from './Products.module.scss';
-
-const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  const handleLoad = useCallback(async () => {
-    try {
-      const response: GetProductResponse | null = await getProducts(
-        ' ',
-        undefined,
-        'rating',
-        0
-      );
-
-      if (response && response.list) {
-        setProducts(response.list);
-      } else {
-        setProducts([]);
-      }
-    } catch (error) {
-      console.error('Error fetching product:', error);
-      setProducts([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    handleLoad();
-  }, [handleLoad]);
-
+const Page = () => {
   return (
-    <section className={styles.wrapper}>
-      <div className={styles.topWrapper}>
-        <h2 className={styles.mainTitle}>지금 핫한 상품</h2>
-        <h2 className={styles.mainTitle2}>TOP 6</h2>
-      </div>
-      <div className={styles.container}>
-        {products.map((productItem) => (
-          <ProductCard
-            key={productItem.id}
-            id={productItem.id}
-            name={productItem.name}
-            image={productItem.image}
-            rating={productItem.rating}
-            favoriteCount={productItem.favoriteCount}
-            reviewCount={productItem.reviewCount}
-          />
-        ))}
-      </div>
-    </section>
+    <div className={styles.wrapper}>
+      <BestProducts />
+      <RatingProducts />
+    </div>
   );
 };
 
-export default Products;
+export default Page;
