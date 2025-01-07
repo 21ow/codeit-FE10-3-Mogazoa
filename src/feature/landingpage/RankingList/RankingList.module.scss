@@ -1,0 +1,93 @@
+.reviewerRanking {
+  padding: 20px;
+}
+
+.reviewerRankingTitle {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: $white;
+}
+
+.reviewerRankingList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.reviewWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.reviewerRankingWrapper {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+.reviewerRankingInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.reviewerRankingContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.reviewerRankingItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.reviewerRankingRankFirst,
+.reviewerRankingRankSecond,
+.reviewerRankingRankDefault {
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: $radius-category-filter;
+  cursor: pointer;
+}
+
+.reviewerRankingRankFirst {
+  background-color: rgba($pink, 0.4);
+  color: $pink;
+}
+
+.reviewerRankingRankSecond {
+  background-color: rgba($green, 0.4);
+  color: $green;
+}
+
+.reviewerRankingRankDefault {
+  background-color: rgba($black-300, 0.4);
+  color: $dark-gray;
+}
+
+.reviewerRankingNickname {
+  font-size: 16px;
+  color: $white;
+}
+
+.reviewerRankingFollowers,
+.reviewerRankingReviews {
+  font-size: 12px;
+  color: $dark-gray;
+}
+.reviewerRankingImage {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+}
