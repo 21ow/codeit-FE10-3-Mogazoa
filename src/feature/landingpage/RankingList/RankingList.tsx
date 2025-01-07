@@ -41,7 +41,7 @@ const RankingList = () => {
     <div className={styles.reviewerRanking}>
       <h1 className={styles.reviewerRankingTitle}>리뷰어 랭킹</h1>
       <ul className={styles.reviewerRankingList}>
-        {rankingList.map((user, index) => (
+        {rankingList.slice(0, 10).map((user, index) => (
           <li className={styles.reviewerRankingItem} key={index}>
             <div className={styles.reviewerRankingInfo}>
               <div className={styles.reviewerRankingImage}>
