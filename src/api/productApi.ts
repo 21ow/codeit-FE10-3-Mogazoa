@@ -1,16 +1,16 @@
 import axiosInstance from '@/lib/axiosInstance';
 import {
-  GetProductRequest,
+  GetProductsRequest,
   GetProductsResponse,
   ProductRequest,
   ProductResponse,
-  GetProdcutReviewRequest,
-  GetProdcutReviewsResponse,
+  GetProductReviewsRequest,
+  GetProductReviewsResponse,
 } from './type/Product';
 
 /*** 상품 목록 조회 ***/
 export const getProducts = async (
-  params: GetProductRequest
+  params: GetProductsRequest
 ): Promise<GetProductsResponse | null> => {
   const URL = `/products`;
   const res = await axiosInstance.get(URL, { params });
@@ -59,9 +59,9 @@ export const getProductsReviews = async (
   productId: number,
   order = 'recent',
   cursor = 1
-): Promise<GetProdcutReviewsResponse> => {
+): Promise<GetProductReviewsResponse> => {
   const URL = `/products/${productId}`;
-  const params: GetProdcutReviewRequest = { order, cursor };
+  const params: GetProductReviewsRequest = { order, cursor };
   const res = await axiosInstance.get(URL, { params });
   return res.data;
 };

@@ -1,4 +1,4 @@
-export type GetProductRequest = {
+export type GetProductsRequest = {
   keyword?: string;
   category?: number;
   order?: string;
@@ -58,7 +58,7 @@ export type ProductResponse = {
   description: string;
 };
 
-export type GetProdcutReviewRequest = {
+export type GetProductReviewsRequest = {
   order?: string;
   cursor?: number;
 };
@@ -88,7 +88,7 @@ export type Review = {
   id: number;
 };
 
-export type GetProdcutReviewsResponse = {
+export type GetProductReviewsResponse = {
   nextCursor: number;
   list: Review[];
 };
