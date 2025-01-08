@@ -1,7 +1,7 @@
-import Signup from '@/feature/auth/signup/Signup';
+import SignUp from '@/feature/auth/signup/Signup';
 
-const SignupPage = () => {
-  return <Signup />;
+const SignUpPage = () => {
+  return <SignUp />;
 };
 
-export default SignupPage;
+export default SignUpPage;
