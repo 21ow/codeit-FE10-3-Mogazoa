@@ -1,7 +1,6 @@
 import axiosInstance from '@/lib/axiosInstance';
 import sessionStorage from './storage/sessionStorage';
 import {
-  GetProductRequest,
   GetProductResponse,
   ProductRequest,
   ProductResponse,
