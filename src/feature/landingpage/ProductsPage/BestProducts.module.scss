@@ -1,0 +1,36 @@
+.wrapper {
+  padding: 20px;
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mainTitle,
+.mainTitle2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열 */
+  grid-gap: 20px; /* 항목 간격 */
+  margin-top: 20px;
+}
+
+.container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2열로 변경 */
+  }
+}

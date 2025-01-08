@@ -1,6 +1,5 @@
 import axiosInstance from '@/lib/axiosInstance';
 import {
-  GetProductRequest,
   GetProductsResponse,
   ProductRequest,
   ProductResponse,
@@ -9,23 +8,9 @@ import {
 } from './type/Product';
 
 /*** 상품 목록 조회 ***/
-export const getProducts = async (
-  keyword = '',
-  category = 0,
-  order = 'recent',
-  cursor = 0
-): Promise<GetProductsResponse | null> => {
-  let URL = `/products`;
-  const params: GetProductRequest = { order, cursor };
-
-  if (keyword.trim() !== '') {
-    URL += `&keyword=${keyword}`;
-  }
-
-  if (category > 0) {
-    URL += `&category=${category}`;
-  }
-  const res = await axiosInstance.get(URL, { params });
+export const getProducts = async (): Promise<GetProductsResponse | null> => {
+  const URL = `/products`;
+  const res = await axiosInstance.get(URL, {});
   return res.data;
 };
 
