@@ -1,6 +1,6 @@
 @use '@/shared/button/Button.module.scss' as button;
 
-.signinWrapper {
+.signInWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +60,7 @@
   font-size: 13px;
 }
 
-.socialSiginin {
+.socialSignIn {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Button from '@/shared/button/Button';
-import styles from './SocialSiginin.module.scss';
+import styles from './SocialSiginIn.module.scss';
 
-type SocialSigninProps = {
+type SocialSignInProps = {
   src: string;
   social: string;
 };
 
-const SocialSignin = ({ src, social }: SocialSigninProps) => {
+const SocialSignIn = ({ src, social }: SocialSignInProps) => {
   return (
     <Button className={styles.socialButton}>
       <Image src={src} width={28} height={28} alt={`${social} 간편로그인`} />
@@ -15,4 +15,4 @@ const SocialSignin = ({ src, social }: SocialSigninProps) => {
   );
 };
 
-export default SocialSignin;
+export default SocialSignIn;

@@ -4,15 +4,15 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
 import { useMutation } from '@tanstack/react-query';
-import { SignInRequest } from '@/api/type/Auth';
-import { postSignIn } from '@/api/authApi';
+import { AuthResponse, SignInRequest } from '@/api/type/Auth';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import SocialSignin from '../component/SocialSignin';
+import SocialSignIn from '../component/SocialSignin';
 import Link from 'next/link';
 import styles from './Signin.module.scss';
+import { createMutations } from '@/api/queries';
 
-const Signin = () => {
+const SignIn = () => {
   const {
     register,
     handleSubmit,
@@ -21,11 +21,15 @@ const Signin = () => {
 
   const router = useRouter();
 
+  const signInMutation = createMutations<SignInRequest, AuthResponse>(
+    `/auth/signIn`
+  );
+
   const { mutate } = useMutation({
-    mutationFn: postSignIn,
-    onSuccess: (data) => {
-      localStorage.setItem('signinToken', data.accessToken);
-      router.push('/home');
+    mutationFn: signInMutation.add().mutationFn,
+    onSuccess: (response) => {
+      localStorage.setItem('signInToken', response.accessToken);
+      router.push('/auth');
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
@@ -38,7 +42,7 @@ const Signin = () => {
   };
 
   return (
-    <div className={styles.signinWrapper}>
+    <div className={styles.signInWrapper}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
@@ -75,15 +79,15 @@ const Signin = () => {
         <Link href="#">비밀번호 재설정</Link>
         <Link href="/auth/signup">회원가입</Link>
       </div>
-      <div className={styles.socialSiginin}>
+      <div className={styles.socialSignIn}>
         <div className={styles.socialTitle}>SNS로 바로 시작하기</div>
         <div className={styles.socialWrapper}>
-          <SocialSignin src={'/icon/ic-google.svg'} social="구글" />
-          <SocialSignin src={'/icon/ic-kakaotalk.svg'} social="카카오톡" />
+          <SocialSignIn src={'/icon/ic-google.svg'} social="구글" />
+          <SocialSignIn src={'/icon/ic-kakaotalk.svg'} social="카카오톡" />
         </div>
       </div>
     </div>
   );
 };
 
-export default Signin;
+export default SignIn;

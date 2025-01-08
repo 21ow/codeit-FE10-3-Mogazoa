@@ -1,17 +1,17 @@
 'use client';
 
+import { createMutations } from '@/api/queries';
+import { useMutation } from '@tanstack/react-query';
+import { SignUpRequest, AuthResponse } from '@/api/type/Auth';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
-import { useMutation } from '@tanstack/react-query';
-import { SignUpRequest } from '@/api/type/Auth';
-import { postSignUp } from '@/api/authApi';
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import styles from './Signup.module.scss';
+import styles from './SignUp.module.scss';
 
-const Signup = () => {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -23,10 +23,14 @@ const Signup = () => {
 
   const router = useRouter();
 
+  const SignUpMutation = createMutations<SignUpRequest, AuthResponse>(
+    `/auth/SignUp`
+  );
+
   const { mutate } = useMutation({
-    mutationFn: postSignUp,
+    mutationFn: SignUpMutation.add().mutationFn,
     onSuccess: (data) => {
-      localStorage.setItem('signupToken', data.accessToken);
+      localStorage.setItem('SignUpToken', data.accessToken);
       router.push('/auth/signin');
     },
     onError: (error: AxiosError) => {
@@ -40,7 +44,7 @@ const Signup = () => {
   };
 
   return (
-    <div className={styles.signupWrapper}>
+    <div className={styles.SignUpWrapper}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
@@ -108,4 +112,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
