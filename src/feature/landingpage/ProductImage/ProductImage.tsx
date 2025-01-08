@@ -35,7 +35,7 @@ const ProductImage = ({
         />
       ) : (
         <div className={styles.placeholder} style={{ width, height }}>
-          이미지 없음
+          ?
         </div>
       )}
     </div>

@@ -19,7 +19,7 @@ const BestProducts = () => {
       );
 
       if (response && response.list) {
-        setProducts(response.list);
+        setProducts(response.list.slice(0, 6));
       } else {
         setProducts([]);
       }
