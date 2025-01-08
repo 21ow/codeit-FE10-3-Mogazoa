@@ -1,7 +1,7 @@
 'use client';
 import { getUsersRanking } from '@/api/userApi';
 import { useEffect, useState } from 'react';
-import Image from '@/shared/Image/Image';
+import CommonImage from '@/shared/Image/Image';
 import styles from './RankingList.module.scss';
 
 const RankingList = () => {
@@ -45,7 +45,7 @@ const RankingList = () => {
           <li className={styles.reviewerRankingItem} key={index}>
             <div className={styles.reviewerRankingInfo}>
               <div className={styles.reviewerRankingImage}>
-                <Image
+                <CommonImage
                   src={user.image}
                   alt={user.nickname}
                   width={50}

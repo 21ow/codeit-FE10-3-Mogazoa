@@ -9,7 +9,12 @@ interface ProductImageProps
   height?: number;
 }
 
-const Image = ({ src, alt, width = 300, height = 300 }: ProductImageProps) => {
+const CommonImage = ({
+  src,
+  alt,
+  width = 300,
+  height = 300,
+}: ProductImageProps) => {
   const [imageSrc, setImageSrc] = useState<string | undefined>(src);
 
   const handleImageError = () => {
@@ -37,4 +42,4 @@ const Image = ({ src, alt, width = 300, height = 300 }: ProductImageProps) => {
   );
 };
 
-export default Image;
+export default CommonImage;

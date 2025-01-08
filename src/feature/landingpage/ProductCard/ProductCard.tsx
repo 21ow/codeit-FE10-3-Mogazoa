@@ -1,6 +1,6 @@
 'use client';
 
-import Image from '@/shared/Image/Image';
+import CommonImage from '@/shared/Image/Image';
 import { Product } from '@/api/type/Product';
 import Link from 'next/link';
 import styles from './ProductCard.module.scss';
@@ -18,7 +18,12 @@ const ProductCard = ({
       <div className={styles.proCardContain}>
         <div className={styles.innerContain}>
           <div className={styles.photoContain}>
-            <Image src={image} alt={`${id} 이미지`} width={300} height={200} />
+            <CommonImage
+              src={image}
+              alt={`${id} 이미지`}
+              width={300}
+              height={200}
+            />
           </div>
           <div className={styles.innerInfo}>
             <div className={styles.contentTitle}>{name}</div>
