@@ -1,7 +1,7 @@
 'use client';
 import { getUsersRanking } from '@/api/userApi';
 import { useEffect, useState } from 'react';
-import ProductImage from '@/feature/landingpage/ProductImage/ProductImage';
+import ImageComponent from '@/shared/Image/Images';
 import styles from './RankingList.module.scss';
 
 const RankingList = () => {
@@ -45,7 +45,7 @@ const RankingList = () => {
           <li className={styles.reviewerRankingItem} key={index}>
             <div className={styles.reviewerRankingInfo}>
               <div className={styles.reviewerRankingImage}>
-                <ProductImage
+                <ImageComponent
                   src={user.image}
                   alt={user.nickname}
                   width={50}
