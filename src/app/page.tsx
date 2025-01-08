@@ -1,23 +1,11 @@
-'use client';
+import Products from '@/feature/landingpage/Products';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { getAccessToken } from '@/api/storage/authStorage';
-
-const RootPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = getAccessToken();
-
-    if (!token) {
-      router.push('/signin');
-    } else {
-      router.push('/home');
-    }
-  }, [router]);
-
-  return <div>로딩 중...</div>;
+const Page = () => {
+  return (
+    <div>
+      <Products />
+    </div>
+  );
 };
 
-export default RootPage;
+export default Page;
