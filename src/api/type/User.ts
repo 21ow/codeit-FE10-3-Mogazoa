@@ -38,7 +38,7 @@ export type Item = {
   id: number;
 };
 
-export type UserActionResponse = {
+export type UserActionsResponse = {
   nextCursor: number;
   list: Item[];
 };
