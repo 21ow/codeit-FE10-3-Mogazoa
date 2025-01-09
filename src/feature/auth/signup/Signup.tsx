@@ -9,7 +9,7 @@ import { AxiosError } from 'axios';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
 import Link from 'next/link';
-import styles from './SignUp.module.scss';
+import styles from './Signup.module.scss';
 
 const SignUp = () => {
   const {

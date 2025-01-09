@@ -8,7 +8,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
-import SocialSignIn from '../component/SocialSignIn';
+import SocialSignIn from '../component/SocialSignin';
 import Link from 'next/link';
 import styles from './SignIn.module.scss';
 
