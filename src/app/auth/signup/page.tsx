@@ -1,4 +1,4 @@
-import SignUp from '@/feature/auth/signup/Signup';
+import SignUp from '@/feature/auth/signup/SignUp';
 
 const SignUpPage = () => {
   return <SignUp />;
