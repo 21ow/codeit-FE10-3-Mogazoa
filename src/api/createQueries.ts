@@ -23,20 +23,3 @@ export const createQueries = <R>(
       },
     }),
 });
-
-export const createMutations = <T, R>(baseURL: string) => ({
-  add: () => ({
-    mutationFn: (data: T) =>
-      axiosInstance.post<R>(`${baseURL}`, data).then((res) => res.data),
-  }),
-
-  update: (id: string) => ({
-    mutationFn: (data: T) =>
-      axiosInstance.patch<R>(`${baseURL}/${id}`, data).then((res) => res.data),
-  }),
-
-  delete: () => ({
-    mutationFn: (id: string) =>
-      axiosInstance.delete<R>(`${baseURL}/${id}`).then((res) => res.data),
-  }),
-});
