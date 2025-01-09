@@ -13,15 +13,13 @@ import Modal from '../modal/Modal';
 import useModalStore from '../modal/useModalStore';
 import Logo from '/public/image/img-logo.svg';
 import Search from '/public/icon/ic-search.svg';
+import AddItem from '/public/icon/ic-add-item.svg';
+import Compare from '/public/icon/ic-compare.svg';
 import styles from './Navigation.module.scss';
-
-type NavigationProps = {
-  children: React.ReactNode;
-};
 
 const categoryQuery = createQueries<CategoryResponse[]>(`/categories`);
 
-const Navigation = ({ children }: NavigationProps) => {
+const Navigation = () => {
   const [isSearchVisible, setSearchVisible] = useState(false); //수정 예정
 
   const { data } = useQuery(categoryQuery.all());
@@ -98,6 +96,15 @@ const Navigation = ({ children }: NavigationProps) => {
         <Logo />
       </Link>
 
+      <Link href="#">
+        <AddItem />
+        <div>등록하기</div>
+      </Link>
+      <Link href="#">
+        <Compare />
+        <div>비교하기</div>
+      </Link>
+
       <div
         className={classNames(styles.explore, {
           [styles.visible]: isSearchVisible,
@@ -115,8 +122,6 @@ const Navigation = ({ children }: NavigationProps) => {
             placeholder="상품 이름을 검색해 보세요"
           />
         </div>
-
-        {children}
       </div>
 
       <Button
