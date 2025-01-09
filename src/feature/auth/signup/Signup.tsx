@@ -40,7 +40,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className={styles.SignUpWrapper}>
+    <div className={styles.signUpWrapper}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
