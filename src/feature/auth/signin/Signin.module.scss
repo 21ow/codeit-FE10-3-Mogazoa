@@ -1,19 +1,12 @@
 @use '@/shared/button/Button.module.scss' as button;
 
 .signInWrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 230px;
   gap: 20px;
-
-  @include tablet {
-    margin-top: 280px;
-  }
-
-  @include mobile {
-    margin-top: 130px;
-  }
 }
 
 .form {
