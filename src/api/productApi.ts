@@ -1,43 +1,20 @@
 import axiosInstance from '@/lib/axiosInstance';
-import sessionStorage from './storage/sessionStorage';
 import {
-  GetProductRequest,
-  GetProductResponse,
+  GetProductsRequest,
+  GetProductsResponse,
   ProductRequest,
   ProductResponse,
-  GetProdcutReviewReQuest,
-  GetProdcutReviewResponse,
+  GetProductReviewsRequest,
+  GetProductReviewsResponse,
 } from './type/Product';
 
 /*** 상품 목록 조회 ***/
 export const getProducts = async (
-  keyword = '',
-  category = 1,
-  order = 'recent',
-  cursor = 1
-): Promise<GetProductResponse> => {
+  params: GetProductsRequest
+): Promise<GetProductsResponse | null> => {
   const URL = `/products`;
-  console.log('GET - getProducts(): ', URL);
-
-  const params: GetProductRequest = { keyword, category, order, cursor };
-
-  try {
-    const res = await axiosInstance.get(URL, {
-      params,
-    });
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as GetProductResponse;
-      sessionStorage.setItem(`getProducts`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to getProducts() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.get(URL, { params });
+  return res.data || null;
 };
 
 /*** 상품 생성 ***/
@@ -45,23 +22,8 @@ export const postProducts = async (
   data: ProductRequest
 ): Promise<ProductResponse> => {
   const URL = `/products`;
-  console.log('POST - postProducts(): ', URL);
-
-  try {
-    const res = await axiosInstance.post(URL, data);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`postProducts`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to postProducts() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.post(URL, data);
+  return res.data;
 };
 
 /*** 상품 상세 조회 ***/
@@ -69,23 +31,8 @@ export const getProductsDetail = async (
   productId: number
 ): Promise<ProductResponse> => {
   const URL = `/products/${productId}`;
-  console.log('GET - getProductsId(): ', URL);
-
-  try {
-    const res = await axiosInstance.get(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`getProductsId`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to getProductsId() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.get(URL);
+  return res.data;
 };
 
 /*** 상품 수정 ***/
@@ -94,23 +41,8 @@ export const patchProducts = async (
   data: ProductRequest
 ): Promise<ProductResponse> => {
   const URL = `/products/${productId}`;
-  console.log('PATCH - patchProductsId(): ', URL);
-
-  try {
-    const res = await axiosInstance.patch(URL, data);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`patchProductsId`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to patchProductsId() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.patch(URL, data);
+  return res.data;
 };
 
 /*** 상품 삭제 ***/
@@ -118,23 +50,8 @@ export const deleteProducts = async (
   productId: number
 ): Promise<ProductResponse> => {
   const URL = `/products/${productId}`;
-  console.log('DELETE - deleteProductsId(): ', URL);
-
-  try {
-    const res = await axiosInstance.delete(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`deleteProductsId`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to deleteProductsId() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.delete(URL);
+  return res.data;
 };
 
 /*** 상품 리뷰 목록 조회 ***/
@@ -142,27 +59,11 @@ export const getProductsReviews = async (
   productId: number,
   order = 'recent',
   cursor = 1
-): Promise<GetProdcutReviewResponse> => {
+): Promise<GetProductReviewsResponse> => {
   const URL = `/products/${productId}`;
-  console.log('GET - getProductsIdReviews(): ', URL);
-
-  const params: GetProdcutReviewReQuest = { order, cursor };
-
-  try {
-    const res = await axiosInstance.get(URL, { params });
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as GetProdcutReviewResponse;
-      sessionStorage.setItem(`getProductsIdReviews`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to getProductsIdReviews() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const params: GetProductReviewsRequest = { order, cursor };
+  const res = await axiosInstance.get(URL, { params });
+  return res.data;
 };
 
 /*** 상품 찜하기 ***/
@@ -170,23 +71,8 @@ export const postProductsFavorite = async (
   productId: number
 ): Promise<ProductResponse> => {
   const URL = `products/${productId}/favorite`;
-  console.log('POST - postProductsIdFavorite(): ', URL);
-
-  try {
-    const res = await axiosInstance.post(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`postProductsIdFavorite`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to postProductsIdFavorite() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.post(URL);
+  return res.data;
 };
 
 /*** 상품 찜하기 취소 ***/
@@ -194,21 +80,6 @@ export const deleteProductsFavorite = async (
   productId: number
 ): Promise<ProductResponse> => {
   const URL = `/products/${productId}/favorite`;
-  console.log('DELETE - deleteProductsIdFavorite(): ', URL);
-
-  try {
-    const res = await axiosInstance.delete(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ProductResponse;
-      sessionStorage.setItem(`deleteProductsIdFavorite`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to deleteProductsIdFavorite() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.delete(URL);
+  return res.data;
 };

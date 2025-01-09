@@ -7,13 +7,13 @@ interface ModalContent {
 
 interface ModalState {
   modals: { [key: string]: ModalContent };
-  openModal: (id: string, content: React.ReactNode) => void;
+  openModal: (id: string, content?: React.ReactNode) => void;
   closeModal: (id: string) => void;
 }
 
 const useModalStore = create<ModalState>((set) => ({
   modals: {},
-  openModal: (id: string, content: React.ReactNode) =>
+  openModal: (id: string, content?: React.ReactNode) =>
     set((state) => ({
       modals: { ...state.modals, [id]: { isVisible: true, content } },
     })),

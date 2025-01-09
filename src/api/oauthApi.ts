@@ -1,5 +1,4 @@
 import axiosInstance from '@/lib/axiosInstance';
-import localStorage from './storage/localStorage';
 import { OauthRequest, OauthResponse } from './type/Oauth';
 
 /*** '간편 로그인 App 등록/수정' 요청
@@ -15,21 +14,6 @@ export const postOauthApps = async (
   data: OauthRequest
 ): Promise<OauthResponse> => {
   const URL = `/oauthApps`;
-  console.log('POST - postOauthApps(): ', URL);
-
-  try {
-    const res = await axiosInstance.post(URL, data);
-
-    if (res.status === 200 || res.status === 201) {
-      const resdata = res.data as OauthResponse;
-      localStorage.setItem(`postOauthApps`, resdata);
-      return resdata;
-    } else {
-      throw new Error(
-        `Failed to postOauthApps() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.post(URL, data);
+  return res.data;
 };

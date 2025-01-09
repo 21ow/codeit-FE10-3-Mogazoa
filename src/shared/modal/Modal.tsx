@@ -1,15 +1,18 @@
 import { useEffect, useRef, ReactNode } from 'react';
-import styles from './index.module.scss';
+import styles from './Modal.module.scss';
 import ModalHeader from './ModalHeader';
 
-export interface ModalProps {
+interface ModalProps {
   headerText?: string;
   children?: ReactNode;
   customModalContainerStyle?: string;
+  customOverlay?: string;
   customModalContentStyle?: string;
   onClose?: () => void;
   buttonClick?: () => void;
   isVisible?: boolean;
+  customVisible?: string;
+  customHidden?: string;
   customHeader?: ReactNode;
 }
 
@@ -17,26 +20,35 @@ const Modal = ({
   headerText = '',
   children = null,
   customModalContainerStyle = '',
+  customOverlay = '',
   customModalContentStyle = '',
   onClose = () => {},
   buttonClick = () => {},
   isVisible = false,
+  customVisible = '',
+  customHidden = '',
   customHeader = null,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const firstFocusableElement = useRef<HTMLButtonElement>(null);
+  const lastFocusableElement = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
+      if (e.key === 'Escape' && modalRef.current) {
+        modalRef.current.classList.remove(customVisible || styles.visible);
+        modalRef.current.classList.add(
+          customHidden ? customHidden : styles.hidden
+        );
+        modalRef.current.addEventListener('animationend', () => {
+          onClose();
+        });
       }
     };
 
     if (isVisible) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    } else document.body.style.overflow = '';
 
     window.addEventListener('keydown', handleKeyDown);
 
@@ -48,7 +60,13 @@ const Modal = ({
 
   const handleOutsideClick = (e: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose();
+      modalRef.current.classList.remove(customVisible || styles.visible);
+      modalRef.current.classList.add(
+        customHidden ? customHidden : styles.hidden
+      );
+      modalRef.current.addEventListener('animationend', () => {
+        onClose();
+      });
     }
   };
 
@@ -60,7 +78,7 @@ const Modal = ({
 
   return (
     <div
-      className={styles.overlay}
+      className={customOverlay || styles.overlay}
       onClick={
         handleOutsideClick as unknown as React.MouseEventHandler<HTMLDivElement>
       }
@@ -70,13 +88,14 @@ const Modal = ({
     >
       <div
         ref={modalRef}
-        className={`${styles.container} ${isVisible ? styles.visible : styles.hidden} ${customModalContainerStyle}`}
+        className={`${customModalContainerStyle || styles.container} ${customVisible || styles.visible}`}
       >
-        {customHeader ||
-          (headerText && (
-            <ModalHeader headerText={headerText} onClose={onClose} />
-          ))}
-        <div className={`${styles.content} ${customModalContentStyle}`}>
+        {customHeader || (
+          <ModalHeader headerText={headerText} onClose={onClose} />
+        )}
+        <div
+          className={`${customModalContentStyle ? customModalContentStyle : styles.content}`}
+        >
           {children}
         </div>
       </div>

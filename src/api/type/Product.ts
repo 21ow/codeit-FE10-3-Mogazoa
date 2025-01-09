@@ -1,24 +1,24 @@
-export type GetProductRequest = {
-  keyword: string;
-  category: number;
-  order: string;
-  cursor: number;
+export type GetProductsRequest = {
+  keyword?: string;
+  category?: number;
+  order?: string;
+  cursor?: number;
 };
 
 export type Product = {
   id: number;
   name: string;
-  image: string;
-  rating: number;
-  createdAt: string;
-  updatedAt: string;
-  writerId: number;
-  categoryId: number;
-  favoriteCount: number;
-  reviewCount: number;
+  image?: string;
+  rating?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  writerId?: number;
+  categoryId?: number;
+  favoriteCount?: number;
+  reviewCount?: number;
 };
 
-export type GetProductResponse = {
+export type GetProductsResponse = {
   nextCursor: number;
   list: Product[];
 };
@@ -58,9 +58,9 @@ export type ProductResponse = {
   description: string;
 };
 
-export type GetProdcutReviewReQuest = {
-  order: string;
-  cursor: number;
+export type GetProductReviewsRequest = {
+  order?: string;
+  cursor?: number;
 };
 
 export type User = {
@@ -88,7 +88,7 @@ export type Review = {
   id: number;
 };
 
-export type GetProdcutReviewResponse = {
+export type GetProductReviewsResponse = {
   nextCursor: number;
   list: Review[];
 };
