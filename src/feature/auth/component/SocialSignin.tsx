@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Button from '@/shared/button/Button';
-import styles from './SocialSiginIn.module.scss';
+import styles from './SocialSiginin.module.scss';
 
 type SocialSignInProps = {
   src: string;

@@ -10,7 +10,7 @@ import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
 import SocialSignIn from '../component/SocialSignin';
 import Link from 'next/link';
-import styles from './SignIn.module.scss';
+import styles from './Signin.module.scss';
 
 const SignIn = () => {
   const {
