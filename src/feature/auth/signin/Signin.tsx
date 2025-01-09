@@ -1,16 +1,16 @@
 'use client';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
-import Input from '@/shared/Input/Input';
-import Button from '@/shared/button/Button';
+import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { AuthResponse, SignInRequest } from '@/api/type/Auth';
+import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
+import Input from '@/shared/Input/Input';
+import Button from '@/shared/button/Button';
 import SocialSignIn from '../component/SocialSignin';
 import Link from 'next/link';
 import styles from './Signin.module.scss';
-import { createMutations } from '@/api/queries';
 
 const SignIn = () => {
   const {
@@ -21,15 +21,11 @@ const SignIn = () => {
 
   const router = useRouter();
 
-  const signInMutation = createMutations<SignInRequest, AuthResponse>(
-    `/auth/signIn`
-  );
-
-  const { mutate } = useMutation({
-    mutationFn: signInMutation.add().mutationFn,
+  const { mutate } = useMutation<AuthResponse, AxiosError, SignInRequest>({
+    mutationFn: (data) => axiosInstance.post(`/auth/signIn`, data),
     onSuccess: (response) => {
       localStorage.setItem('signInToken', response.accessToken);
-      router.push('/auth');
+      router.push('/'); //임시
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;

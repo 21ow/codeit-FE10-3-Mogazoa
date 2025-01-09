@@ -1,10 +1,10 @@
 'use client';
 
-import { createMutations } from '@/api/queries';
 import { useMutation } from '@tanstack/react-query';
 import { SignUpRequest, AuthResponse } from '@/api/type/Auth';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
@@ -23,14 +23,10 @@ const SignUp = () => {
 
   const router = useRouter();
 
-  const SignUpMutation = createMutations<SignUpRequest, AuthResponse>(
-    `/auth/SignUp`
-  );
-
-  const { mutate } = useMutation({
-    mutationFn: SignUpMutation.add().mutationFn,
-    onSuccess: (data) => {
-      localStorage.setItem('SignUpToken', data.accessToken);
+  const { mutate } = useMutation<AuthResponse, AxiosError, SignUpRequest>({
+    mutationFn: (data) => axiosInstance.post(`/auth/signUp`, data),
+    onSuccess: (response) => {
+      localStorage.setItem('SignUpToken', response.accessToken);
       router.push('/auth/signin');
     },
     onError: (error: AxiosError) => {
