@@ -3,7 +3,7 @@ import sessionStorage from './storage/sessionStorage';
 import {
   UserResponse,
   PatchUserRequest,
-  UserActionResponse,
+  UserActionsResponse,
   UserRelationsResponse,
 } from './type/User';
 
@@ -101,7 +101,7 @@ export const getUsersInfo = async (userId: string): Promise<UserResponse> => {
 export const getUsersProducts = async (
   userId: string,
   cursor?: number
-): Promise<UserActionResponse> => {
+): Promise<UserActionsResponse> => {
   const URL =
     cursor === undefined
       ? `/users/${userId}/created-products`
@@ -112,7 +112,7 @@ export const getUsersProducts = async (
     const res = await axiosInstance.get(URL);
 
     if (res.status === 200 || res.status === 201) {
-      const resData = res.data as UserActionResponse;
+      const resData = res.data as UserActionsResponse;
       sessionStorage.setItem(`getUserIdCreatedProducts`, resData);
       return resData;
     } else {
@@ -129,7 +129,7 @@ export const getUsersProducts = async (
 export const getUsersReviews = async (
   userId: string,
   cursor?: number
-): Promise<UserActionResponse> => {
+): Promise<UserActionsResponse> => {
   const URL =
     cursor === undefined
       ? `/users/${userId}/reviewed-products`
@@ -140,7 +140,7 @@ export const getUsersReviews = async (
     const res = await axiosInstance.get(URL);
 
     if (res.status === 200 || res.status === 201) {
-      const resData = res.data as UserActionResponse;
+      const resData = res.data as UserActionsResponse;
       sessionStorage.setItem(`getUserIdReviewedProducts`, resData);
       return resData;
     } else {
@@ -157,7 +157,7 @@ export const getUsersReviews = async (
 export const getUsersLikes = async (
   userId: string,
   cursor?: number
-): Promise<UserActionResponse> => {
+): Promise<UserActionsResponse> => {
   const URL =
     cursor === undefined
       ? `/users/${userId}/favorite-products`
@@ -168,7 +168,7 @@ export const getUsersLikes = async (
     const res = await axiosInstance.get(URL);
 
     if (res.status === 200 || res.status === 201) {
-      const resData = res.data as UserActionResponse;
+      const resData = res.data as UserActionsResponse;
       sessionStorage.setItem(`getUserIdFavoriteProducts`, resData);
       return resData;
     } else {
