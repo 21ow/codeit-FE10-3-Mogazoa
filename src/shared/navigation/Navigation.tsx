@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { createQueries } from '@/api/queries';
+import { createQueries } from '@/api/createQueries';
 import { CategoryResponse } from '@/api/type/Category';
 import classNames from 'classnames';
 import Link from 'next/link';
