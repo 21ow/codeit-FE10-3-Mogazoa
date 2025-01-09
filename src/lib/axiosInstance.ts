@@ -1,8 +1,8 @@
 import axios from 'axios';
-
 import { isAuthRequired, NO_TOKEN_ENDPOINTS } from '@/api/util/isAuthRequired';
-import { _LOGIN_NEED_MESSAGE_ } from '@/api/storage/authStorage';
 const BASE_URL = 'https://mogazoa-api.vercel.app/10-33';
+
+const _LOGIN_NEED_MESSAGE_ = '로그인이 필요한 서비스입니다.';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,11 +15,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    //dino@email.com, 12341234
-    //임시 토큰
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzMyLCJ0ZWFtSWQiOiIxMC0zIiwiaWF0IjoxNzM0NTEzNTUyLCJpc3MiOiJzcC1tb2dhem9hIn0.tbvOoiH-iTR1CZW5rhjJW5KSr2Go8cxGwqRWxLGwqZ8';
-
     const path = config.url || '';
     const method = config?.method || '';
 
@@ -32,7 +27,7 @@ axiosInstance.interceptors.request.use(
       return config;
     }
 
-    // const token = getAccessToken();
+    const token = localStorage.getItem('signInToken');
 
     if (!token && config.url && !NO_TOKEN_ENDPOINTS.includes(config.url)) {
       throw new Error(`Failed to getAccessToken(), ${_LOGIN_NEED_MESSAGE_}`);

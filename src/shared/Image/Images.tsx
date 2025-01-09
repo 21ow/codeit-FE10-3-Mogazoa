@@ -1,7 +1,7 @@
 'use client';
 import { ImgHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
-import styles from './ProductImage.module.scss';
+import styles from './Images.module.scss';
 
 interface ProductImageProps
   extends Pick<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> {
@@ -9,7 +9,7 @@ interface ProductImageProps
   height?: number;
 }
 
-const ProductImage = ({
+const ImageComponent = ({
   src,
   alt,
   width = 300,
@@ -42,4 +42,4 @@ const ProductImage = ({
   );
 };
 
-export default ProductImage;
+export default ImageComponent;
