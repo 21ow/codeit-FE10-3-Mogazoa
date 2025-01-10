@@ -147,9 +147,9 @@ export const deleteProducts = async (
 export const getProductsReviews = async (
   productId: number,
   order = 'recent',
-  cursor = 1
+  cursor = 0
 ): Promise<GetProdcutReviewResponse> => {
-  const URL = `/products/${productId}`;
+  const URL = `/products/${productId}/reviews?`;
   console.log('GET - getProductsIdReviews(): ', URL);
 
   const params: GetProdcutReviewReQuest = { order, cursor };
