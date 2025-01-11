@@ -28,15 +28,6 @@ const Navigation = () => {
         <Logo />
       </Link>
 
-      <Link href="#">
-        <AddItem />
-        <div>등록하기</div>
-      </Link>
-      <Link href="#">
-        <Compare />
-        <div>비교하기</div>
-      </Link>
-
       <div
         className={classNames(styles.explore, {
           [styles.visible]: isSearchVisible,
@@ -54,6 +45,15 @@ const Navigation = () => {
             placeholder="상품 이름을 검색해 보세요"
           />
         </div>
+
+        <Link href="#">
+          <AddItem />
+          <div>등록하기</div>
+        </Link>
+        <Link href="#">
+          <Compare />
+          <div>비교하기</div>
+        </Link>
       </div>
 
       <Button
