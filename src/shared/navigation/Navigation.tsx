@@ -11,7 +11,7 @@ type NavigationProps = {
 const Navigation = ({ children }: NavigationProps) => {
   return (
     <div className={styles.navigation}>
-      <Link href="#" className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <Logo />
       </Link>
 
@@ -25,7 +25,6 @@ const Navigation = ({ children }: NavigationProps) => {
             className={styles.searchIcon}
           />
           <Input
-            type="text"
             className={styles.search}
             placeholder="상품 이름을 검색해 보세요"
           />
