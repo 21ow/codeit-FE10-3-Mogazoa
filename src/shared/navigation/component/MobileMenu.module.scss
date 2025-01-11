@@ -1,0 +1,80 @@
+.menuBtn {
+  display: none;
+
+  @include mobile {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+}
+
+.customModal {
+  width: 270px;
+  padding: 16px 26px;
+  background-color: $black-450;
+}
+
+.customOverlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.customVisible {
+  animation: fadeIn 0.3s forwards;
+}
+
+.customHidden {
+  animation: fadeOut 0.3s forwards;
+}
+
+.customHeader {
+  padding-bottom: 20px;
+  border-bottom: 1px solid $black-350;
+}
+
+.modalLogo {
+  display: inline-flex;
+  margin-bottom: 20px;
+  > svg {
+    height: 22px;
+  }
+}
+
+.categoryBtn {
+  width: 100%;
+  padding: 0 14px;
+  height: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+}
