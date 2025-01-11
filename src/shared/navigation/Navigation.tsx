@@ -40,7 +40,6 @@ const Navigation = () => {
         >
           <Search />
           <Input
-            type="text"
             className={styles.search}
             placeholder="상품 이름을 검색해 보세요"
           />

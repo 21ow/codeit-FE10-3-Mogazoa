@@ -1,9 +1,9 @@
-$black-500: #17171c; //dard
-$black-450: #1c1c22; //배경
+$black-500: #17171c;
+$black-450: #1c1c22;
 $black-400: #181d26;
 $black-350: #252530;
-$black-300: #2e2e3a; //light
-$black-200: #353542; //mood
+$black-300: #2e2e3a;
+$black-200: #353542;
 
 $dark-gray: #6e6e82;
 $gray: #9fa6b2;
@@ -31,7 +31,7 @@ $border-blue: 1px solid $blue;
 
 $pad-input: 20px;
 $pad-button: 24px 288px;
-$pad-search: 16px 20px 16px 64px;
+$pad-search: 16px 20px 16px 44px;
 $pad-menu: 15px 20px;
 $pad-category: 4px 10px;
 $pad-category-small: 4px 8px;
@@ -46,7 +46,7 @@ $pad-statistics: 30px 74px;
   $right: auto,
   $transform: none,
   $color: $dark-gray,
-  $background-color: $black-350
+  $background-color: inherit
 ) {
   position: $position;
   top: $top;
@@ -56,4 +56,33 @@ $pad-statistics: 30px 74px;
   transform: $transform;
   color: $color;
   background-color: $background-color;
+}
+
+@mixin form-style(
+  $width: 100%,
+  $display: grid,
+  $grid-template-columns: none,
+  $column-gap: 0,
+  $grid-template-rows: none,
+  $row-gap: 0
+) {
+  width: $width;
+  display: $display;
+  grid-template-columns: $grid-template-columns;
+  column-gap: $column-gap;
+  grid-template-rows: $grid-template-rows;
+  row-gap: $row-gap;
+  column-gap: $column-gap;
+}
+
+@mixin tablet {
+  @media (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
 }
