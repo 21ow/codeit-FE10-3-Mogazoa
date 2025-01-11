@@ -51,10 +51,10 @@ const MobileMenu = () => {
                 <Logo />
               </Link>
               <div className={styles.authLinkWrapper}>
-                <Link href="/auth/signin" className={styles.signinLink}>
+                <Link href="/auth/signin" className={styles.signInLink}>
                   로그인
                 </Link>
-                <Link href="/auth/signup" className={styles.signupLink}>
+                <Link href="/auth/signup" className={styles.signUpLink}>
                   회원가입
                 </Link>
                 {/* 토큰 있으면 사용자 계정 전환 */}
