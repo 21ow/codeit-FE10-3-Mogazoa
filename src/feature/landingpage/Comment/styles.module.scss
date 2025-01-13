@@ -1,7 +1,15 @@
 .articleContain {
-  background-color: $black-350;
+  display: flex;
+  flex-direction: column;
   margin: 5px;
+  border-radius: $radius-common;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.commentContainer {
+  background-color: $black-350;
+  margin-bottom: 20px;
+  padding: 15px;
   border-radius: $radius-common;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -14,22 +22,37 @@
 
 .innerContain {
   display: flex;
-  padding: 5px;
-  gap: 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .photoInfo {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25px;
-  height: 25px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   overflow: hidden;
 }
 
-.photo {
+.photoInfo1 {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.photoContainer {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+}
+
+.photoContainer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -37,21 +60,26 @@
 
 .userInfo {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-grow: 1;
 }
 
 .topInfo {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
   align-items: center;
 }
 
-.name {
-  font-size: 14px;
-  font-weight: bold;
-  color: $dark-gray;
+.bottomInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameBlock {
+  font-size: 16px;
+  color: $white;
 }
 
 .iconContain {
@@ -71,12 +99,17 @@
 }
 
 .updatedAt {
-  font-size: 12px;
+  font-size: 14px;
   color: $dark-gray;
 }
 
-.content {
-  font-size: 14px;
-  color: $dark-gray;
+.contentBlock {
+  font-size: 16px;
+  color: $white;
   margin-top: 5px;
+}
+
+.nameInfo {
+  display: flex;
+  flex-direction: column;
 }

@@ -72,6 +72,7 @@ const ProductDetail = () => {
         <p>리뷰 {product.reviewCount}</p>
         <p>별점 평균 {product.rating}</p>
       </div>
+      <h3 className={styles.reviewName}>상품 리뷰</h3>
       <CoCard productId={product.id} onCommentEditSuccess={updatedComment} />
     </div>
   );
