@@ -5,8 +5,10 @@ import { getProductsDetail } from '@/api/productApi';
 import { ProductResponse, GetProdcutReviewResponse } from '@/api/type/Product';
 import { useEffect, useState } from 'react';
 import ImageComponent from '@/shared/Image/Images';
-import styles from './styles.module.scss';
+import HeartCheck from '@/feature/landingpage/HeartCheck/HeartCheck';
 import CoCard from '@/feature/landingpage/Comment/Comment';
+import DataForm from '@/feature/landingpage/DataForm/DataForm';
+import styles from './styles.module.scss';
 
 const ProductDetail = () => {
   const params = useParams();
@@ -63,15 +65,12 @@ const ProductDetail = () => {
         />
         <div className={styles.productDetailInfo}>
           <p className={productClassName}>{product.category.name}</p>
+          <HeartCheck productId={product.id} />
           <h2 className={styles.productWhat}>{product.name}</h2>
           <p>{product.description}</p>
         </div>
       </div>
-      <div className={styles.productDetailInfo}>
-        <p>찜 {product.favoriteCount}</p>
-        <p>리뷰 {product.reviewCount}</p>
-        <p>별점 평균 {product.rating}</p>
-      </div>
+      <DataForm product={product} />
       <h3 className={styles.reviewName}>상품 리뷰</h3>
       <CoCard productId={product.id} onCommentEditSuccess={updatedComment} />
     </div>

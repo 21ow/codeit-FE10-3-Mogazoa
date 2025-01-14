@@ -34,7 +34,6 @@ const CoCard = ({ productId }: CoCardProps) => {
         <div className={styles.insideContain}>
           {comments.map((comment) => (
             <div key={comment.id} className={styles.commentContainer}>
-              {/* 댓글 하나당 하나의 독립적인 컨테이너 */}
               <div className={styles.innerContain}>
                 <div className={styles.userInfo}>
                   <div className={styles.topInfo}>

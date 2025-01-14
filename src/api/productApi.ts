@@ -199,7 +199,7 @@ export const postProductsFavorite = async (
 export const deleteProductsFavorite = async (
   productId: number
 ): Promise<ProductResponse> => {
-  const URL = `/products/${productId}/favorite`;
+  const URL = `products/${productId}/favorite`;
   console.log('DELETE - deleteProductsIdFavorite(): ', URL);
 
   try {
