@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styles from './Dropdown.module.scss';
-import useDropdownStore from './useDropdown';
+import useDropdownStore from './useDropdownStore';
 
 interface DropdownProps {
   options: string[];
