@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '@/api/productApi';
 import ProductCard from '@/feature/landingpage/ProductCard/ProductCard';
-import { Product, GetProductResponse } from '@/api/type/Product';
+import { Product, GetProductsResponse } from '@/api/type/Product';
 import styles from './BestProducts.module.scss';
 
 const BestProducts = () => {
@@ -11,12 +11,9 @@ const BestProducts = () => {
 
   const handleLoad = useCallback(async () => {
     try {
-      const response: GetProductResponse | null = await getProducts(
-        ' ',
-        undefined,
-        'reviewCount',
-        0
-      );
+      const response: GetProductsResponse | null = await getProducts({
+        order: 'reviewCount',
+      });
 
       if (response && response.list) {
         setProducts(response.list.slice(0, 6));

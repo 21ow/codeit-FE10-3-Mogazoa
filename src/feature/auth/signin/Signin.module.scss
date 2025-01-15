@@ -1,0 +1,73 @@
+@use '@/shared/button/Button.module.scss' as button;
+
+.signInWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.form {
+  @include form-style(
+    $width: 640px,
+    $grid-template-rows: repeat(3, auto),
+    $row-gap: 40px
+  );
+
+  @include tablet {
+    width: 440px;
+  }
+
+  @include mobile {
+    width: 335px;
+    row-gap: 30px;
+  }
+}
+
+.submitButton {
+  @include button.button-style(
+    $width: 100%,
+    $height: 65px,
+    $font-weight: 600,
+    $font-size: 18px,
+    $background: linear-gradient(90deg, #5097fa, #5363ff),
+    $padding: 0
+  );
+
+  &:hover {
+    background: linear-gradient(90deg, #3a7bc7, #3c50e0);
+  }
+
+  @include tablet {
+    height: 55px;
+    font-size: 16px;
+  }
+}
+
+.accountActions {
+  display: flex;
+  gap: 20px;
+  color: $gray;
+  font-size: 13px;
+}
+
+.socialSignIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.socialTitle {
+  color: $dark-gray;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.socialWrapper {
+  display: flex;
+  gap: 20px;
+}

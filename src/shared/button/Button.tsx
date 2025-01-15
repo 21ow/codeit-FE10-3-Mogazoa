@@ -6,13 +6,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className = '', ...props }, ref) => {
+  ({ children, className, ...props }, ref) => {
     return (
-      <button
-        ref={ref}
-        className={`${styles.maButton} ${className}`}
-        {...props}
-      >
+      <button ref={ref} className={className || styles.maButton} {...props}>
         {children}
       </button>
     );
