@@ -65,8 +65,10 @@ const ProductDetail = () => {
         />
         <div className={styles.productDetailInfo}>
           <p className={productClassName}>{product.category.name}</p>
-          <HeartCheck productId={product.id} />
-          <h2 className={styles.productWhat}>{product.name}</h2>
+          <div className={styles.productDetailInfo2}>
+            <h2 className={styles.productWhat}>{product.name}</h2>
+            <HeartCheck productId={product.id} />
+          </div>
           <p>{product.description}</p>
         </div>
       </div>

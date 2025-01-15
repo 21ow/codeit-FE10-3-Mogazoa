@@ -1,8 +1,9 @@
+'use client';
 import { ProductResponse } from '@/api/type/Product';
 import styles from './styles.module.scss';
 import Star from '/public/icon/ic-star.svg';
-import Heart from '/public/icon/ic-heart-select.svg';
 import Bubble from '/public/icon/ic-bubble.svg';
+import LikeForm from './LikeForm/LikeForm';
 
 interface ProductDetailInfoProps {
   product: ProductResponse;
@@ -14,36 +15,6 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
     product.favoriteCount - product.categoryMetric.favoriteCount;
   const reviewDifference =
     product.reviewCount - product.categoryMetric.reviewCount;
-
-  const renderFavoriteMessage = () => {
-    if (favoriteDifference > 0) {
-      return (
-        <div className={styles.innerContain}>
-          <p className={styles.innerMessage}>같은 카테고리의 제품들보다 </p>
-          <div className={styles.innerContain2}>
-            <p className={styles.innerMessage2}>{favoriteDifference} </p>
-            <p className={styles.innerMessage}>개 더 많아요!</p>
-          </div>
-        </div>
-      );
-    } else if (favoriteDifference < 0) {
-      return (
-        <div className={styles.innerContain}>
-          <p className={styles.innerMessage}>같은 카테고리의 제품들보다</p>
-          <div className={styles.innerContain2}>
-            <p className={styles.innerMessage2}>
-              {Math.abs(favoriteDifference)}
-            </p>
-            <p className={styles.innerMessage}>개 더 적어요!</p>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <p className={styles.innerMessage}>찜 개수가 평균 값과 일치해요!</p>
-      );
-    }
-  };
 
   const renderRatingMessage = () => {
     if (ratingDifference > 0) {
@@ -124,19 +95,11 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
         </div>
         {renderRatingMessage()}
       </div>
-      <div className={styles.iLikeIt}>
-        <p className={styles.iLikeItTitle}>찜</p>
-        <div className={styles.iLikeItContent}>
-          <Heart
-            className={styles.heartIcon}
-            alt="Heart"
-            width={24}
-            height={24}
-          />
-          <p className={styles.contentTitle}>{product.favoriteCount}</p>
-        </div>
-        {renderFavoriteMessage()}
-      </div>
+      <LikeForm
+        productId={product.id}
+        favoriteCount={product.favoriteCount}
+        categoryFavoriteCount={product.categoryMetric.favoriteCount}
+      />
       <div className={styles.iLikeIt}>
         <p className={styles.iLikeItTitle}>리뷰</p>
         <div className={styles.iLikeItContent}>

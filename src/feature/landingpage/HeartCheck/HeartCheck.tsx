@@ -1,8 +1,12 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
-import { getProductsDetail } from '@/api/productApi';
-import { ProductResponse } from '@/api/type/Product';
-import { postProductsFavorite, deleteProductsFavorite } from '@/api/productApi';
+import { useEffect, useCallback, useState } from 'react';
+import {
+  getProductsDetail,
+  postProductsFavorite,
+  deleteProductsFavorite,
+} from '@/api/productApi';
+import { useFavoriteStore } from '@/feature/landingpage/DataForm/useFavoriteStore';
+import Heart from '/public/icon/ic-heart.svg';
 import SelectHeart from '/public/icon/ic-heart-select.svg';
 import styles from './styles.module.scss';
 
@@ -11,38 +15,50 @@ interface FavoriteButtonProps {
 }
 
 const HeartCheck: React.FC<FavoriteButtonProps> = ({ productId }) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(true);
+  const {
+    favorites,
+    favoriteCounts,
+    toggleFavorite,
+    setFavoriteCount,
+    setFavorite,
+  } = useFavoriteStore();
+  const [isFavorite, setIsFavorite] = useState(favorites[productId] || false); // 로컬 상태
+  const favoriteCount = favoriteCounts[productId] || 0;
 
   const fetchProductDetails = useCallback(async () => {
-    const productDetails: ProductResponse = await getProductsDetail(productId);
-    setIsFavorite(productDetails.isFavorite);
-  }, [productId]);
+    const { isFavorite, favoriteCount } = await getProductsDetail(productId);
+    setFavoriteCount(productId, favoriteCount);
+    setIsFavorite(isFavorite);
+  }, [productId, setFavoriteCount]);
+
+  const handleFavoriteToggle = async () => {
+    if (isFavorite) {
+      const res = await deleteProductsFavorite(productId);
+      toggleFavorite(productId);
+      setFavoriteCount(productId, res.favoriteCount);
+      setIsFavorite(false);
+    } else {
+      const res = await postProductsFavorite(productId);
+      toggleFavorite(productId);
+      setFavoriteCount(productId, res.favoriteCount);
+      setIsFavorite(true);
+    }
+  };
 
   useEffect(() => {
     fetchProductDetails();
   }, [fetchProductDetails]);
 
-  const handleFavoriteToggle = async () => {
-    let resData;
-    if (isFavorite) {
-      resData = await deleteProductsFavorite(productId);
-      setIsFavorite(false);
-    } else {
-      resData = await postProductsFavorite(productId);
-      setIsFavorite(true);
-    }
-
-    if (resData && resData.isFavorite !== undefined) {
-      setIsFavorite(resData.isFavorite);
-    }
-  };
+  useEffect(() => {
+    setFavorite(productId, isFavorite);
+  }, [isFavorite, productId, setFavorite]);
 
   return (
     <button onClick={handleFavoriteToggle} className={styles.heartButton}>
       {isFavorite ? (
         <SelectHeart className={styles.heartIcon1} width={24} height={24} />
       ) : (
-        <SelectHeart className={styles.heartIcon2} width={24} height={24} />
+        <Heart width={24} height={24} />
       )}
     </button>
   );

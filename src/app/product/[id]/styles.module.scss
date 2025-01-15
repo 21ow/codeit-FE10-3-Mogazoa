@@ -24,3 +24,9 @@
   background-color: rgb($pink, 0.2);
   border-radius: $radius-category-filter;
 }
+.productDetailInfo2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
