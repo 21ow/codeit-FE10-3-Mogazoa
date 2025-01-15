@@ -1,0 +1,14 @@
+.container {
+  margin-top: 60px;
+  display: flex;
+  width: 1200px;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}

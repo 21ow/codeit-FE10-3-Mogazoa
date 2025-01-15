@@ -1,0 +1,89 @@
+.container {
+  width: 340px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--black-black_353542, #353542);
+  background: var(--black-black_252530, #252530);
+}
+
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--gray-gray_6E6E82, #6E6E82);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+
+  .nickname {
+    text-align: center;
+    color: var(--white-white_F1F1F5, #F1F1F5);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+
+.follow {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.followItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.count {
+  color: var(--white-white_F1F1F5, #F1F1F5);
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.followTitle {
+  color: var(--gray-gray_9FA6B2, #9FA6B2);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.button {
+  display: flex;
+  width: 300px;
+  height: 65px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--main-main_gradation, linear-gradient(91deg, #5097FA 0%, #5363FF 100%));
+  color: var(--white-white_F1F1F5, #F1F1F5);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
