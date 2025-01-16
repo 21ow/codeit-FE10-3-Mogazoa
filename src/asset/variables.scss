@@ -75,6 +75,15 @@ $pad-statistics: 30px 74px;
   column-gap: $column-gap;
 }
 
+@mixin hover-style($hover-bg, $hover-color, $border-radius, $transition-time) {
+  &:hover {
+    background-color: $hover-bg;
+    border-radius: $border-radius;
+    color: $hover-color;
+    transition: background-color $transition-time ease;
+  }
+}
+
 @mixin tablet {
   @media (max-width: 1199px) {
     @content;
