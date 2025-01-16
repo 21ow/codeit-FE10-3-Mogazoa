@@ -8,6 +8,7 @@ interface DropdownProps {
   parentRef: React.RefObject<HTMLElement>;
   onClose: () => void;
   customDropdownStyle?: string;
+  customItemStyle?: string;
   buttonClick?: () => void;
   isVisible?: boolean;
   customVisible?: string;
@@ -19,6 +20,7 @@ const Dropdown = ({
   dropdownId,
   parentRef,
   customDropdownStyle = '',
+  customItemStyle = '',
   onClose = () => {},
   isVisible = false,
   customVisible = '',
@@ -85,14 +87,14 @@ const Dropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className={`${customDropdownStyle || styles.container} ${customVisible || styles.visible}`}
+      className={`${customDropdownStyle || styles.dropdown} ${customVisible || styles.visible}`}
       onKeyUp={handleKeyPress}
       role="button"
       tabIndex={0}
     >
       {options.map((option, index) => (
         <div
-          className={styles.item}
+          className={`${customItemStyle || styles.item}`}
           key={index}
           onClick={() => handleItemClick(option)}
           tabIndex={index++}

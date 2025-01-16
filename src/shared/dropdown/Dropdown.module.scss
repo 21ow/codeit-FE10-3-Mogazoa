@@ -1,35 +1,84 @@
+@use '@/asset/variables' as *;
+
+@mixin dropdown-style(
+  $display: flex,
+  $width: 360px,
+  $padding: 10px,
+  $flex-direction: column,
+  $align-items: flex-start,
+  $gap: 5px,
+  $border-radius: 8px,
+  $border: 1px solid $black-200,
+  $background: $black-350,
+  $color: $dark-gray,
+  $font-size: 14px,
+  $font-style: normal,
+  $font-weight: 400,
+  $line-height: 20px,
+  $margin-top: 5px,
+) {
+  display: $display;
+  width: $width;
+  padding: $padding;
+  flex-direction: $flex-direction;
+  align-items: $align-items;
+  gap: $gap;
+  border-radius: $border-radius;
+  border: $border;
+  background: $background;
+  color: $color;
+  font-size: $font-size;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  margin-top: $margin-top;
+}
+
 .dropdown {
-  display: flex;
-  width: 360px;
-  padding: 10px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-  border-radius: 8px;
-  border: 1px solid var(--black-black_353542, #353542);
-  background: var(--black-black_252530, #252530);
-  color: var(--gray-gray_6E6E82, #6E6E82);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
+  @include dropdown-style();
+}
+
+@mixin item-style(
+  $width: 100%,
+  $border-radius: 6px,
+  $background: $black-350,
+  $display: flex,
+  $padding: 6px 20px,
+  $align-items: center,
+  $color: $dark-gray,
+  $font-size: 14px,
+  $font-style: normal,
+  $font-weight: 400,
+  $line-height: 20px
+) {
+  width: $width;
+  border-radius: $border-radius;
+  background: $background;
+  display: $display;
+  padding: $padding;
+  align-items: $align-items;
+  color: $color;
+  font-size: $font-size;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  line-height: $line-height;
+
+  &:hover {
+    background: $black-200;
+    color: $white;
+  }
 }
 
 .item {
-  border-radius: 6px;
-  background: var(--black-black_2E2E3A, #2E2E3A);
-  display: flex;
-  padding: 6px 20px;
-  align-items: center;
+  @include item-style();
+}
 
-  &:hover {
-    background: var(--black-black_353542, #353542);
-    color: var(--white-white_F1F1F5, #F1F1F5);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-  }
+.visible {
+  animation: fadeIn 0.3s;
+}
+
+.hidden {
+  animation: fadeOut 0.3s;
 }
 
 .visible {
