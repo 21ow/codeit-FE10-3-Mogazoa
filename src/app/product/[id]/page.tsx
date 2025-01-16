@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { getProductsDetail } from '@/api/productApi';
-import { ProductResponse, GetProdcutReviewResponse } from '@/api/type/Product';
+import { ProductResponse, GetProductReviewsResponse } from '@/api/type/Product';
 import { useEffect, useState } from 'react';
 import ImageComponent from '@/shared/Image/Images';
 import HeartCheck from '@/feature/landingpage/HeartCheck/HeartCheck';
@@ -28,7 +28,7 @@ const ProductDetail = () => {
   }, [id]);
 
   const updatedComment = (
-    comment: GetProdcutReviewResponse['list'][number]
+    comment: GetProductReviewsResponse['list'][number]
   ) => {
     console.log('Updated comment:', comment);
   };

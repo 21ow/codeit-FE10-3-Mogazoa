@@ -3,19 +3,19 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { getProductsReviews } from '@/api/productApi';
-import { GetProdcutReviewResponse } from '@/api/type/Product';
+import { GetProductReviewsResponse } from '@/api/type/Product';
 import ImageComponent from '@/shared/Image/Images';
 import RatingStar from '@/feature/landingpage/RatingStar/RatingStar';
 
 type CoCardProps = {
   productId: number;
   onCommentEditSuccess: (
-    updatedComment: GetProdcutReviewResponse['list'][number]
+    updatedComment: GetProductReviewsResponse['list'][number]
   ) => void;
 };
 
 const CoCard = ({ productId }: CoCardProps) => {
-  const [comments, setComments] = useState<GetProdcutReviewResponse['list']>(
+  const [comments, setComments] = useState<GetProductReviewsResponse['list']>(
     []
   );
 
