@@ -6,6 +6,7 @@ import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
+import useAuthStore from '@/store/useAuthStore';
 import Input from '@/shared/Input/Input';
 import Button from '@/shared/button/Button';
 import Link from 'next/link';
@@ -23,10 +24,12 @@ const SignUp = () => {
 
   const router = useRouter();
 
+  const { setToken } = useAuthStore();
+
   const { mutate } = useMutation<AuthResponse, AxiosError, SignUpRequest>({
     mutationFn: (data) => axiosInstance.post(`/auth/signUp`, data),
     onSuccess: (response) => {
-      localStorage.setItem('SignUpToken', response.accessToken);
+      setToken(response.accessToken);
       router.push('/auth/signin');
     },
     onError: (error: AxiosError) => {
