@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
-import Input from '../Input/Input';
+import Input from '../input/Input';
 import Image from 'next/image';
 import styles from './Navigation.module.scss';
 
