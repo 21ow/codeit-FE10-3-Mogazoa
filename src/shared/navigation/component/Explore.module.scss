@@ -1,0 +1,57 @@
+@use '@/shared/category/Category.module.scss' as list;
+
+.explore {
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    display: block;
+    padding: 20px 0;
+    border-top: 1px solid $black-350;
+    border-bottom: 1px solid $black-350;
+  }
+
+  > a {
+    padding: 16px;
+
+    @include tablet {
+      padding: 13px;
+    }
+
+    @include mobile {
+      @include list.list-style($color: $white);
+      &:hover {
+        @include hover-style(
+          $hover-bg: #25252e,
+          $hover-color: $white,
+          $border-radius: 4px,
+          $transition-time: 0.3s
+        );
+      }
+    }
+
+    > svg {
+      display: block;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+
+      &:hover {
+        color: $indigo;
+        fill: currentColor;
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    > span {
+      display: none;
+
+      @include mobile {
+        display: block;
+      }
+    }
+  }
+}
