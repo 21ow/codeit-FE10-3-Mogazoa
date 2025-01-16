@@ -80,7 +80,6 @@ export const postProductsFavorite = async (
 export const deleteProductsFavorite = async (
   productId: number
 ): Promise<ProductResponse> => {
-
   const URL = `/products/${productId}/favorite`;
   const res = await axiosInstance.delete(URL);
   return res.data;
