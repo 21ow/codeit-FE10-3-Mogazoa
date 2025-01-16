@@ -1,0 +1,26 @@
+@use '@/shared/button/Button.module.scss' as button;
+
+.compareButton {
+  @include button.button-style(
+    $background: $black-450,
+    $border: $border-blue,
+    $radius: $radius-common,
+    $width: 180px,
+    $height: 65px,
+    $padding: 0,
+    $color: $blue
+  );
+  display: flex;
+}
+.reviewButton {
+  @include button.button-style(
+    $background: $gradient,
+    $border: $border-blue,
+    $radius: $radius-common,
+    $width: 345px,
+    $height: 65px,
+    $padding: 0,
+    $color: $white
+  );
+  display: flex;
+}

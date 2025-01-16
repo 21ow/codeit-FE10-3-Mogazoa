@@ -6,6 +6,7 @@ import { getProductsReviews } from '@/api/productApi';
 import { GetProductReviewsResponse } from '@/api/type/Product';
 import ImageComponent from '@/shared/Image/Images';
 import RatingStar from '@/feature/landingpage/RatingStar/RatingStar';
+import ThumbCheck from '@/feature/landingpage/ThumbCheck/ThumbCheck';
 
 type CoCardProps = {
   productId: number;
@@ -67,9 +68,12 @@ const CoCard = ({ productId }: CoCardProps) => {
                       </div>
                     ))}
                   </div>
-                  <p className={styles.updatedAt}>
-                    {new Date(comment.updatedAt).toLocaleDateString()}
-                  </p>
+                  <div className={styles.bottomInfo2}>
+                    <p className={styles.updatedAt}>
+                      {new Date(comment.updatedAt).toLocaleDateString()}
+                    </p>
+                    <ThumbCheck reviewId={comment.id} productId={productId} />
+                  </div>
                 </div>
               </div>
             </div>

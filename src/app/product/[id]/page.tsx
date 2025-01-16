@@ -8,6 +8,8 @@ import ImageComponent from '@/shared/Image/Images';
 import HeartCheck from '@/feature/landingpage/HeartCheck/HeartCheck';
 import CoCard from '@/feature/landingpage/Comment/Comment';
 import DataForm from '@/feature/landingpage/DataForm/DataForm';
+import ReviewButton from '@/feature/landingpage/Button/ReviewButton';
+import CompareButton from '@/feature/landingpage/Button/CompareButton';
 import styles from './styles.module.scss';
 
 const ProductDetail = () => {
@@ -56,22 +58,27 @@ const ProductDetail = () => {
 
   return (
     <div className={styles.productId}>
-      <div className={styles.productDetail}>
+      <div className={styles.productTop}>
         <ImageComponent
           src={product.image}
           alt={`${id} 이미지`}
           width={240}
           height={300}
         />
-        <div className={styles.productDetailInfo}>
+        <div className={styles.productDetail}>
           <p className={productClassName}>{product.category.name}</p>
           <div className={styles.productDetailInfo2}>
             <h2 className={styles.productWhat}>{product.name}</h2>
             <HeartCheck productId={product.id} />
           </div>
-          <p>{product.description}</p>
+          <p className={styles.whatIsThis}>{product.description}</p>
+          <div className={styles.buttonContain}>
+            <ReviewButton />
+            <CompareButton />
+          </div>
         </div>
       </div>
+      <h3 className={styles.reviewName}>상품 통계</h3>
       <DataForm product={product} />
       <h3 className={styles.reviewName}>상품 리뷰</h3>
       <CoCard productId={product.id} onCommentEditSuccess={updatedComment} />
