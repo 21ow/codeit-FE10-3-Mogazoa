@@ -1,0 +1,28 @@
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reviewItem {
+  padding: 10px;
+  border: 1px solid $dark-gray;
+  border-radius: 8px;
+}
+
+.reviewContent {
+  margin-bottom: 5px;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 2px;
+
+  .activeStar {
+    color: $yellow;
+  }
+
+  .inactiveStar {
+    color: $dark-gray;
+  }
+}

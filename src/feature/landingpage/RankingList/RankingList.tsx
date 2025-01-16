@@ -30,7 +30,7 @@ const RankingList = () => {
 
         setRankingList(formattedData);
       } catch (error) {
-        console.error('Failed to fetch ranking data:', error);
+        console.error('오류', error);
       }
     };
 
@@ -54,7 +54,7 @@ const RankingList = () => {
               </div>
               <div className={styles.reviewerRankingContent}>
                 <div className={styles.reviewWrapper}>
-                  <button
+                  <div
                     className={
                       index === 0
                         ? styles.reviewerRankingRankFirst
@@ -64,7 +64,7 @@ const RankingList = () => {
                     }
                   >
                     {index + 1}등
-                  </button>
+                  </div>
                   <span className={styles.reviewerRankingNickname}>
                     {user.nickname}
                   </span>
