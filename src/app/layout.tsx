@@ -3,6 +3,8 @@
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { usePathname } from 'next/navigation';
+import Navigation from '@/shared/navigation/Navigation';
 import './globals.scss';
 
 export default function RootLayout({
@@ -11,6 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const queryClient = new QueryClient();
+  const pathname = usePathname();
+  const isAuthPage = pathname?.startsWith('/auth');
 
   return (
     <html lang="ko">
@@ -21,6 +25,7 @@ export default function RootLayout({
       </Head>
       <body>
         <QueryClientProvider client={queryClient}>
+          {!isAuthPage && <Navigation />}
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
