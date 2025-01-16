@@ -1,5 +1,3 @@
-'use client';
-
 import ImageComponent from '@/shared/Image/Images';
 import { Product } from '@/api/type/Product';
 import Link from 'next/link';

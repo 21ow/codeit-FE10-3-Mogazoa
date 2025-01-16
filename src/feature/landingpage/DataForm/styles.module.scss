@@ -1,0 +1,56 @@
+.productDetailInfo {
+  display: flex;
+  gap: 10px;
+}
+.starColor {
+  color: $yellow;
+}
+.heartIcon {
+  color: $red;
+}
+.iLikeItTitle {
+  font-size: 18px;
+  font-weight: 500;
+}
+.iLikeItContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.contentTitle {
+  color: $dark-gray;
+  font-size: 24px;
+  font-weight: 300;
+}
+.iLikeIt {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $black-350;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.innerMessage {
+  font-size: 14px;
+  font-weight: 300;
+  color: $dark-gray;
+}
+.innerMessage2 {
+  font-size: 14px;
+  font-weight: 300;
+  color: $white;
+}
+.innerContain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.innerContain2 {
+  display: flex;
+  gap: 5px;
+}

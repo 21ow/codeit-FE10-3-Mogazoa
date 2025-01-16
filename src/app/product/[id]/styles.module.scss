@@ -1,0 +1,32 @@
+.productId {
+  color: $white;
+}
+.productDetail {
+  display: flex;
+}
+.productWhat {
+  font-size: 24px;
+  font-weight: 600;
+}
+.productName1 {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 4px 6px;
+  color: $green;
+  background-color: rgb($green, 0.2);
+  border-radius: $radius-category-filter;
+}
+.productName2 {
+  color: $pink;
+  background-color: rgb($pink, 0.2);
+  border-radius: $radius-category-filter;
+}
+.productDetailInfo2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}

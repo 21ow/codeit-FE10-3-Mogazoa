@@ -58,6 +58,7 @@ export const deleteProducts = async (
 export const getProductsReviews = async (
   productId: number,
   order = 'recent',
+
   cursor = 1
 ): Promise<GetProductReviewsResponse> => {
   const URL = `/products/${productId}`;
