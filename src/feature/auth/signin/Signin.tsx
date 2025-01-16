@@ -6,7 +6,8 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthResponse, SignInRequest } from '@/api/type/Auth';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
-import Input from '@/shared/Input/Input';
+import { useAuthStore } from '@/store/useAuthStore';
+import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
 import SocialSignIn from '../component/SocialSignin';
 import Link from 'next/link';
@@ -21,10 +22,12 @@ const SignIn = () => {
 
   const router = useRouter();
 
+  const { setToken } = useAuthStore();
+
   const { mutate } = useMutation<AuthResponse, AxiosError, SignInRequest>({
     mutationFn: (data) => axiosInstance.post(`/auth/signIn`, data),
     onSuccess: (response) => {
-      localStorage.setItem('signInToken', response.accessToken);
+      setToken(response.accessToken);
       router.push('/'); //임시
     },
     onError: (error: AxiosError) => {

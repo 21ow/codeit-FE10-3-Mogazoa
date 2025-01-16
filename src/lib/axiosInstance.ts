@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { isAuthRequired, NO_TOKEN_ENDPOINTS } from '@/api/util/isAuthRequired';
+import { getToken } from '@/store/useAuthStore';
+import { LOGIN_NEED_MESSAGE } from '@/constant/message';
 const BASE_URL = 'https://mogazoa-api.vercel.app/10-33';
-
-const _LOGIN_NEED_MESSAGE_ = '로그인이 필요한 서비스입니다.';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -27,10 +27,10 @@ axiosInstance.interceptors.request.use(
       return config;
     }
 
-    const token = localStorage.getItem('signInToken');
+    const token = getToken();
 
     if (!token && config.url && !NO_TOKEN_ENDPOINTS.includes(config.url)) {
-      throw new Error(`Failed to getAccessToken(), ${_LOGIN_NEED_MESSAGE_}`);
+      throw new Error(`${LOGIN_NEED_MESSAGE}`);
     }
 
     if (token) {
