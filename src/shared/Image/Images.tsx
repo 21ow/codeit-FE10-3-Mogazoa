@@ -9,7 +9,7 @@ interface ProductImageProps
   height?: number;
 }
 
-const ImageComponent = ({
+const ProductImage = ({
   src,
   alt,
   width = 300,
@@ -42,4 +42,4 @@ const ImageComponent = ({
   );
 };
 
-export default ImageComponent;
+export default ProductImage;
