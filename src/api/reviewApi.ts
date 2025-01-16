@@ -1,5 +1,5 @@
 import axiosInstance from '@/lib/axiosInstance';
-import sessionStorage from './storage/sessionStorage';
+
 import {
   ReviewRequest,
   ReviewResponse,
@@ -12,24 +12,8 @@ export const postReviewsLike = async (
   reviewId: number
 ): Promise<ReviewResponse> => {
   const URL = `/reviews/${reviewId}/like`;
-  console.log('POST - postReviewsIdLike(): ', URL);
-
-  try {
-    const res = await axiosInstance.post(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ReviewResponse;
-      sessionStorage.setItem(`postReviewsIdLike`, resData);
-
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to postReviewsIdLike() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.post(URL);
+  return res.data;
 };
 
 /*** 리뷰 좋아요 취소 ***/
@@ -37,24 +21,8 @@ export const deleteReviewsLike = async (
   reviewId: number
 ): Promise<ReviewResponse> => {
   const URL = `/reviews/${reviewId}/like`;
-  console.log('DELETE - deleteReviewsIdLike(): ', URL);
-
-  try {
-    const res = await axiosInstance.delete(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ReviewResponse;
-      sessionStorage.setItem(`deleteReviewsIdLike`, resData);
-
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to deleteReviewsIdLike() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.delete(URL);
+  return res.data;
 };
 
 /*** 리뷰 생성 ***/
@@ -62,23 +30,8 @@ export const postReviews = async (
   data: ReviewRequest
 ): Promise<ReviewResponse> => {
   const URL = `/reviews`;
-  console.log('POST - postReviews(): ', URL);
-
-  try {
-    const res = await axiosInstance.post(URL, data);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ReviewResponse;
-      sessionStorage.setItem(`postReviews`, resData);
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to postReviews() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.post(URL, data);
+  return res.data;
 };
 
 /*** 리뷰 삭제 ***/
@@ -86,24 +39,8 @@ export const deleteReviews = async (
   reviewId: number
 ): Promise<DeleteReviewResponse> => {
   const URL = `/reviews/${reviewId}`;
-  console.log('DELETE - deleteReviewsId(): ', URL);
-
-  try {
-    const res = await axiosInstance.delete(URL);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as DeleteReviewResponse;
-      sessionStorage.setItem(`deleteReviewsId`, resData);
-
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to deleteReviewsId() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.delete(URL);
+  return res.data;
 };
 
 /*** 리뷰 수정 ***/
@@ -116,22 +53,6 @@ export const patchReviews = async (
   data: PatchReviewRequest
 ): Promise<ReviewResponse> => {
   const URL = `/reviews/${reviewId}`;
-  console.log('PATCH - patchReviewsId(): ', URL);
-
-  try {
-    const res = await axiosInstance.patch(URL, data);
-
-    if (res.status === 200 || res.status === 201) {
-      const resData = res.data as ReviewResponse;
-      sessionStorage.setItem(`patchReviewsId`, resData);
-
-      return resData;
-    } else {
-      throw new Error(
-        `Failed to patchReviewsId() res.status: ${res.status}, res.data: ${res.data}`
-      );
-    }
-  } catch (error) {
-    throw error;
-  }
+  const res = await axiosInstance.patch(URL, data);
+  return res.data;
 };
