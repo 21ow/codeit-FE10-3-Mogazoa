@@ -6,8 +6,17 @@ type AuthState = {
   clearToken: () => void;
 };
 
+const getToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    return token;
+  }
+  return null;
+};
+
 const useAuthStore = create<AuthState>((set) => ({
-  token: localStorage.getItem('token'),
+  token: getToken(),
   setToken: (token) => {
     if (token) {
       localStorage.setItem('token', token);
