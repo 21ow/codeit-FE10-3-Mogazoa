@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { create } from 'zustand';
 
 type AuthState = {
@@ -6,17 +7,16 @@ type AuthState = {
   clearToken: () => void;
 };
 
-const getToken = (): string | null => {
+export const getToken = (): string | null => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('token');
-    console.log(token);
     return token;
   }
   return null;
 };
 
-const useAuthStore = create<AuthState>((set) => ({
-  token: getToken(),
+export const useAuthStore = create<AuthState>((set) => ({
+  token: null,
   setToken: (token) => {
     if (token) {
       localStorage.setItem('token', token);
@@ -31,4 +31,11 @@ const useAuthStore = create<AuthState>((set) => ({
   },
 }));
 
-export default useAuthStore;
+export const useInitAuthStore = () => {
+  const setToken = useAuthStore((state) => state.setToken);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) setToken(token);
+  }, [setToken]);
+};
