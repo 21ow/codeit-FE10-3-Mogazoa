@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { isAuthRequired, NO_TOKEN_ENDPOINTS } from '@/api/util/isAuthRequired';
-import useAuthStore from '@/store/useAuthStore';
+import { getToken } from '@/store/useAuthStore';
 import { LOGIN_NEED_MESSAGE } from '@/constant/message';
 const BASE_URL = 'https://mogazoa-api.vercel.app/10-33';
 
@@ -27,7 +27,7 @@ axiosInstance.interceptors.request.use(
       return config;
     }
 
-    const { token } = useAuthStore();
+    const token = getToken();
 
     if (!token && config.url && !NO_TOKEN_ENDPOINTS.includes(config.url)) {
       throw new Error(`${LOGIN_NEED_MESSAGE}`);
