@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import Input from '../Input/Input';
+import Input from '../input/Input';
 import Button from '../button/Button';
 import MobileMenu from './component/MobileMenu';
 import Logo from '/public/image/img-logo.svg';
