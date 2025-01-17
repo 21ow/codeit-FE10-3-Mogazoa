@@ -1,11 +1,8 @@
-import Link from 'next/link';
+import Products from '@/feature/landingpage/Products';
+import '@/asset/globals.scss';
 
 const Page = () => {
-  return (
-    <div>
-      <Link href="/product">메인페이지</Link>
-    </div>
-  );
+  return <Products />;
 };
 
 export default Page;

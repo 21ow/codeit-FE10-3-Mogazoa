@@ -1,17 +1,23 @@
-.menuBtn {
+@use '@/shared/category/Category.module.scss' as actionBtn;
+.mobileMenu {
   display: none;
 
   @include mobile {
-    width: 24px;
-    height: 24px;
     display: block;
   }
 }
 
+.menuBtn {
+  width: 24px;
+  height: 24px;
+}
+
 .customModal {
   width: 270px;
+  height: 100%;
   padding: 16px 26px;
   background-color: $black-450;
+  overflow-y: auto;
 }
 
 .customOverlay {
@@ -19,8 +25,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
 }
@@ -58,75 +64,47 @@
 }
 
 .customHeader {
-  padding-bottom: 20px;
   border-bottom: 1px solid $black-350;
+  position: sticky;
+  background-color: inherit;
+  top: 0;
+  z-index: 1;
 }
 
 .modalLogo {
   display: inline-flex;
-  margin-bottom: 20px;
   > svg {
-    height: 22px;
+    width: auto;
+    height: 28px;
   }
 }
 
-.authLinkWrapper {
+.customContent {
+  margin: 0; //임시 코드
+}
+
+.mobileUserAcitons {
+  padding: 20px 14px;
   display: flex;
-  width: 100%;
-  gap: 16px;
-}
+  line-height: 40px;
 
-@mixin Link-style(
-  $background-color: $white,
-  $border: 1px solid $blue,
-  $color: $blue,
-  $padding: 12px 20px,
-  $border-radius: 4px,
-  $font-size: 16px,
-  $font-weight: bold,
-  $justify-content: center,
-  $hover-background-color: #d0d0d8,
-  $active-background-color: #b0b0b8,
-  $active-transform: translateY(2px)
-) {
-  background-color: $background-color;
-  border: $border;
-  color: $color;
-  padding: $padding;
-  border-radius: $border-radius;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  justify-content: $justify-content;
+  > a,
+  button {
+    width: 50%;
+    display: inline-flex;
+    justify-content: center;
 
-  &:hover {
-    background-color: $hover-background-color;
-  }
-
-  &:active {
-    background-color: $active-background-color;
-    transform: $active-transform;
+    &:hover {
+      @include hover-style(
+        $hover-bg: #25252e,
+        $hover-color: $white,
+        $border-radius: 4px,
+        $transition-time: 0.3s
+      );
+    }
   }
 }
 
-.signInLink {
-  @include Link-style();
-}
-
-.signUpLink {
-  @include Link-style(
-    $background-color: $indigo,
-    $color: $white,
-    $border: none,
-    $hover-background-color: #3c50e0,
-    $active-background-color: #2e42d7
-  );
-}
-
-.categoryBtn {
-  width: 100%;
-  padding: 0 14px;
-  height: 100%;
-  text-align: left;
-  background: none;
-  border: none;
+.logoutBtn {
+  @include actionBtn.actionButton-style;
 }
