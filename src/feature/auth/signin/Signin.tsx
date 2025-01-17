@@ -22,13 +22,16 @@ const SignIn = () => {
 
   const router = useRouter();
 
-  const { setToken } = useAuthStore();
+  const setToken = useAuthStore((state) => state.setToken);
 
   const { mutate } = useMutation<AuthResponse, AxiosError, SignInRequest>({
-    mutationFn: (data) => axiosInstance.post(`/auth/signIn`, data),
-    onSuccess: (response) => {
-      setToken(response.accessToken);
-      router.push('/'); //임시
+    mutationFn: (data) =>
+      axiosInstance
+        .post(`/auth/signIn`, data)
+        .then((response) => response.data),
+    onSuccess: (resData) => {
+      setToken(resData.accessToken);
+      router.push('/');
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
