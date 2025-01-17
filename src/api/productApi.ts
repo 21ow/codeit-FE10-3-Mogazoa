@@ -58,10 +58,9 @@ export const deleteProducts = async (
 export const getProductsReviews = async (
   productId: number,
   order = 'recent',
-
-  cursor = 1
+  cursor = 0
 ): Promise<GetProductReviewsResponse> => {
-  const URL = `/products/${productId}`;
+  const URL = `/products/${productId}/reviews?`;
   const params: GetProductReviewsRequest = { order, cursor };
   const res = await axiosInstance.get(URL, { params });
   return res.data;
