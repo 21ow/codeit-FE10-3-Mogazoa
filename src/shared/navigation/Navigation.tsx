@@ -10,7 +10,7 @@ import MobileMenu from '../navigation/component/MobileMenu';
 import Logo from '/public/image/img-logo.svg';
 import Search from '/public/icon/ic-search.svg';
 import UserActions from '../navigation/component/UserActions';
-import Explore from '../navigation/component/Explore';
+import NavMenu from '../navigation/component/NavMenu';
 import styles from './Navigation.module.scss';
 
 const Navigation = () => {
@@ -53,7 +53,7 @@ const Navigation = () => {
           />
         </div>
 
-        {!isMobile && <Explore />}
+        {!isMobile && <NavMenu />}
         {!isMobile && <UserActions />}
       </div>
 

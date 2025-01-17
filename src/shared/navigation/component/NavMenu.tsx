@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import AddItem from '/public/icon/ic-add-item.svg';
 import Compare from '/public/icon/ic-compare.svg';
-import styles from './Explore.module.scss';
+import styles from './NavMenu.module.scss';
 
-const Explore = () => {
+const NavMenu = () => {
   return (
-    <div className={styles.explore}>
+    <div className={styles.NavMenu}>
       <Link href="#">
         <AddItem />
         <span>등록하기</span>
@@ -18,4 +18,4 @@ const Explore = () => {
   );
 };
 
-export default Explore;
+export default NavMenu;
