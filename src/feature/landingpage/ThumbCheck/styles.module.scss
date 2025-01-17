@@ -1,0 +1,35 @@
+.thumbButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $dark-gray;
+  border-radius: $radius-category-filter;
+  width: 50px;
+  padding: 4px 5px;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    border-color: $blue;
+  }
+}
+
+.thumbChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.likeCount {
+  font-size: 14px;
+  color: $blue;
+  font-style: bold;
+}
+
+.likeCount2 {
+  font-size: 14px;
+  color: $dark-gray;
+  font-style: bold;
+}
