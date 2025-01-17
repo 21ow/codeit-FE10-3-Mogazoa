@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   const queryClient = new QueryClient();
   const pathname = usePathname();
-  const isAuthPage = pathname?.startsWith('/auth');
+  const isRootPage = pathname === '/';
 
   return (
     <html lang="ko">
@@ -27,22 +27,25 @@ export default function RootLayout({
       </Head>
       <body>
         <QueryClientProvider client={queryClient}>
-          <div className={styles.layout}>
-            <header className={styles.header}>
-              {!isAuthPage && <Navigation />}
-            </header>
+          {isRootPage ? (
+            <div className={styles.layout}>
+              <header className={styles.header}>
+                <Navigation />
+              </header>
 
-            <div className={styles.content}>
-              <aside className={styles.aside}>
-                {!isAuthPage && <Category />}
-              </aside>
-              <main className={styles.main}>{children}</main>
-              <article className={styles.article}>
-                {!isAuthPage && <RankingList />}
-              </article>
+              <div className={styles.content}>
+                <aside className={styles.aside}>
+                  {isRootPage && <Category />}
+                </aside>
+                <main className={styles.main}>{children}</main>
+                <article className={styles.article}>
+                  {isRootPage && <RankingList />}
+                </article>
+              </div>
             </div>
-          </div>
-
+          ) : (
+            <>{children}</>
+          )}
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </body>
