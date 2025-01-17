@@ -1,0 +1,74 @@
+@mixin link-style(
+  $background-color: $white,
+  $border: 1px solid $blue,
+  $color: $blue,
+  $padding: 16px,
+  $border-radius: 4px,
+  $font-size: 16px,
+  $font-weight: bold,
+  $justify-content: center,
+  $hover-background-color: #d0d0d8,
+  $active-background-color: #b0b0b8,
+  $active-transform: translateY(2px)
+) {
+  background-color: $background-color;
+  color: $color;
+  padding: $padding;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  justify-content: $justify-content;
+
+  &:hover {
+    background-color: $hover-background-color;
+    color: $color;
+  }
+
+  &:active {
+    background-color: $active-background-color;
+    transform: $active-transform;
+  }
+}
+
+.authLinkWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  > a {
+    &:hover {
+      color: $indigo;
+    }
+
+    @include mobile {
+      width: 50%;
+      &:hover {
+        color: unset;
+      }
+    }
+  }
+
+  @include mobile {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0 20px;
+
+    .signInLink {
+      @include link-style();
+    }
+
+    > span {
+      display: none;
+    }
+
+    .signUpLink {
+      @include link-style(
+        $background-color: $indigo,
+        $color: $white,
+        $border: none,
+        $hover-background-color: #3c50e0,
+        $active-background-color: #2e42d7
+      );
+    }
+  }
+}

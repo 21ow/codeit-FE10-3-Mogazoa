@@ -1,18 +1,20 @@
-import { useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { createQueries } from '@/api/createQueries';
-import { CategoryResponse } from '@/api/type/Category';
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
+import { useAuthStore } from '@/store/useAuthStore';
+import UserActions from './UserActions';
+import Category from '@/shared/category/Category';
+import NavMenu from './NavMenu';
 import styles from './MobileMenu.module.scss';
 
 const MobileMenu = () => {
-  const categoryQuery = createQueries<CategoryResponse[]>(`/categories`);
-  const { data } = useQuery(categoryQuery.all());
+  const { token, clearToken } = useAuthStore();
 
   const modalId = useRef('menu');
   const { modals, openModal, closeModal } = useModalStore();
@@ -25,8 +27,16 @@ const MobileMenu = () => {
     closeModal(modalId.current);
   };
 
+  const handleLogout = () => {
+    clearToken();
+  };
+
+  useEffect(() => {
+    handleClose();
+  }, [token]);
+
   return (
-    <>
+    <div className={styles.mobileMenu}>
       <Button className={styles.menuBtn} onClick={handleOpen}>
         <Image
           src={'/icon/ic-menu.svg'}
@@ -50,32 +60,26 @@ const MobileMenu = () => {
               <Link href="/" className={styles.modalLogo}>
                 <Logo />
               </Link>
-              <div className={styles.authLinkWrapper}>
-                <Link href="/auth/signin" className={styles.signInLink}>
-                  로그인
-                </Link>
-                <Link href="/auth/signup" className={styles.signUpLink}>
-                  회원가입
-                </Link>
-                {/* 토큰 있으면 사용자 계정 전환 */}
-              </div>
+
+              <UserActions />
             </div>
           }
         >
           <>
-            <div>카테고리</div>
-            <ul className={styles.categories}>
-              {data &&
-                data.map((item) => (
-                  <li key={item.id}>
-                    <Button className={styles.categoryBtn}>{item.name}</Button>
-                  </li>
-                ))}
-            </ul>
+            <Category />
+            <NavMenu />
+            <div className={styles.mobileUserAcitons}>
+              <Link href="#">고객센터</Link>
+              {token && (
+                <Button className={styles.logoutBtn} onClick={handleLogout}>
+                  로그아웃
+                </Button>
+              )}
+            </div>
           </>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 

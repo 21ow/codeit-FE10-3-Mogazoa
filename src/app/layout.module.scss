@@ -1,0 +1,74 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.content {
+  gap: 60px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px auto 300px;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'aside main article';
+
+  @include tablet {
+    gap: 40px 25px;
+    grid-template-columns: 2fr;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      'aside article'
+      'aside main';
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      'article'
+      'main';
+  }
+}
+
+.aside {
+  grid-area: aside;
+  width: 220px;
+  height: 100vh;
+  > div {
+    position: sticky;
+    top: 145px;
+    z-index: 1;
+
+    @include tablet {
+      top: 125px;
+    }
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.main {
+  grid-area: main;
+}
+
+.article {
+  grid-area: article;
+  width: 250px;
+  height: 100vh;
+  > div {
+    position: sticky;
+    top: 145px;
+    z-index: 1;
+  }
+
+  @include tablet {
+    display: none; // 리뷰어 랭킹 반응형 후 삭제될 코드
+  }
+}

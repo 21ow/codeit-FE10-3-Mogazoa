@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { usePathname } from 'next/navigation';
 import Navigation from '@/shared/navigation/Navigation';
-import './globals.scss';
+import Category from '@/shared/category/Category';
+import RankingList from '@/feature/landingpage/RankingList/RankingList';
+import styles from './layout.module.scss';
 
 export default function RootLayout({
   children,
@@ -25,8 +27,22 @@ export default function RootLayout({
       </Head>
       <body>
         <QueryClientProvider client={queryClient}>
-          {!isAuthPage && <Navigation />}
-          {children}
+          <div className={styles.layout}>
+            <header className={styles.header}>
+              {!isAuthPage && <Navigation />}
+            </header>
+
+            <div className={styles.content}>
+              <aside className={styles.aside}>
+                {!isAuthPage && <Category />}
+              </aside>
+              <main className={styles.main}>{children}</main>
+              <article className={styles.article}>
+                {!isAuthPage && <RankingList />}
+              </article>
+            </div>
+          </div>
+
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </body>

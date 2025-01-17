@@ -1,0 +1,51 @@
+@use '@/asset/variables' as *;
+
+@mixin list-style(
+  $padding: 0 20px,
+  $margin: 4px 0,
+  $color: $gray,
+  $height: 40px,
+  $line-height: 40px
+) {
+  padding: $padding;
+  margin: $margin;
+  color: $color;
+  height: $height;
+  line-height: $line-height;
+}
+
+.categories {
+  @include mobile {
+    padding: 20px 0;
+  }
+  > h2 {
+    font-size: 16px;
+    line-height: 40px;
+    padding: 0 14px;
+  }
+  > ul {
+    > li {
+      display: block;
+      @include list-style();
+
+      @include hover-style(
+        $hover-bg: #25252e,
+        $hover-color: $white,
+        $border-radius: 4px,
+        $transition-time: 0.3s
+      );
+    }
+  }
+}
+
+@mixin actionButton-style {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+}
+
+.categoryBtn {
+  @include actionButton-style;
+}

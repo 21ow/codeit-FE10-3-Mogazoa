@@ -1,28 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
 import Link from 'next/link';
 import Input from '../input/Input';
 import Button from '../button/Button';
-import MobileMenu from './component/MobileMenu';
+import MobileMenu from '../navigation/component/MobileMenu';
 import Logo from '/public/image/img-logo.svg';
 import Search from '/public/icon/ic-search.svg';
-import AddItem from '/public/icon/ic-add-item.svg';
-import Compare from '/public/icon/ic-compare.svg';
+import UserActions from '../navigation/component/UserActions';
+import NavMenu from '../navigation/component/NavMenu';
 import styles from './Navigation.module.scss';
 
 const Navigation = () => {
+  const [isClient, setIsClient] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [isSearchVisible, setSearchVisible] = useState(false); //수정 예정
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   const toggleSearch = () => {
     setSearchVisible((prev) => !prev);
-    console.log(isSearchVisible);
   };
 
   return (
     <div className={styles.navigation}>
-      <MobileMenu />
+      {isMobile && <MobileMenu />}
 
       <Link href="/" className={styles.logo}>
         <Logo />
@@ -45,14 +53,8 @@ const Navigation = () => {
           />
         </div>
 
-        <Link href="#">
-          <AddItem />
-          <div>등록하기</div>
-        </Link>
-        <Link href="#">
-          <Compare />
-          <div>비교하기</div>
-        </Link>
+        {!isMobile && <NavMenu />}
+        {!isMobile && <UserActions />}
       </div>
 
       <Button
