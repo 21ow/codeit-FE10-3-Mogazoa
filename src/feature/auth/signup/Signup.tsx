@@ -24,10 +24,13 @@ const SignUp = () => {
 
   const router = useRouter();
 
-  const { setToken } = useAuthStore();
+  const setToken = useAuthStore((state) => state.setToken);
 
   const { mutate } = useMutation<AuthResponse, AxiosError, SignUpRequest>({
-    mutationFn: (data) => axiosInstance.post(`/auth/signUp`, data),
+    mutationFn: (data) =>
+      axiosInstance
+        .post(`/auth/signUp`, data)
+        .then((response) => response.data),
     onSuccess: (response) => {
       setToken(response.accessToken);
       router.push('/auth/signin');
