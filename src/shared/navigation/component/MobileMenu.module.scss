@@ -1,13 +1,15 @@
 @use '@/shared/category/Category.module.scss' as actionBtn;
-
-.menuBtn {
+.mobileMenu {
   display: none;
 
   @include mobile {
-    width: 24px;
-    height: 24px;
     display: block;
   }
+}
+
+.menuBtn {
+  width: 24px;
+  height: 24px;
 }
 
 .customModal {
@@ -72,11 +74,13 @@
 .modalLogo {
   display: inline-flex;
   > svg {
+    width: auto;
     height: 28px;
   }
 }
 
 .customContent {
+  margin: 0; //임시 코드
 }
 
 .mobileUserAcitons {

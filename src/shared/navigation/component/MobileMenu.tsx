@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
@@ -10,7 +10,7 @@ import Modal from '@/shared/modal/Modal';
 import { useAuthStore } from '@/store/useAuthStore';
 import UserActions from './UserActions';
 import Category from '@/shared/category/Category';
-import Explore from './Explore';
+import NavMenu from './NavMenu';
 import styles from './MobileMenu.module.scss';
 
 const MobileMenu = () => {
@@ -36,7 +36,7 @@ const MobileMenu = () => {
   }, [token]);
 
   return (
-    <>
+    <div className={styles.mobileMenu}>
       <Button className={styles.menuBtn} onClick={handleOpen}>
         <Image
           src={'/icon/ic-menu.svg'}
@@ -67,7 +67,7 @@ const MobileMenu = () => {
         >
           <>
             <Category />
-            <Explore />
+            <NavMenu />
             <div className={styles.mobileUserAcitons}>
               <Link href="#">고객센터</Link>
               {token && (
@@ -79,7 +79,7 @@ const MobileMenu = () => {
           </>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 
