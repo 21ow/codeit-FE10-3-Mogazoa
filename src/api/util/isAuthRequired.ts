@@ -2,7 +2,6 @@ export const NO_TOKEN_ENDPOINTS = [
   '/auth/',
   '/categories',
   '/oauthApps',
-  '/products',
   '/users',
 ];
 
@@ -15,7 +14,7 @@ export const isAuthRequired = (
     return true;
   }
 
-  if (method === 'POST' && path.startsWith('/products')) {
+  if (method === 'GET' && path === '/products') {
     return true;
   }
 
