@@ -1,5 +1,5 @@
 export type ImageRequest = {
-  file: File;
+  image: File;
 };
 
 export type ImageResponse = {
