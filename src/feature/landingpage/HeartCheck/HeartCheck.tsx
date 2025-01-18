@@ -17,7 +17,7 @@ interface FavoriteButtonProps {
 const HeartCheck: React.FC<FavoriteButtonProps> = ({ productId }) => {
   const { favorites, toggleFavorite, setFavoriteCount, setFavorite } =
     useFavoriteStore();
-  const [isFavorite, setIsFavorite] = useState(favorites[productId] || false); // 로컬 상태
+  const [isFavorite, setIsFavorite] = useState(favorites[productId] || false);
 
   const fetchProductDetails = useCallback(async () => {
     const { isFavorite, favoriteCount } = await getProductsDetail(productId);

@@ -73,7 +73,7 @@ const ProductDetail = () => {
           </div>
           <p className={styles.whatIsThis}>{product.description}</p>
           <div className={styles.buttonContain}>
-            <ReviewButton />
+            <ReviewButton productId={product.id} />
             <CompareButton />
           </div>
         </div>

@@ -32,7 +32,7 @@ const ProductCard = ({
                 <p className={styles.favoriteCount}>찜</p>
                 <p className={styles.favoriteCount}>{favoriteCount}</p>
               </div>
-              <p className={styles.raTing}>{rating}</p>
+              <p className={styles.raTing}>{rating?.toFixed(1)}</p>
             </div>
           </div>
         </div>

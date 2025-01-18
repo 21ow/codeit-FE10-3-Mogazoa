@@ -9,7 +9,7 @@ interface ModalHeaderProps {
 const ModalHeader: React.FC<ModalHeaderProps> = ({ headerText, onClose }) => {
   return (
     <div className={styles.container}>
-      <p>{headerText}</p>
+      <p className={styles.headerText}>{headerText}</p>
       <button type="button" onClick={onClose}>
         <Image
           src={'/icon/ic-close.svg'}
