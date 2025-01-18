@@ -1,0 +1,84 @@
+@use '@/shared/modal/Modal.module.scss' as Modal;
+@use '@/shared/button/Button.module.scss' as Button;
+
+.reviewBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+.reviewModal {
+  @include Modal.container-style(
+    $background-color: $black-450,
+    $padding: 3px,
+    $border-radius: $radius-modal,
+    $min-width: 500px,
+    $min-height: 400px
+  );
+}
+.reviewContent {
+  width: 540px;
+  height: 160px;
+  padding: 20px;
+  font-size: 16px;
+  border: 1px solid $black-300;
+  border-radius: $radius-common;
+  resize: none;
+  color: $gray;
+  &:focus {
+    border-color: $blue;
+    outline: none;
+  }
+}
+
+.reviewButton {
+  @include Button.button-style(
+    $color: $white,
+    $background: $blue,
+    $padding: 0,
+    $radius: $radius-common,
+    $border: $border-none,
+    $height: 65px,
+    $width: 540px,
+    $justify-content: center,
+    $align-items: center,
+    $font-size: 18px,
+    $font-weight: 500
+  );
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($blue, 10%);
+  }
+}
+
+.starRating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+.activeStar {
+  color: $yellow;
+}
+
+.inactiveStar {
+  color: $gray;
+}
+.ratingContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.ratingText {
+  color: $gray;
+  font-size: 16px;
+}
+.reviewButton:disabled {
+  background-color: $dark-gray;
+  cursor: not-allowed;
+}
