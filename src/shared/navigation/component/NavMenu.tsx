@@ -6,7 +6,7 @@ import styles from './NavMenu.module.scss';
 const NavMenu = () => {
   return (
     <div className={styles.NavMenu}>
-      <Link href="#">
+      <Link href="/add-product">
         <AddItem />
         <span>등록하기</span>
       </Link>
