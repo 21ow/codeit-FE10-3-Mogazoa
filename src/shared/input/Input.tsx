@@ -51,6 +51,20 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
       [styles.errorStatus]: formErrorMessage,
     });
 
+    const { onChange, ...rest } = props;
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange(e);
+      }
+
+      if (type === 'file') {
+        handleFileChange(e);
+      } else {
+        handleTextCounter(e);
+      }
+    };
+
     return (
       <div
         className={
@@ -67,12 +81,10 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
             id={id}
             ref={mergeRefs([ref, toggleRef])}
             maxLength={maxLength}
-            onChange={(e) =>
-              type === 'file' ? handleFileChange(e) : handleTextCounter(e)
-            }
+            onChange={handleChange}
             multiple={multiple}
             className={inputClassName}
-            {...props}
+            {...rest}
           />
           <PwToggleBtn
             type={type}
@@ -90,6 +102,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           formError={formErrorMessage}
           fileError={fileErrorMessage}
         />
+
         <FilePreview
           type={type}
           filePreviews={filePreviews}
