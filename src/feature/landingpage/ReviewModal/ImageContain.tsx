@@ -26,7 +26,6 @@ const ImageContain = ({ setImageUrl }: ImageContainProps) => {
         setImageUrl(uploadedUrl);
         setUploading(false);
       } catch (error) {
-        console.error('이미지 업로드 실패:', error);
         alert('이미지 업로드 실패. 다시 시도해주세요.');
         setUploading(false);
       }
