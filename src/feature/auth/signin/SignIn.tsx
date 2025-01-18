@@ -9,9 +9,9 @@ import { AxiosError } from 'axios';
 import { useAuthStore } from '@/store/useAuthStore';
 import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
-import SocialSignIn from '../component/SocialSignin';
+import SocialSignIn from '../component/SocialSignIn';
 import Link from 'next/link';
-import styles from './Signin.module.scss';
+import styles from './SignIn.module.scss';
 
 const SignIn = () => {
   const {

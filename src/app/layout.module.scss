@@ -38,7 +38,7 @@
 .aside {
   grid-area: aside;
   width: 220px;
-  height: 100vh;
+  height: 100%;
   > div {
     position: sticky;
     top: 145px;
@@ -61,7 +61,7 @@
 .article {
   grid-area: article;
   width: 250px;
-  height: 100vh;
+  height: 100%;
   > div {
     position: sticky;
     top: 145px;
