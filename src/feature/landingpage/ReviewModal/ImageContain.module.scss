@@ -1,0 +1,66 @@
+.imageUploadContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.fileLabel {
+  display: inline-block;
+  width: 165px;
+  height: 165px;
+  padding: 63px;
+  cursor: pointer;
+  text-align: center;
+  background-color: $black-350;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fileInput {
+  display: none;
+}
+
+.imagePreviewContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.imagePreview {
+  position: relative;
+  width: 165px;
+  height: 165px;
+  background-color: $white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.removeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: $dark-gray;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.removeButton:hover {
+  background-color: $gray;
+}
+.fileLabel:disabled {
+  cursor: not-allowed;
+}

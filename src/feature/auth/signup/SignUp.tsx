@@ -10,7 +10,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
 import Link from 'next/link';
-import styles from './Signup.module.scss';
+import styles from './SignUp.module.scss';
 
 const SignUp = () => {
   const {

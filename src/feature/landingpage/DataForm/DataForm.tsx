@@ -11,8 +11,6 @@ interface ProductDetailInfoProps {
 
 const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
   const ratingDifference = product.rating - product.categoryMetric.rating;
-  const favoriteDifference =
-    product.favoriteCount - product.categoryMetric.favoriteCount;
   const reviewDifference =
     product.reviewCount - product.categoryMetric.reviewCount;
 
@@ -56,7 +54,9 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
         <div className={styles.innerContain}>
           <p className={styles.innerMessage}>같은 카테고리의 제품들보다</p>
           <div className={styles.innerContain2}>
-            <p className={styles.innerMessage2}>{reviewDifference}개</p>
+            <p className={styles.innerMessage2}>
+              {reviewDifference.toFixed(1)}개
+            </p>
             <p className={styles.innerMessage}>더 많아요!</p>
           </div>
         </div>
@@ -67,7 +67,7 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
           <p className={styles.innerMessage}>같은 카테고리의 제품들보다</p>
           <div className={styles.innerContain2}>
             <p className={styles.innerMessage2}>
-              {Math.abs(reviewDifference)}개
+              {Math.abs(reviewDifference).toFixed(1)}개
             </p>
             <p className={styles.innerMessage}>더 적어요!</p>
           </div>
@@ -91,7 +91,8 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
             width={24}
             height={24}
           />
-          <p className={styles.contentTitle}>{product.rating}</p>
+          <p className={styles.contentTitle}>{product.rating.toFixed(1)}</p>{' '}
+          {/* 소수점 1자리로 표시 */}
         </div>
         {renderRatingMessage()}
       </div>
