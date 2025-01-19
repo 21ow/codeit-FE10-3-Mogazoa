@@ -18,15 +18,15 @@ const Navigation = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [isSearchVisible, setSearchVisible] = useState(false); //수정 예정
 
+  const toggleSearch = () => {
+    setSearchVisible((prev) => !prev);
+  };
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   if (!isClient) return null;
-
-  const toggleSearch = () => {
-    setSearchVisible((prev) => !prev);
-  };
 
   return (
     <div className={styles.navigation}>
