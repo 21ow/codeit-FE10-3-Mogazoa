@@ -12,6 +12,7 @@ import Dropdown from '@/shared/dropdown/Dropdown';
 import Input from '@/shared/input/Input';
 import TextArea from '@/shared/TextArea/TextArea';
 import Button from '@/shared/button/Button';
+import useAuthGuard from '@/hook/useAuthGuard';
 // import styles from './addProduct.module.scss';
 
 export type CombinedRequest = ProductRequest & {
@@ -19,6 +20,7 @@ export type CombinedRequest = ProductRequest & {
 };
 
 const AddProduct = () => {
+  useAuthGuard();
   const { register, handleSubmit, setValue } = useForm<CombinedRequest>();
 
   const { mutate: imageUpload } = useMutation<
