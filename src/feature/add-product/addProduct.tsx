@@ -78,12 +78,12 @@ const AddProduct = () => {
 
       const imageResponse = await new Promise<ImageResponse>(
         (resolve, reject) => {
-          imageUpload(imageData, {
+          imageUpload(imageData as unknown as ImageRequest, {
             onSuccess: (res) => resolve(res),
             onError: (err) => reject(err),
           });
         }
-      );
+      ); //임시 강제 형변환
 
       const { image, ...rest } = data;
 
