@@ -22,7 +22,11 @@ const useDropdownStore = create<DropdownState>((set) => ({
     set((state) => ({
       dropdowns: {
         ...state.dropdowns,
-        [id]: { isVisible: false, content: null },
+        [id]: {
+          ...state.dropdowns[id],
+          isVisible: false,
+          content: null,
+        },
       },
     })),
 }));
