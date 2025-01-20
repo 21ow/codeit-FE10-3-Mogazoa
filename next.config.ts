@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'src')],
-    additionalData: `@use '@/asset/variables' as *;`,
+    additionalData: `
+  @use '@/asset/variables' as *;
+  @use '@/asset/mixins' as *;
+`,
   },
   images: {
     remotePatterns: [
