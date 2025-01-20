@@ -1,0 +1,51 @@
+.productId {
+  color: $white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+}
+.productTop {
+  display: flex;
+  max-width: 940px;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.productDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.productWhat {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.productDetailInfo2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.buttonContain {
+  display: flex;
+  gap: 10px;
+}
+.whatIsThis {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+}
+.reviewContain {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
