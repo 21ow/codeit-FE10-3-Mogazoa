@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
+import Menu from '/public/icon/ic-Menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
@@ -38,14 +38,9 @@ const MobileMenu = () => {
   return (
     <div className={styles.mobileMenu}>
       <Button className={styles.menuBtn} onClick={handleOpen}>
-        <Image
-          src={'/icon/ic-menu.svg'}
-          width={24}
-          height={24}
-          alt="검색하기"
-          className={styles.menu}
-        />
+        <Menu />
       </Button>
+
       {modals[modalId.current]?.isVisible && (
         <Modal
           onClose={handleClose}
