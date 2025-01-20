@@ -1,0 +1,64 @@
+.chip {
+  display: inline-flex;
+  padding: 4px 10px; // 이 패딩 값에 맞게 너비가 자동으로 결정됩니다.
+  justify-content: center;
+  align-items: center;
+  border-radius: $radius-category-filter;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.music {
+  color: $green;
+  background-color: rgba($green, 0.4);
+}
+
+.movie {
+  color: $blue;
+  background-color: rgba($blue, 0.4);
+}
+
+.lecture {
+  color: $white;
+  background-color: rgba($white, 0.4);
+}
+
+.hotel {
+  color: $red;
+  background-color: rgba($red, 0.4);
+}
+
+.furniture {
+  color: $yellow;
+  background-color: rgba($yellow, 0.4);
+}
+
+.restaurant {
+  color: purple;
+  background-color: rgba(purple, 0.4);
+}
+
+.electronics {
+  color: orange;
+  background-color: rgba(orange, 0.4);
+}
+
+.cosmetics {
+  color: $gray;
+  background-color: rgba($gray, 0.4);
+}
+
+.clothing {
+  color: $black-300;
+  background-color: rgba($black-300, 0.4);
+}
+
+.app {
+  color: brown;
+  background-color: rgba(brown, 0.4);
+}
+
+.default {
+  color: $gray;
+  background-color: rgba($gray, 0.4);
+}

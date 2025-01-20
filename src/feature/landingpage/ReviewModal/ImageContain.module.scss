@@ -1,3 +1,5 @@
+@use '@/asset/variables' as *;
+
 .imageUploadContainer {
   display: flex;
   align-items: center;
@@ -5,18 +7,34 @@
   gap: 20px;
 }
 
+@mixin fileLabelStyle(
+  $display: inline-block,
+  $width: 160px,
+  $height: 160px,
+  $padding: 63px,
+  $cursor: pointer,
+  $textAlign: center,
+  $bgColor: $black-350,
+  $overflow: hidden,
+  $position: relative,
+  $borderRadius: 8px,
+  $boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+) {
+  display: $display;
+  width: $width;
+  height: $height;
+  padding: $padding;
+  cursor: $cursor;
+  text-align: $textAlign;
+  background-color: $bgColor;
+  border-radius: $borderRadius;
+  overflow: $overflow;
+  position: $position;
+  box-shadow: $boxShadow;
+}
+
 .fileLabel {
-  display: inline-block;
-  width: 165px;
-  height: 165px;
-  padding: 63px;
-  cursor: pointer;
-  text-align: center;
-  background-color: $black-350;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  @include fileLabelStyle();
 }
 
 .fileInput {

@@ -54,7 +54,11 @@ const LikeForm: React.FC<ProductDetailInfoProps> = ({
       );
     } else {
       return (
-        <p className={styles.innerMessage}>찜 개수가 평균 값과 일치해요!</p>
+        <div className={styles.innerContain}>
+          <p className={styles.innerMessage}>찜 갯수와</p>
+          <p className={styles.innerMessage}>다른 카테고리의 값이</p>
+          <p className={styles.innerMessage}>일치해요!</p>
+        </div>
       );
     }
   };

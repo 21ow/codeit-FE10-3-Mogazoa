@@ -1,7 +1,5 @@
 'use client';
-
 import { useState } from 'react';
-
 import ReviewModal from '@/feature/landingpage/ReviewModal/ReviewModal';
 import Button from '@/shared/button/Button';
 import styles from './styles.module.scss';
@@ -23,7 +21,7 @@ const ReviewButton = ({ productId }: { productId: number }) => {
 
   return (
     <div className={styles.reviewButton}>
-      <Button className="styles.reviewButton" onClick={handleOpenModal}>
+      <Button className={styles.reviewButton} onClick={handleOpenModal}>
         리뷰 작성하기
       </Button>
 
