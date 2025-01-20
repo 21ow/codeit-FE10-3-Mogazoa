@@ -1,17 +1,16 @@
-'use client';
-
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useAuthStore } from '@/store/useAuthStore';
+import { getToken } from '@/lib/localStorage';
 
 const useAuthGuard = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const token = useAuthStore((state) => state.token);
+  const token = getToken();
   const TOKEN_REQUIRED_PAGE = ['/add-product'];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    console.log(token, '가드 토큰');
     if (TOKEN_REQUIRED_PAGE.includes(pathname) && !token) {
       router.push('/auth/signin');
     }
