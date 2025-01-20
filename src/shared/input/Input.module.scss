@@ -1,4 +1,5 @@
 @use '@/asset/variables' as *;
+@use '@/asset/mixins' as *;
 
 @mixin input-style(
   $color: $white,
@@ -36,8 +37,14 @@
   flex-direction: column;
   gap: 10px;
 
-  &.fileInput {
+  &.multipleFileOption {
     flex-direction: row;
+    width: 95%;
+    position: relative;
+  }
+
+  &.singleFileOption {
+    display: block;
   }
 }
 
