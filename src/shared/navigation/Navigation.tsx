@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import MobileMenu from '../navigation/component/MobileMenu';
-import LogoLink from '../logo/logo';
+import LogoLink from '@/shared/logo/logo';
 import Search from '/public/icon/ic-search.svg';
 import UserActions from '../navigation/component/UserActions';
 import NavMenu from '../navigation/component/NavMenu';
