@@ -1,21 +1,52 @@
+@use '@/shared/button/Button.module.scss' as button;
+@use '@/shared/input/Input.module.scss' as input;
+
 .form {
-  width: 640px;
-  margin: 0 auto;
+  width: 840px;
+  margin: 60px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 50px;
+
+  @include tablet {
+    width: 640px;
+  }
+
+  @include mobile {
+    width: 335px;
+  }
 }
 
 .inputWrapper {
   display: flex;
   width: 100%;
-  padding: 30px;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
 }
 
 .image {
   width: 40%;
   position: relative;
+
+  @include mobile {
+    width: unset;
+  }
+}
+
+.upload {
+  width: 200px;
+  height: 200px;
+  padding: 70px;
+
+  > img {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .details {
@@ -23,8 +54,72 @@
   flex-direction: column;
   gap: 30px;
   width: 60%;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
-.file {
-  width: 100%;
+.submitButton {
+  @include button.button-style(
+    $width: 100%,
+    $height: 65px,
+    $font-weight: 600,
+    $font-size: 18px,
+    $background: linear-gradient(90deg, #5097fa, #5363ff),
+    $padding: 0
+  );
+
+  &:hover {
+    background: linear-gradient(90deg, #3a7bc7, #3c50e0);
+  }
+
+  &.disabled {
+    background: linear-gradient(90deg, $gray, $dark-gray);
+    cursor: auto;
+    opacity: 0.6;
+  }
+
+  @include tablet {
+    height: 55px;
+    font-size: 16px;
+  }
+}
+
+.dropdown {
+  @include input.input-style($width: 100%, $line-height: 30px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+
+  > span {
+    color: #757575;
+  }
+}
+
+.customDropdownStyle {
+  display: flex;
+  width: 384px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  border-radius: 8px;
+  border: 1px solid $black-200;
+  background: $black-350;
+  color: $dark-gray;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 5px;
+  z-index: 100;
+  position: absolute;
+
+  @include mobile {
+    width: 335px;
+  }
 }
