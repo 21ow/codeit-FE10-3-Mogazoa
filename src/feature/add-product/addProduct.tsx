@@ -13,7 +13,7 @@ import Input from '@/shared/input/Input';
 import TextArea from '@/shared/TextArea/TextArea';
 import Button from '@/shared/button/Button';
 import useAuthGuard from '@/hook/useAuthGuard';
-// import styles from './addProduct.module.scss';
+import styles from './addProduct.module.scss';
 
 export type CombinedRequest = ProductRequest & {
   file: FileList;
@@ -107,37 +107,48 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    setValue('categoryId', Number(selectCategory)); //
+    setValue('categoryId', Number(selectCategory));
   }, [selectCategory, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      encType="multipart/form-data"
+      className={styles.form}
+    >
       <Button type="submit">올리기</Button>
-      <Input type="file" {...register('file')} />
-      <Input type="text" placeholder="상품명" {...register('name')} />
-      <div ref={divRef} onClick={toggleDropdown} role="listbox">
-        {selectCategory}
+
+      <div className={styles.inputWrapper}>
+        <div className={styles.image}>
+          <Input type="file" {...register('file')} />
+        </div>
+
+        <div className={styles.details}>
+          <Input type="text" placeholder="상품명" {...register('name')} />
+          <div ref={divRef} onClick={toggleDropdown} role="listbox">
+            {selectCategory}
+          </div>
+          {dropdowns[dropdownId.current]?.isVisible && (
+            <Dropdown
+              onClose={handleClose}
+              options={options}
+              dropdownId={dropdownId.current}
+              parentRef={divRef}
+              {...register('categoryId')}
+            />
+          )}
+          <TextArea
+            maxLength={500}
+            placeholder="상품 설명"
+            {...register('description', {
+              minLength: {
+                value: 10,
+                message: '상품 설명은 10자 이상 등록해주세요.',
+              },
+            })}
+          />
+        </div>
       </div>
-      {dropdowns[dropdownId.current]?.isVisible && (
-        <Dropdown
-          onClose={handleClose}
-          options={options}
-          dropdownId={dropdownId.current}
-          parentRef={divRef}
-          {...register('categoryId')}
-        />
-      )}
-      <TextArea
-        maxLength={500}
-        placeholder="상품 설명"
-        {...register('description', {
-          required: true,
-          minLength: {
-            value: 10,
-            message: '상품 설명은 10자 이상 등록해주세요.',
-          },
-        })}
-      />
     </form>
   );
 };
