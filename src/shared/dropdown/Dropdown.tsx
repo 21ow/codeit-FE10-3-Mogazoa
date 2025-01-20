@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, CSSProperties } from 'react';
 import styles from './Dropdown.module.scss';
 import useDropdownStore from './useDropdownStore';
+import { createPortal } from 'react-dom';
 
 interface DropdownProps {
   options: string[];
@@ -84,25 +85,38 @@ const Dropdown = ({
     //화살표로도 드롭다운 컨트롤 할 수 있게 수정
   };
 
+  const parentRect = parentRef.current?.getBoundingClientRect();
+
+  const dropdownStyle: CSSProperties = {
+    top: `${parentRect?.bottom}px`,
+    left: `${parentRect?.left}px`,
+  };
+
   return (
-    <div
-      ref={dropdownRef}
-      className={`${customDropdownStyle || styles.dropdown} ${customVisible || styles.visible}`}
-      onKeyUp={handleKeyPress}
-      role="button"
-      tabIndex={0}
-    >
-      {options.map((option, index) => (
+    <>
+      {createPortal(
         <div
-          className={`${customItemStyle || styles.item}`}
-          key={index}
-          onClick={() => handleItemClick(option)}
-          tabIndex={index++}
+          ref={dropdownRef}
+          className={`${customDropdownStyle || styles.dropdown} ${customVisible || styles.visible}`}
+          style={dropdownStyle}
+          onKeyUp={handleKeyPress}
+          role="button"
+          tabIndex={0}
         >
-          {option}
-        </div>
-      ))}
-    </div>
+          {options.map((option, index) => (
+            <div
+              className={`${customItemStyle || styles.item}`}
+              key={index}
+              onClick={() => handleItemClick(option)}
+              tabIndex={index++}
+            >
+              {option}
+            </div>
+          ))}
+        </div>,
+        document.body
+      )}
+    </>
   );
 };
 
