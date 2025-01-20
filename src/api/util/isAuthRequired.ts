@@ -18,5 +18,9 @@ export const isAuthRequired = (
     return false;
   }
 
+  if (path.startsWith('/products')) {
+    return true;
+  }
+
   return !NO_TOKEN_ENDPOINTS.some((endpoint) => path.startsWith(endpoint));
 };

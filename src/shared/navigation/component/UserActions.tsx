@@ -1,12 +1,12 @@
 'use client';
 
-import { useAuthStore } from '@/store/useAuthStore';
+import { getToken } from '@/lib/localStorage';
 import Link from 'next/link';
 import UserProfile from './UserProfile';
 import styles from './UserActions.module.scss';
 
 const UserActions = () => {
-  const { token } = useAuthStore();
+  const token = getToken();
   return token ? (
     <UserProfile />
   ) : (
