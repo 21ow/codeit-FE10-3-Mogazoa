@@ -7,14 +7,14 @@ import Menu from '/public/icon/ic-Menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
-import { useAuthStore } from '@/store/useAuthStore';
+import { getToken, clearToken } from '@/lib/localStorage';
 import UserActions from './UserActions';
 import Category from '@/shared/category/Category';
 import NavMenu from './NavMenu';
 import styles from './MobileMenu.module.scss';
 
 const MobileMenu = () => {
-  const { token, clearToken } = useAuthStore();
+  const token = getToken();
 
   const modalId = useRef('menu');
   const { modals, openModal, closeModal } = useModalStore();
