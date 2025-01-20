@@ -1,9 +1,10 @@
 'use client';
 
 import Products from '@/feature/landingpage/Products';
-import '@/asset/globals.scss';
+import { useInitAuthStore } from '@/store/useAuthStore';
 
 const Page = () => {
+  useInitAuthStore();
   return <Products />;
 };
 

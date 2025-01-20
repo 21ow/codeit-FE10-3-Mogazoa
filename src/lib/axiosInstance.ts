@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { isAuthRequired } from '@/api/util/isAuthRequired';
-import { getToken } from '@/lib/localStorage';
+import { getToken } from '@/store/useAuthStore';
 
 const BASE_URL = 'https://mogazoa-api.vercel.app/10-33';
 
