@@ -3,6 +3,7 @@ export const NO_TOKEN_ENDPOINTS = [
   '/categories',
   '/oauthApps',
   '/users',
+  '/products',
 ];
 
 export const isAuthRequired = (

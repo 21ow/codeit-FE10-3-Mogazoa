@@ -1,6 +1,6 @@
+import { HTMLInputTypeAttribute } from 'react';
 import Image from 'next/image';
 import styles from './Label.module.scss';
-import { HTMLInputTypeAttribute } from 'react';
 
 type LabelProps = {
   type: HTMLInputTypeAttribute;
@@ -9,8 +9,11 @@ type LabelProps = {
 };
 
 const Label = ({ type, id, label }: LabelProps) => {
+  // const labelOption = classNames(
+  //   multiple ? styles.multipleFileLabel : styles.singleFileLabel
+  // );
   return type === 'file' ? (
-    <label htmlFor={id} className={styles.fileLabel}>
+    <label htmlFor={id} className={styles.multipleFileLabel}>
       <Image
         src="/icon/ic-img-upload.svg"
         alt="이미지 업로드 버튼"

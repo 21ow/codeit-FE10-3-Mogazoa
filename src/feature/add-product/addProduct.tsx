@@ -2,24 +2,31 @@
 
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Input from '@/shared/input/Input';
-import TextArea from '@/shared/TextArea/TextArea';
-import Dropdown from '@/shared/dropdown/Dropdown';
-import Button from '@/shared/button/Button';
 import { useMutation } from '@tanstack/react-query';
-import { ProductRequest, ProductResponse } from '@/api/type/Product';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
-import { ImageRequest, ImageResponse } from '@/api/type/Image';
+import { ProductRequest, ProductResponse } from '@/api/type/Product';
+import { ImageResponse } from '@/api/type/Image';
 import useDropdownStore from '@/shared/dropdown/useDropdownStore';
+import Dropdown from '@/shared/dropdown/Dropdown';
+import Input from '@/shared/input/Input';
+import TextArea from '@/shared/TextArea/TextArea';
+import Button from '@/shared/button/Button';
+import useAuthGuard from '@/hook/useAuthGuard';
+import styles from './addProduct.module.scss';
+
+export type CombinedRequest = ProductRequest & {
+  file: FileList;
+};
 
 const AddProduct = () => {
-  const { register, handleSubmit, setValue } = useForm<ProductRequest>();
+  useAuthGuard();
+  const { register, handleSubmit, setValue } = useForm<CombinedRequest>();
 
   const { mutate: imageUpload } = useMutation<
     ImageResponse,
     AxiosError,
-    ImageRequest
+    FormData
   >({
     mutationFn: (data) =>
       axiosInstance
@@ -53,8 +60,6 @@ const AddProduct = () => {
   const selectCategory =
     dropdowns[dropdownId.current]?.selectedOption || '옵션 선택';
 
-  console.log(selectCategory, typeof selectCategory, Number(selectCategory));
-
   const toggleDropdown = () => {
     if (dropdowns[dropdownId.current]?.isVisible) {
       closeDropdown(dropdownId.current);
@@ -67,28 +72,31 @@ const AddProduct = () => {
     closeDropdown(dropdownId.current);
   };
 
-  const onSubmit: SubmitHandler<ProductRequest> = async (data) => {
+  const onSubmit: SubmitHandler<CombinedRequest> = async (data) => {
     try {
-      console.log(data);
       const imageData = new FormData();
-      const file = data.image[0];
+      const file = data.file?.[0];
+      console.log(data);
+
       if (file) {
         imageData.append('image', file);
       }
 
       const imageResponse = await new Promise<ImageResponse>(
         (resolve, reject) => {
-          imageUpload(imageData as unknown as ImageRequest, {
+          imageUpload(imageData, {
             onSuccess: (res) => resolve(res),
             onError: (err) => reject(err),
           });
         }
-      ); //임시 강제 형변환
+      );
 
-      const { image, ...rest } = data;
+      const { categoryId, description, name } = data;
 
       const productData = {
-        ...rest,
+        categoryId,
+        description,
+        name,
         image: imageResponse.url,
       };
 
@@ -99,37 +107,48 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    setValue('categoryId', Number(selectCategory)); //
+    setValue('categoryId', Number(selectCategory));
   }, [selectCategory, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      encType="multipart/form-data"
+      className={styles.form}
+    >
       <Button type="submit">올리기</Button>
-      <Input type="file" {...register('image')} />
-      <Input type="text" placeholder="상품명" {...register('name')} />
-      <div ref={divRef} onClick={toggleDropdown} role="listbox">
-        {selectCategory}
+
+      <div className={styles.inputWrapper}>
+        <div className={styles.image}>
+          <Input type="file" {...register('file')} />
+        </div>
+
+        <div className={styles.details}>
+          <Input type="text" placeholder="상품명" {...register('name')} />
+          <div ref={divRef} onClick={toggleDropdown} role="listbox">
+            {selectCategory}
+          </div>
+          {dropdowns[dropdownId.current]?.isVisible && (
+            <Dropdown
+              onClose={handleClose}
+              options={options}
+              dropdownId={dropdownId.current}
+              parentRef={divRef}
+              {...register('categoryId')}
+            />
+          )}
+          <TextArea
+            maxLength={500}
+            placeholder="상품 설명"
+            {...register('description', {
+              minLength: {
+                value: 10,
+                message: '상품 설명은 10자 이상 등록해주세요.',
+              },
+            })}
+          />
+        </div>
       </div>
-      {dropdowns[dropdownId.current]?.isVisible && (
-        <Dropdown
-          onClose={handleClose}
-          options={options}
-          dropdownId={dropdownId.current}
-          parentRef={divRef}
-          {...register('categoryId')}
-        />
-      )}
-      <TextArea
-        maxLength={500}
-        placeholder="상품 설명"
-        {...register('description', {
-          required: true,
-          minLength: {
-            value: 10,
-            message: '상품 설명은 10자 이상 등록해주세요.',
-          },
-        })}
-      />
     </form>
   );
 };

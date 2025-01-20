@@ -10,6 +10,7 @@ import { setToken } from '@/lib/localStorage';
 import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
 import Link from 'next/link';
+import LogoLink from '@/shared/logo/logo';
 import styles from './SignUp.module.scss';
 
 const SignUp = () => {
@@ -45,6 +46,7 @@ const SignUp = () => {
 
   return (
     <div className={styles.signUpWrapper}>
+      <LogoLink className={styles.authLogo} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
