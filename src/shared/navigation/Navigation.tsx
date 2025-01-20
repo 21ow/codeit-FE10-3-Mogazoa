@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
-import Link from 'next/link';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import MobileMenu from '../navigation/component/MobileMenu';
-import Logo from '/public/image/img-logo.svg';
+import LogoLink from '../logo/logo';
 import Search from '/public/icon/ic-search.svg';
 import UserActions from '../navigation/component/UserActions';
 import NavMenu from '../navigation/component/NavMenu';
@@ -32,9 +31,7 @@ const Navigation = () => {
     <div className={styles.navigation}>
       {isMobile && <MobileMenu />}
 
-      <Link href="/" className={styles.logo}>
-        <Logo />
-      </Link>
+      <LogoLink className={styles.logo} />
 
       <div
         className={classNames(styles.explore, {

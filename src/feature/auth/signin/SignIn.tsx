@@ -11,6 +11,7 @@ import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
 import SocialSignIn from '../component/SocialSignIn';
 import Link from 'next/link';
+import LogoLink from '@/shared/logo/logo';
 import styles from './SignIn.module.scss';
 
 const SignIn = () => {
@@ -45,6 +46,7 @@ const SignIn = () => {
 
   return (
     <div className={styles.signInWrapper}>
+      <LogoLink className={styles.authLogo} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label="이메일"
