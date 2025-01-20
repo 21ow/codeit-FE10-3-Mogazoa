@@ -1,22 +1,21 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
 import Menu from '/public/icon/ic-menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
-import { getToken, clearToken } from '@/lib/localStorage';
+import { useAuthStore } from '@/store/useAuthStore';
 import UserActions from './UserActions';
 import Category from '@/shared/category/Category';
 import NavMenu from './NavMenu';
 import styles from './MobileMenu.module.scss';
 
 const MobileMenu = () => {
-  const token = getToken();
-
   const modalId = useRef('menu');
+  const { token, clearToken } = useAuthStore();
   const { modals, openModal, closeModal } = useModalStore();
 
   const handleOpen = () => {
@@ -29,11 +28,8 @@ const MobileMenu = () => {
 
   const handleLogout = () => {
     clearToken();
-  };
-
-  useEffect(() => {
     handleClose();
-  }, [token]);
+  };
 
   return (
     <div className={styles.mobileMenu}>

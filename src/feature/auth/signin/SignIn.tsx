@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthResponse, SignInRequest } from '@/api/type/Auth';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
-import { setToken } from '@/lib/localStorage';
+import { useAuthStore } from '@/store/useAuthStore';
 import Input from '@/shared/input/Input';
 import Button from '@/shared/button/Button';
 import SocialSignIn from '../component/SocialSignIn';
@@ -22,6 +22,7 @@ const SignIn = () => {
   } = useForm<SignInRequest>();
 
   const router = useRouter();
+  const setToken = useAuthStore((state) => state.setToken);
 
   const { mutate } = useMutation<AuthResponse, AxiosError, SignInRequest>({
     mutationFn: (data) =>

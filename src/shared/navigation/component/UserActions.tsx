@@ -1,12 +1,13 @@
 'use client';
 
-import { getToken } from '@/lib/localStorage';
+import { useAuthStore } from '@/store/useAuthStore';
 import Link from 'next/link';
 import UserProfile from './UserProfile';
 import styles from './UserActions.module.scss';
 
 const UserActions = () => {
-  const token = getToken();
+  const token = useAuthStore((state) => state.token);
+
   return token ? (
     <UserProfile />
   ) : (
@@ -14,6 +15,7 @@ const UserActions = () => {
       <Link href="/auth/signin" className={styles.signInLink}>
         로그인
       </Link>
+
       <span>/</span>
       <Link href="/auth/signup" className={styles.signUpLink}>
         회원가입
