@@ -47,6 +47,11 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
 
     const { text, handleTextCounter } = useTextCounter(maxLength);
 
+    const inputContainerClassName = classNames(styles.inputContainer, {
+      [styles.multipleFileOption]: type === 'file' && multiple,
+      [styles.singleFileOption]: type === 'file' && !multiple,
+    });
+
     const inputClassName = classNames(className || styles.input, {
       [styles.errorStatus]: formErrorMessage,
     });
@@ -66,13 +71,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
     };
 
     return (
-      <div
-        className={
-          type === 'file'
-            ? `${styles.inputContainer} ${styles.fileInput}`
-            : styles.inputContainer
-        }
-      >
+      <div className={inputContainerClassName}>
         <Label type={type} id={id} label={label} />
         <div className={styles.inputWrapper}>
           <input
@@ -107,6 +106,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           type={type}
           filePreviews={filePreviews}
           handleDeleteImg={handleDeleteImg}
+          multiple={multiple}
         />
       </div>
     );

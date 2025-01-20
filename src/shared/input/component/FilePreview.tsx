@@ -4,21 +4,27 @@ import Image from 'next/image';
 import Button from '@/shared/button/Button';
 import styles from './FilePreview.module.scss';
 import { HTMLInputTypeAttribute } from 'react';
+import classNames from 'classnames';
 
 type FilePreviewProps = {
   type: HTMLInputTypeAttribute;
   filePreviews: string[] | null;
   handleDeleteImg: (index: number) => void;
+  multiple?: boolean;
 };
 
 const FilePreview = ({
   type,
   filePreviews = [],
   handleDeleteImg,
+  multiple,
 }: FilePreviewProps) => {
+  const filePreviewClassName = classNames(styles.filePreviewsContainer, {
+    [styles.singleFilePreview]: type === 'file' && !multiple,
+  });
   return (
     type === 'file' && (
-      <div className={styles.filePreviewsContainer}>
+      <div className={filePreviewClassName}>
         {filePreviews &&
           filePreviews.map((preview, index) => (
             <div className={styles.filePreviewsWrapper} key={index}>
