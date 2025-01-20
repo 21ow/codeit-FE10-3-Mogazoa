@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useEffect, useRef, useState } from 'react';
 import useAuthGuard from '@/hook/useAuthGuard';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
@@ -92,7 +91,6 @@ const AddProduct = () => {
   const addDropdownView = addDropdown?.isVisible;
   const selectCategory = addDropdown?.selectedOption;
 
-
   useEffect(() => {
     if (!data) return;
     const selectedCategory = data.find(
@@ -162,12 +160,10 @@ const AddProduct = () => {
             {...register('file')}
             customFileInput={styles.upload}
           />
-
         </div>
 
         <div className={styles.details}>
           <Input type="text" placeholder="상품명" {...register('name')} />
-
 
           <div
             ref={divRef}
@@ -179,7 +175,6 @@ const AddProduct = () => {
             {!addDropdownView ? <Open /> : <Close />}
           </div>
           {addDropdownView && (
-
             <Dropdown
               onClose={handleClose}
               options={options}
@@ -189,7 +184,6 @@ const AddProduct = () => {
               {...register('categoryId')}
             />
           )}
-
 
           <TextArea
             maxLength={500}
@@ -213,7 +207,6 @@ const AddProduct = () => {
       >
         올리기
       </Button>
-
     </form>
   );
 };

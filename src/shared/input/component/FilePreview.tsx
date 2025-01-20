@@ -12,7 +12,6 @@ type FilePreviewProps = {
   handleDeleteImg: (index: number) => void;
   multiple?: boolean;
   className?: string;
-
 };
 
 const FilePreview = ({

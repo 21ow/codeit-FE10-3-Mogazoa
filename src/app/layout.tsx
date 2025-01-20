@@ -35,13 +35,11 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           {!isAuthPage ? (
             <div className={classNames({ [styles.layout]: isRootPage })}>
-
               <header className={styles.header}>
                 <Navigation />
               </header>
 
               <div className={classNames({ [styles.content]: isRootPage })}>
-
                 {isRootPage && (
                   <aside className={styles.aside}>
                     <Category />
