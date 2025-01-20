@@ -8,14 +8,14 @@ interface FilteringProps {
   data: string[];
   parentRef: React.RefObject<HTMLElement>;
   filterId: string;
-  setFilter: (id: string, value: string) => void;
+  setSelectedFilteringData: (id: string, value: string) => void;
 }
 
 const Filtering = ({
   data,
   parentRef,
   filterId,
-  setFilter,
+  setSelectedFilteringData,
 }: FilteringProps) => {
   const [filteredData, setFilteredData] = useState(data);
   const dropdownId = useRef(`filterDropdown${Math.random()}`);
@@ -49,7 +49,7 @@ const Filtering = ({
     dropdowns,
     filterId,
     parentRef,
-    setFilter,
+    setSelectedFilteringData,
     openDropdown,
     closeDropdown,
   ]);
@@ -59,7 +59,10 @@ const Filtering = ({
   };
 
   const onClick = () => {
-    setFilter(filterId, dropdowns[dropdownId.current]?.selectedOption || '');
+    setSelectedFilteringData(
+      filterId,
+      dropdowns[dropdownId.current]?.selectedOption || ''
+    );
   };
 
   return (
