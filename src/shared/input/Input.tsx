@@ -17,6 +17,8 @@ import styles from './Input.module.scss';
 type InputProps = {
   label?: string;
   formErrorMessage?: string | null;
+  customInput?: string;
+  customFileInput?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement | null, InputProps>(
@@ -27,7 +29,8 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
       maxLength,
       multiple,
       formErrorMessage,
-      className,
+      customInput,
+      customFileInput,
       ...props
     },
     ref
@@ -52,7 +55,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
       [styles.singleFileOption]: type === 'file' && !multiple,
     });
 
-    const inputClassName = classNames(className || styles.input, {
+    const inputClassName = classNames(customInput || styles.input, {
       [styles.errorStatus]: formErrorMessage,
     });
 
@@ -72,7 +75,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
 
     return (
       <div className={inputContainerClassName}>
-        <Label type={type} id={id} label={label} />
+        <Label type={type} id={id} label={label} className={customFileInput} />
         <div className={styles.inputWrapper}>
           <input
             key={inputKey}
@@ -107,6 +110,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           filePreviews={filePreviews}
           handleDeleteImg={handleDeleteImg}
           multiple={multiple}
+          className={customFileInput}
         />
       </div>
     );

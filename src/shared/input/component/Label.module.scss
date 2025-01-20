@@ -10,7 +10,7 @@
   @include label-style();
 }
 
-.multipleFileLabel {
+.fileLabel {
   position: sticky;
   top: 0;
   left: 0;
@@ -18,8 +18,3 @@
   @include input.input-style($width: 160px, $height: 160px, $padding: 63px);
   cursor: pointer;
 }
-
-// .singleFileLabel {
-//   @include input.input-style($width: 100%, $height: 100%, $padding: 63px);
-//   cursor: pointer;
-// }
