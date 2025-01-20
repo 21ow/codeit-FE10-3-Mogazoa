@@ -5,8 +5,13 @@
 }
 
 .textarea {
-  @include input.input-style($height: 160px);
+  @include input.input-style($height: 160px, $padding: 20px 20px 40px 20px);
   resize: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .textCount {

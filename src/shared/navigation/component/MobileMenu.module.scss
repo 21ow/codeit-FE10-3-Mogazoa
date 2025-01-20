@@ -30,6 +30,11 @@
   padding: 16px 26px;
   background-color: $black-450;
   overflow-y: auto;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .customOverlay {
