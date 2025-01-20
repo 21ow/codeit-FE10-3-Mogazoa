@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Logo from '/public/image/img-logo.svg';
-import Menu from '/public/icon/ic-Menu.svg';
+import Menu from '/public/icon/ic-menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
