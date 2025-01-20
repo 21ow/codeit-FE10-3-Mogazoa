@@ -16,17 +16,27 @@ const useDropdownStore = create<DropdownState>((set) => ({
   dropdowns: {},
   openDropdown: (id: string, content: React.ReactNode) =>
     set((state) => ({
-      dropdowns: { ...state.dropdowns, [id]: { isVisible: true, content } },
+      dropdowns: {
+        ...state.dropdowns,
+        [id]: {
+          isVisible: true,
+          content,
+          selectedOption: state.dropdowns[id]?.selectedOption,
+        },
+      },
     })),
   closeDropdown: (id: string) =>
     set((state) => ({
       dropdowns: {
         ...state.dropdowns,
-        [id]: {
-          ...state.dropdowns[id],
-          isVisible: false,
-          content: null,
-        },
+        [id]: { ...state.dropdowns[id], isVisible: false, content: null },
+      },
+    })),
+  setSelectedOption: (id: string, option: string) =>
+    set((state) => ({
+      dropdowns: {
+        ...state.dropdowns,
+        [id]: { ...state.dropdowns[id], selectedOption: option },
       },
     })),
 }));
