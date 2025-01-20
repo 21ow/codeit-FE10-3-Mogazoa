@@ -1,11 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { createQueries } from '@/api/createQueries';
-import { CategoryResponse } from '@/api/type/Category';
+import { categoryQuery } from '@/api/query';
 import Button from '@/shared/button/Button';
 import styles from './Category.module.scss';
 
 const Category = () => {
-  const categoryQuery = createQueries<CategoryResponse[]>(`/categories`);
   const { data } = useQuery(categoryQuery.all());
   return (
     <div className={styles.categories}>
