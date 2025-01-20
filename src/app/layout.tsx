@@ -21,6 +21,7 @@ export default function RootLayout({
   const queryClient = new QueryClient();
   const pathname = usePathname();
   const isAuthPage = pathname.startsWith('/auth');
+
   const isRootPage = pathname === '/';
 
   return (
@@ -34,11 +35,13 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           {!isAuthPage ? (
             <div className={classNames({ [styles.layout]: isRootPage })}>
+
               <header className={styles.header}>
                 <Navigation />
               </header>
 
               <div className={classNames({ [styles.content]: isRootPage })}>
+
                 {isRootPage && (
                   <aside className={styles.aside}>
                     <Category />
@@ -47,6 +50,7 @@ export default function RootLayout({
                 <main className={classNames({ [styles.main]: isRootPage })}>
                   {children}
                 </main>
+
                 {isRootPage && (
                   <article className={styles.article}>
                     <RankingList />

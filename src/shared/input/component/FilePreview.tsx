@@ -12,6 +12,7 @@ type FilePreviewProps = {
   handleDeleteImg: (index: number) => void;
   multiple?: boolean;
   className?: string;
+
 };
 
 const FilePreview = ({
@@ -28,6 +29,7 @@ const FilePreview = ({
       [styles.singleFilePreview]: type === 'file' && !multiple,
     }
   );
+
   return (
     type === 'file' && (
       <div className={filePreviewClassName}>

@@ -56,6 +56,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
     });
 
     const inputClassName = classNames(customInput || styles.input, {
+
       [styles.errorStatus]: formErrorMessage,
     });
 
@@ -111,6 +112,7 @@ const Input = forwardRef<HTMLInputElement | null, InputProps>(
           handleDeleteImg={handleDeleteImg}
           multiple={multiple}
           className={customFileInput}
+
         />
       </div>
     );

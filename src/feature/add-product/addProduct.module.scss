@@ -1,3 +1,4 @@
+
 @use '@/shared/button/Button.module.scss' as button;
 @use '@/shared/input/Input.module.scss' as input;
 
@@ -16,6 +17,7 @@
   @include mobile {
     width: 335px;
   }
+
 }
 
 .inputWrapper {
@@ -27,6 +29,7 @@
     align-items: center;
     gap: 50px;
   }
+
 }
 
 .image {
@@ -47,6 +50,7 @@
     width: 60px;
     height: 60px;
   }
+
 }
 
 .details {
@@ -54,6 +58,7 @@
   flex-direction: column;
   gap: 30px;
   width: 60%;
+
 
   @include mobile {
     width: 100%;
@@ -122,4 +127,9 @@
   @include mobile {
     width: 335px;
   }
+
 }
+
+.file {
+  width: 100%;
+

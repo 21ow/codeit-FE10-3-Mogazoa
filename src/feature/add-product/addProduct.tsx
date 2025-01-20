@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useEffect, useRef, useState } from 'react';
 import useAuthGuard from '@/hook/useAuthGuard';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
@@ -9,6 +10,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
 import { ProductRequest, ProductResponse } from '@/api/type/Product';
 import { ImageResponse } from '@/api/type/Image';
+
 import { useQuery } from '@tanstack/react-query';
 import { categoryQuery } from '@/api/query';
 import useDropdownStore from '@/shared/dropdown/useDropdownStore';
@@ -26,6 +28,7 @@ export type CombinedRequest = ProductRequest & {
 
 const AddProduct = () => {
   useAuthGuard();
+
   const { register, handleSubmit, setValue, control } =
     useForm<CombinedRequest>();
 
@@ -89,6 +92,7 @@ const AddProduct = () => {
   const addDropdownView = addDropdown?.isVisible;
   const selectCategory = addDropdown?.selectedOption;
 
+
   useEffect(() => {
     if (!data) return;
     const selectedCategory = data.find(
@@ -112,7 +116,6 @@ const AddProduct = () => {
   };
 
   const onSubmit: SubmitHandler<CombinedRequest> = async (data) => {
-    console.log(data);
     try {
       const imageData = new FormData();
       const file = data.file?.[0];
@@ -159,10 +162,12 @@ const AddProduct = () => {
             {...register('file')}
             customFileInput={styles.upload}
           />
+
         </div>
 
         <div className={styles.details}>
           <Input type="text" placeholder="상품명" {...register('name')} />
+
 
           <div
             ref={divRef}
@@ -174,6 +179,7 @@ const AddProduct = () => {
             {!addDropdownView ? <Open /> : <Close />}
           </div>
           {addDropdownView && (
+
             <Dropdown
               onClose={handleClose}
               options={options}
@@ -183,6 +189,7 @@ const AddProduct = () => {
               {...register('categoryId')}
             />
           )}
+
 
           <TextArea
             maxLength={500}
@@ -196,6 +203,7 @@ const AddProduct = () => {
           />
         </div>
       </div>
+
       <Button
         type="submit"
         disabled={!isFormValid}
@@ -205,6 +213,7 @@ const AddProduct = () => {
       >
         올리기
       </Button>
+
     </form>
   );
 };
