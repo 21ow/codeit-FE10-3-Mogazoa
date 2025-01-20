@@ -30,8 +30,6 @@ const Modal = ({
   customHeader = null,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const firstFocusableElement = useRef<HTMLButtonElement>(null);
-  const lastFocusableElement = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

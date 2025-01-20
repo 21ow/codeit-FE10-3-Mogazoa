@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { usePathname } from 'next/navigation';
+import { useInitAuthStore } from '@/store/useAuthStore';
+import classNames from 'classnames';
 import Navigation from '@/shared/navigation/Navigation';
 import Category from '@/shared/category/Category';
 import RankingList from '@/feature/landingpage/RankingList/RankingList';
@@ -15,9 +17,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useInitAuthStore();
   const queryClient = new QueryClient();
   const pathname = usePathname();
-  const isAuthPage = pathname === '/auth';
+  const isAuthPage = pathname.startsWith('/auth');
+
   const isRootPage = pathname === '/';
 
   return (
@@ -30,18 +34,21 @@ export default function RootLayout({
       <body>
         <QueryClientProvider client={queryClient}>
           {!isAuthPage ? (
-            <div className={styles.layout}>
+            <div className={classNames({ [styles.layout]: isRootPage })}>
               <header className={styles.header}>
                 <Navigation />
               </header>
 
-              <div className={styles.content}>
+              <div className={classNames({ [styles.content]: isRootPage })}>
                 {isRootPage && (
                   <aside className={styles.aside}>
                     <Category />
                   </aside>
                 )}
-                <main className={styles.main}>{children}</main>
+                <main className={classNames({ [styles.main]: isRootPage })}>
+                  {children}
+                </main>
+
                 {isRootPage && (
                   <article className={styles.article}>
                     <RankingList />

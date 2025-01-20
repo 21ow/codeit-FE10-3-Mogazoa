@@ -1,18 +1,24 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import useAuthGuard from '@/hook/useAuthGuard';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import classNames from 'classnames';
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
 import { ProductRequest, ProductResponse } from '@/api/type/Product';
 import { ImageResponse } from '@/api/type/Image';
+
+import { useQuery } from '@tanstack/react-query';
+import { categoryQuery } from '@/api/query';
 import useDropdownStore from '@/shared/dropdown/useDropdownStore';
 import Dropdown from '@/shared/dropdown/Dropdown';
 import Input from '@/shared/input/Input';
 import TextArea from '@/shared/TextArea/TextArea';
+import Open from '/public/icon/ic-dropdown.svg';
+import Close from '/public/icon/ic-dropup.svg';
 import Button from '@/shared/button/Button';
-import useAuthGuard from '@/hook/useAuthGuard';
 import styles from './addProduct.module.scss';
 
 export type CombinedRequest = ProductRequest & {
@@ -21,7 +27,9 @@ export type CombinedRequest = ProductRequest & {
 
 const AddProduct = () => {
   useAuthGuard();
-  const { register, handleSubmit, setValue } = useForm<CombinedRequest>();
+
+  const { register, handleSubmit, setValue, control } =
+    useForm<CombinedRequest>();
 
   const { mutate: imageUpload } = useMutation<
     ImageResponse,
@@ -38,6 +46,16 @@ const AddProduct = () => {
     },
   });
 
+  const watchedValues = useWatch({
+    control,
+  });
+
+  const isFormValid =
+    (watchedValues.file?.length ?? 0) > 0 &&
+    watchedValues.name &&
+    watchedValues.categoryId &&
+    (watchedValues.description?.length ?? 0) >= 10;
+
   const { mutate: addProduct } = useMutation<
     ProductResponse,
     AxiosError,
@@ -45,23 +63,46 @@ const AddProduct = () => {
   >({
     mutationFn: (data) =>
       axiosInstance.post(`/products`, data).then((response) => response.data),
+    onSuccess: () => {
+      window.location.reload(); //임시 초기화
+    },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
       console.log(message);
     },
   });
 
+  const { data } = useQuery(categoryQuery.all());
+  const [options, setOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      const names = data.map((category) => category.name);
+      setOptions(names);
+    }
+  }, [data]);
+
   const dropdownId = useRef('selectCategory');
   const divRef = useRef<HTMLDivElement>(null);
 
   const { dropdowns, openDropdown, closeDropdown } = useDropdownStore();
 
-  const options = ['1', '2', '3'];
-  const selectCategory =
-    dropdowns[dropdownId.current]?.selectedOption || '옵션 선택';
+  const addDropdown = dropdowns[dropdownId.current];
+  const addDropdownView = addDropdown?.isVisible;
+  const selectCategory = addDropdown?.selectedOption;
+
+  useEffect(() => {
+    if (!data) return;
+    const selectedCategory = data.find(
+      (category) => category.name === selectCategory
+    );
+    if (selectedCategory) {
+      setValue('categoryId', selectedCategory.id);
+    }
+  }, [selectCategory, setValue, data]);
 
   const toggleDropdown = () => {
-    if (dropdowns[dropdownId.current]?.isVisible) {
+    if (addDropdownView) {
       closeDropdown(dropdownId.current);
     } else {
       openDropdown(dropdownId.current);
@@ -106,37 +147,44 @@ const AddProduct = () => {
     }
   };
 
-  useEffect(() => {
-    setValue('categoryId', Number(selectCategory));
-  }, [selectCategory, setValue]);
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       encType="multipart/form-data"
       className={styles.form}
     >
-      <Button type="submit">올리기</Button>
-
       <div className={styles.inputWrapper}>
         <div className={styles.image}>
-          <Input type="file" {...register('file')} />
+          <Input
+            type="file"
+            {...register('file')}
+            customFileInput={styles.upload}
+          />
         </div>
 
         <div className={styles.details}>
           <Input type="text" placeholder="상품명" {...register('name')} />
-          <div ref={divRef} onClick={toggleDropdown} role="listbox">
-            {selectCategory}
+
+          <div
+            ref={divRef}
+            onClick={toggleDropdown}
+            role="listbox"
+            className={styles.dropdown}
+          >
+            {selectCategory || <span>카테고리 선택</span>}
+            {!addDropdownView ? <Open /> : <Close />}
           </div>
-          {dropdowns[dropdownId.current]?.isVisible && (
+          {addDropdownView && (
             <Dropdown
               onClose={handleClose}
               options={options}
               dropdownId={dropdownId.current}
               parentRef={divRef}
+              customDropdownStyle={styles.customDropdownStyle}
               {...register('categoryId')}
             />
           )}
+
           <TextArea
             maxLength={500}
             placeholder="상품 설명"
@@ -149,6 +197,16 @@ const AddProduct = () => {
           />
         </div>
       </div>
+
+      <Button
+        type="submit"
+        disabled={!isFormValid}
+        className={classNames(styles.submitButton, {
+          [styles.disabled]: !isFormValid,
+        })}
+      >
+        올리기
+      </Button>
     </form>
   );
 };

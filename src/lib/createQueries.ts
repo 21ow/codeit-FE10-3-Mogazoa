@@ -25,7 +25,6 @@ export const createQueries = <R>(
     });
   },
 
-  // detail 역시 객체로 리턴해야 해
   detail: (id: string) => {
     return queryOptions({
       queryKey: [`${baseURL}`, id] as QueryKey,
