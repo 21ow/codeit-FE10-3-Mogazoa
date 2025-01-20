@@ -4,9 +4,16 @@ import styles from './styles.module.scss';
 type StarRatingProps = {
   rating: number;
   onChange: (rating: number) => void;
+  width?: number;
+  height?: number;
 };
 
-const StarRating = ({ rating, onChange }: StarRatingProps) => {
+const StarRating = ({
+  rating,
+  onChange,
+  width = 32,
+  height = 32,
+}: StarRatingProps) => {
   const handleClick = (index: number) => {
     onChange(index + 1);
   };
@@ -19,8 +26,8 @@ const StarRating = ({ rating, onChange }: StarRatingProps) => {
           <Star
             key={star}
             className={star <= rating ? styles.activeStar : styles.inactiveStar}
-            width={32}
-            height={32}
+            width={width}
+            height={height}
             onClick={() => handleClick(star - 1)}
           />
         ))}

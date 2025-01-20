@@ -8,6 +8,7 @@ import Navigation from '@/shared/navigation/Navigation';
 import Category from '@/shared/category/Category';
 import RankingList from '@/feature/landingpage/RankingList/RankingList';
 import styles from './layout.module.scss';
+import '@/asset/globals.scss';
 
 export default function RootLayout({
   children,

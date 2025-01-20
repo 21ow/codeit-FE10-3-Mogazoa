@@ -6,9 +6,19 @@ import styles from './ImageContain.module.scss';
 
 type ImageContainProps = {
   setImageUrl: (url: string | null) => void;
+  showPreview?: boolean;
+  width?: number;
+  height?: number;
+  className?: string;
 };
 
-const ImageContain = ({ setImageUrl }: ImageContainProps) => {
+const ImageContain = ({
+  setImageUrl,
+  showPreview = true,
+  width = 34,
+  height = 34,
+  className,
+}: ImageContainProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -29,8 +39,6 @@ const ImageContain = ({ setImageUrl }: ImageContainProps) => {
         alert('이미지 업로드 실패. 다시 시도해주세요.');
         setUploading(false);
       }
-    } else if (imageUrls.length >= 2) {
-      alert('최대 2개의 이미지만 업로드할 수 있습니다.');
     }
   };
 
@@ -40,41 +48,43 @@ const ImageContain = ({ setImageUrl }: ImageContainProps) => {
 
   return (
     <div className={styles.imageUploadContainer}>
-      <label htmlFor="imageUpload" className={styles.fileLabel}>
+      <label htmlFor="imageUpload" className={className || styles.fileLabel}>
         <input
           type="file"
           id="imageUpload"
           onChange={handleFileChange}
           accept="image/*"
           className={styles.fileInput}
-          disabled={imageUrls.length >= 2}
+          disabled={imageUrls.length >= 1}
         />
         <Image
           src="/icon/ic-img-upload.svg"
           alt="이미지 업로드 버튼"
-          width={34}
-          height={34}
+          width={width}
+          height={height}
         />
       </label>
 
-      <div className={styles.imagePreviewContainer}>
-        {imageUrls.map((url, index) => (
-          <div key={index} className={styles.imagePreview}>
-            <Image
-              src={url}
-              alt={`업로드된 이미지 ${index + 1}`}
-              width={165}
-              height={165}
-            />
-            <button
-              className={styles.removeButton}
-              onClick={() => handleRemoveImage(url)}
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
+      {showPreview && (
+        <div className={styles.imagePreviewContainer}>
+          {imageUrls.map((url, index) => (
+            <div key={index} className={styles.imagePreview}>
+              <Image
+                src={url}
+                alt={`업로드된 이미지 ${index + 1}`}
+                width={165}
+                height={165}
+              />
+              <button
+                className={styles.removeButton}
+                onClick={() => handleRemoveImage(url)}
+              >
+                X
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

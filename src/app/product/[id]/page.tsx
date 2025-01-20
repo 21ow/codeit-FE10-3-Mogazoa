@@ -1,8 +1,7 @@
 'use client';
-
 import { useParams } from 'next/navigation';
 import { getProductsDetail } from '@/api/productApi';
-import { ProductResponse, GetProductReviewsResponse } from '@/api/type/Product';
+import { ProductResponse } from '@/api/type/Product';
 import { useEffect, useState } from 'react';
 import ImageComponent from '@/shared/Image/Images';
 import HeartCheck from '@/feature/landingpage/HeartCheck/HeartCheck';
@@ -28,12 +27,6 @@ const ProductDetail = () => {
         .catch(() => setProduct(null));
     }
   }, [id]);
-
-  const updatedComment = (
-    comment: GetProductReviewsResponse['list'][number]
-  ) => {
-    console.log('Updated comment:', comment);
-  };
 
   const categoryClassMap: { [key: string]: string } = {
     음악: styles.productName1,
@@ -81,7 +74,7 @@ const ProductDetail = () => {
       <h3 className={styles.reviewName}>상품 통계</h3>
       <DataForm product={product} />
       <h3 className={styles.reviewName}>상품 리뷰</h3>
-      <CoCard productId={product.id} onCommentEditSuccess={updatedComment} />
+      <CoCard productId={product.id} />
     </div>
   );
 };

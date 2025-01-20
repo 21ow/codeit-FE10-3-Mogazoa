@@ -1,0 +1,100 @@
+@use '@/feature/landingpage/ReviewModal/ImageContain.module.scss' as Image;
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.editContainer2 {
+  width: 100%;
+}
+.textarea {
+  width: 100%;
+  height: 85px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid $dark-gray;
+  border-radius: 6px;
+  color: $white;
+  background-color: none;
+  box-sizing: border-box;
+  resize: none;
+  &:focus {
+    border-color: $blue;
+    outline: none;
+  }
+}
+
+.saveButton,
+.cancelButton {
+  width: 100%;
+  max-width: 70px;
+  padding: 12px;
+  border: 1px solid $blue;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  background-color: $black-300;
+  color: $blue;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.imageContainer {
+  display: flex;
+  gap: 10px;
+}
+.imageWrapper {
+  display: flex;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: $white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.deleteButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: $dark-gray;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.images {
+  display: flex;
+  gap: 10px;
+}
+.editLabel {
+  @include Image.fileLabelStyle(
+    $bgColor: $black-300,
+    $width: 100px,
+    $height: 100px,
+    $padding: 30px
+  );
+}
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+}
+.behindContain {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
