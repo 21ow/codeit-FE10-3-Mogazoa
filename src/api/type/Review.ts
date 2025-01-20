@@ -12,8 +12,8 @@ export type User = {
 };
 
 export type ReviewImage = {
-  source: string;
-  id: number;
+  source?: string;
+  id?: number;
 };
 
 export type ReviewResponse = {

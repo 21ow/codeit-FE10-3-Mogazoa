@@ -5,7 +5,6 @@ import { postReviews } from '@/api/reviewApi';
 import { ReviewRequest } from '@/api/type/Review';
 import { getProductsDetail } from '@/api/productApi';
 import Button from '@/shared/button/Button';
-
 import StarRating from './StarRating';
 import ImageContain from './ImageContain';
 import styles from './styles.module.scss';
@@ -55,6 +54,7 @@ const ReviewModal = ({
       postReviews(reviewData).then(() => {
         onConfirm();
         onClose();
+        window.location.reload();
       });
     }
   };
@@ -72,7 +72,12 @@ const ReviewModal = ({
         customOverlay={styles.customOverlay}
       >
         <div className={styles.reviewBody}>
-          <StarRating rating={rating} onChange={setRating} />
+          <StarRating
+            rating={rating}
+            onChange={setRating}
+            width={32}
+            height={32}
+          />
           <textarea
             id="reviewContent"
             value={content}

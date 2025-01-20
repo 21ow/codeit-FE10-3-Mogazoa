@@ -41,9 +41,11 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
       );
     } else {
       return (
-        <p className={styles.innerMessage}>
-          평균 값과 다른 카테고리의 값이 일치해요!
-        </p>
+        <div className={styles.innerContain}>
+          <p className={styles.innerMessage}>평균 값과</p>
+          <p className={styles.innerMessage}>다른 카테고리의 값이</p>
+          <p className={styles.innerMessage}>일치해요!</p>
+        </div>
       );
     }
   };
@@ -75,7 +77,11 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
       );
     } else {
       return (
-        <p className={styles.innerMessage}>리뷰 개수가 평균 값과 일치해요!</p>
+        <div className={styles.innerContain}>
+          <p className={styles.innerMessage}>리뷰 갯수가</p>
+          <p className={styles.innerMessage}>다른 카테고리의 값이</p>
+          <p className={styles.innerMessage}>일치해요!</p>
+        </div>
       );
     }
   };
@@ -91,8 +97,7 @@ const DataForm: React.FC<ProductDetailInfoProps> = ({ product }) => {
             width={24}
             height={24}
           />
-          <p className={styles.contentTitle}>{product.rating.toFixed(1)}</p>{' '}
-          {/* 소수점 1자리로 표시 */}
+          <p className={styles.contentTitle}>{product.rating.toFixed(1)}</p>
         </div>
         {renderRatingMessage()}
       </div>

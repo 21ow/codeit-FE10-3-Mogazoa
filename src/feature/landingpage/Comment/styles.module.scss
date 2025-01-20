@@ -4,10 +4,13 @@
   margin: 5px;
   border-radius: $radius-common;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 940px;
+  width: 100%;
 }
 
 .commentContainer {
   background-color: $black-350;
+  width: 100%;
   margin-bottom: 20px;
   padding: 16px;
   border-radius: $radius-common;
@@ -21,6 +24,7 @@
 }
 
 .innerContain {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -120,4 +124,21 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+.editName {
+  font-size: 14px;
+  color: $dark-gray;
+  text-decoration: underline;
+}
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.frontContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
 }

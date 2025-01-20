@@ -1,49 +1,10 @@
-.productTop {
-  display: flex;
-  gap: 40px;
-}
-.productId {
-  color: $white;
-}
-.productDetail {
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 160px 0;
+  padding: 0 60px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.productWhat {
-  font-size: 24px;
-  font-weight: 600;
-}
-.productName1 {
-  display: inline-flex;
-  width: 45px;
-  align-items: center;
-  border: none;
-  justify-content: flex-start;
-  margin: 0;
-  padding: 4px 6px;
-  color: $green;
-  background-color: rgb($green, 0.2);
-  border-radius: $radius-category-filter;
-}
-.productName2 {
-  color: $pink;
-  background-color: rgb($pink, 0.2);
-  border-radius: $radius-category-filter;
-}
-.productDetailInfo2 {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-}
-.buttonContain {
-  display: flex;
-  gap: 10px;
-}
-.whatIsThis {
-  display: flex;
-  flex-direction: column;
-  height: 150px;
+  justify-content: center;
+  align-items: flex-start;
 }
