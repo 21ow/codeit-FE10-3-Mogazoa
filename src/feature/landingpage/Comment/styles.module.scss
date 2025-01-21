@@ -1,11 +1,83 @@
+@use '@/shared/dropdown/Dropdown.module.scss' as DropDown;
+
 .articleContain {
   display: flex;
   flex-direction: column;
   margin: 5px;
-  border-radius: $radius-common;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 940px;
   width: 100%;
+  justify-content: center;
+}
+.titleName {
+  font-size: 20px;
+  color: $white;
+}
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dropDownContainer {
+  display: flex;
+  position: absolute;
+}
+.dropDown {
+  @include DropDown.dropdown-style(
+    $display: flex,
+    $width: 300px,
+    $padding: 10px,
+    $flex-direction: column,
+    $align-items: flex-start,
+    $gap: 5px,
+    $border-radius: 8px,
+    $border: 1px solid $black-200,
+    $background: $black-350,
+    $color: $dark-gray,
+    $font-size: 14px,
+    $font-style: normal,
+    $font-weight: 400,
+    $line-height: 20px,
+    $margin-top: 5px,
+    $z-index: 100,
+    $position: absolute
+  );
+}
+.visiBle {
+  @include DropDown.dropdown-style(
+    $display: flex,
+    $width: 300px,
+    $padding: 10px,
+    $flex-direction: column,
+    $align-items: flex-start,
+    $gap: 5px,
+    $border-radius: 8px,
+    $border: 1px solid $black-200,
+    $background: $black-350,
+    $color: $dark-gray,
+    $font-size: 14px,
+    $font-style: normal,
+    $font-weight: 400,
+    $line-height: 20px,
+    $margin-top: 5px,
+    $z-index: 100,
+    $position: absolute
+  );
+}
+.dropdownItem {
+  @include DropDown.item-style(
+    $width: 100%,
+    $border-radius: 6px,
+    $background: $black-350,
+    $display: flex,
+    $padding: 6px 20px,
+    $align-items: center,
+    $color: $dark-gray,
+    $font-size: 14px,
+    $font-style: normal,
+    $font-weight: 400,
+    $line-height: 20px
+  );
 }
 
 .commentContainer {
@@ -119,6 +191,10 @@
 .nameInfo {
   display: flex;
   flex-direction: column;
+}
+.reviewName {
+  font-size: 20px;
+  color: $white;
 }
 .bottomInfo2 {
   display: flex;

@@ -11,8 +11,9 @@
   display: flex;
   max-width: 940px;
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: flex-start;
+  gap: 80px;
 }
 .productDetail {
   display: flex;
