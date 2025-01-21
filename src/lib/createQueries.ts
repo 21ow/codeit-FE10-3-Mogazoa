@@ -3,10 +3,7 @@ import { QueryClient, QueryKey, queryOptions } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-export const createQueries = <R>(
-  baseURL: string,
-  params?: Record<string, string | number>
-) => ({
+export const createQueries = <R, P>(baseURL: string, params?: P) => ({
   all: () => {
     const queryKey = params ? [`${baseURL}`, params] : [`${baseURL}`];
 

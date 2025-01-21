@@ -1,46 +1,74 @@
 .reviewerRanking {
-  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include tablet {
+    gap: 20px;
+    overflow: hidden;
+  }
 }
 
 .reviewerRankingTitle {
   font-size: 16px;
   font-weight: 400;
-  margin-bottom: 20px;
   color: $white;
 }
 
 .reviewerRankingList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  @include tablet {
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
+
 .reviewWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 10px;
+
+  @include tablet {
+    gap: 5px;
+  }
 }
 .reviewerRankingWrapper {
   display: flex;
-  margin-top: 10px;
-  gap: 10px;
+  gap: 15px;
 }
+
 .reviewerRankingInfo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  min-width: 185px;
+
+  @include tablet {
+    min-width: 150px;
+  }
 }
 .reviewerRankingContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 10px;
+  flex-grow: 1;
 }
 .reviewerRankingItem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
   margin-bottom: 10px;
   border-radius: 6px;
 }
@@ -50,7 +78,7 @@
 .reviewerRankingRankDefault {
   font-weight: bold;
   font-size: 12px;
-  padding: 5px 5px;
+  padding: 4px 10px;
   border: none;
   border-radius: $radius-category-filter;
 }
@@ -83,10 +111,7 @@
 .reviewerRankingImage {
   width: 42px;
   height: 42px;
+  background-color: $white;
   border-radius: 50%;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $white;
 }

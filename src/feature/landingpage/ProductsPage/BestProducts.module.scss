@@ -1,7 +1,3 @@
-.wrapper {
-  padding: 15px;
-}
-
 .topWrapper {
   display: flex;
   justify-content: flex-start;
@@ -13,11 +9,12 @@
   font-size: 24px;
   font-weight: bold;
   color: $white;
-}
-.mainTitle2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: $blue;
+
+  > span {
+    color: transparent;
+    background: linear-gradient(91deg, #5097fa, #5363ff);
+    background-clip: text;
+  }
 }
 
 .container {
@@ -25,16 +22,9 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   margin-top: 20px;
-}
+  grid-auto-rows: minmax(200px, auto);
 
-.container > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .container {
+  @include tablet {
     grid-template-columns: repeat(2, 1fr);
   }
 }

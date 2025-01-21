@@ -1,53 +1,53 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import { getProducts } from '@/api/productApi';
-import ProductCard from '@/feature/landingpage/ProductCard/ProductCard';
-import { Product, GetProductsResponse } from '@/api/type/Product';
+import classNames from 'classnames';
+import { createQueries } from '@/lib/createQueries';
+import { useQuery } from '@tanstack/react-query';
+import { GetProductsRequest, GetProductsResponse } from '@/api/type/Product';
+import useCategoryStore from '@/store/useCategoryStore';
+import ProductCard from '../ProductCard/ProductCard';
+import Empty from '@/shared/empty/Empty';
 import styles from './BestProducts.module.scss';
 
 const BestProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const selectedCategory = useCategoryStore((state) => state.selectedCategory);
 
-  const handleLoad = useCallback(async () => {
-    try {
-      const response: GetProductsResponse | null = await getProducts({
-        order: 'reviewCount',
-      });
+  const params: GetProductsRequest = {
+    order: 'reviewCount',
+    category: selectedCategory,
+  };
 
-      if (response && response.list) {
-        setProducts(response.list.slice(0, 6));
-      } else {
-        setProducts([]);
-      }
-    } catch (error) {
-      console.error('Error fetching product:', error);
-      setProducts([]);
-    }
-  }, []);
+  const bestProductsQuery = createQueries<
+    GetProductsResponse,
+    GetProductsRequest
+  >(`/products`, params);
 
-  useEffect(() => {
-    handleLoad();
-  }, [handleLoad]);
+  const { data } = useQuery(bestProductsQuery.all());
+  const products = data?.list || [];
 
   return (
     <section className={styles.wrapper}>
       <div className={styles.topWrapper}>
-        <h2 className={styles.mainTitle}>지금 핫한 상품</h2>
-        <h2 className={styles.mainTitle2}>TOP 6</h2>
+        <h2 className={styles.mainTitle}>
+          지금 <span>HOT</span> 한 상품
+        </h2>
       </div>
-      <div className={styles.container}>
-        {products.map((productItem) => (
-          <ProductCard
-            key={productItem.id}
-            id={productItem.id}
-            name={productItem.name}
-            image={productItem.image}
-            rating={productItem.rating}
-            favoriteCount={productItem.favoriteCount}
-            reviewCount={productItem.reviewCount}
-          />
-        ))}
+      <div className={classNames({ [styles.container]: products?.length })}>
+        {products?.length ? (
+          products.map((item) => (
+            <ProductCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              image={item.image}
+              rating={item.rating}
+              favoriteCount={item.favoriteCount}
+              reviewCount={item.reviewCount}
+            />
+          ))
+        ) : (
+          <Empty />
+        )}
       </div>
     </section>
   );
