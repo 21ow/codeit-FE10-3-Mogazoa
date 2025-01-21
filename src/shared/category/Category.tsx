@@ -1,15 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import { categoryQuery } from '@/api/query';
+import { useRouter } from 'next/navigation';
 import useCategoryStore from '@/store/useCategoryStore';
 import Button from '@/shared/button/Button';
 import styles from './Category.module.scss';
 
-const Category = () => {
+type CategoryProps = {
+  onClick: () => void;
+};
+
+const Category = ({ onClick }: CategoryProps) => {
   const { data } = useQuery(categoryQuery.all());
   const { setCategory } = useCategoryStore();
+  const router = useRouter();
 
   const handleCategoryClick = (id: number) => {
     setCategory(id);
+    onClick();
+    router.push('/');
   };
 
   return (
