@@ -1,0 +1,27 @@
+@use '@/shared/category/Category.module.scss' as actionBtn;
+
+.userDashboard {
+  padding: 20px 14px;
+  display: flex;
+  line-height: 40px;
+
+  > a,
+  button {
+    width: 50%;
+    display: inline-flex;
+    justify-content: center;
+
+    &:hover {
+      @include hover-style(
+        $hover-bg: #25252e,
+        $hover-color: $white,
+        $border-radius: 4px,
+        $transition-time: 0.3s
+      );
+    }
+  }
+}
+
+.logoutBtn {
+  @include actionBtn.actionButton-style;
+}
