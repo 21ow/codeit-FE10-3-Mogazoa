@@ -9,21 +9,29 @@
 }
 .productTop {
   display: flex;
-  max-width: 940px;
   width: 100%;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 .productDetail {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
+  justify-content: center;
 }
 
-.productWhat {
-  font-size: 24px;
-  font-weight: 600;
+.buttonContain {
+  display: flex;
+  &.expandedButtons {
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  & {
+    gap: 25px;
+    justify-content: flex-end;
+  }
 }
 
 .productDetailInfo2 {
@@ -32,10 +40,7 @@
   align-items: center;
   gap: 10px;
 }
-.buttonContain {
-  display: flex;
-  gap: 10px;
-}
+
 .whatIsThis {
   display: flex;
   flex-direction: column;

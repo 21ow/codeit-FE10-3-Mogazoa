@@ -5,7 +5,7 @@
     $background: $black-450,
     $border: $border-blue,
     $radius: $radius-common,
-    $width: 180px,
+    $width: 250px,
     $height: 65px,
     $padding: 0,
     $color: $blue
@@ -17,7 +17,19 @@
     $background: $gradient,
     $border: $border-blue,
     $radius: $radius-common,
-    $width: 345px,
+    $width: 350px,
+    $height: 65px,
+    $padding: 0,
+    $color: $white
+  );
+  display: flex;
+}
+.editButton {
+  @include button.button-style(
+    $background: $black-350,
+    $border: 1px solid $white,
+    $radius: $radius-common,
+    $width: 80px,
     $height: 65px,
     $padding: 0,
     $color: $white
