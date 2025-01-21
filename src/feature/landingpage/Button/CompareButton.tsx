@@ -6,7 +6,7 @@ const CompareButton = () => {
   const router = useRouter();
 
   const handleCompare = () => {
-    router.push('/product');
+    router.push('/compare');
   };
 
   return (
