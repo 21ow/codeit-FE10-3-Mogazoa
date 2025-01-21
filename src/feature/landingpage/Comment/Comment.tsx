@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getProductsReviews } from '@/api/productApi';
 import { GetProductReviewsResponse } from '@/api/type/Product';
 import ImageComponent from '@/shared/Image/Images';
@@ -8,25 +8,39 @@ import ThumbCheck from '@/feature/landingpage/ThumbCheck/ThumbCheck';
 import ReviewEdit from './Edit/ReviewEdit';
 import ReviewDelete from './Delete/ReviewDelete';
 import styles from './styles.module.scss';
+import Dropdown from '@/shared/dropdown/Dropdown';
+import useDropdownStore from '@/shared/dropdown/useDropdownStore';
 
 type CoCardProps = {
   productId: number;
 };
-
 const CoCard = ({ productId }: CoCardProps) => {
   const [comments, setComments] = useState<GetProductReviewsResponse['list']>(
     []
   );
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
+  const { dropdowns, openDropdown, closeDropdown } = useDropdownStore();
+  const dropdownId = useRef('Comment');
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleDropdownClick = () => {
+    if (dropdowns[dropdownId.current]?.isVisible) {
+      closeDropdown(dropdownId.current);
+    } else {
+      openDropdown(dropdownId.current);
+    }
+  };
+
   useEffect(() => {
-    const fetchInitialData = async () => {
-      const data = await getProductsReviews(productId);
+    const fetchReviews = async () => {
+      const order = dropdowns[dropdownId.current]?.selectedOption ?? 'recent';
+      const data = await getProductsReviews(productId, order);
       setComments(data.list || []);
     };
 
-    fetchInitialData();
-  }, [productId]);
+    fetchReviews();
+  }, [productId, dropdowns[dropdownId.current]?.selectedOption]);
 
   const handleEditSuccess = (
     updatedReview: GetProductReviewsResponse['list'][number]
@@ -55,6 +69,26 @@ const CoCard = ({ productId }: CoCardProps) => {
 
   return (
     <div className={styles.articleContain}>
+      <div className={styles.titleContainer}>
+        <h3 className={styles.titleName}>상품 리뷰</h3>
+        <div className={styles.dropdownContainer}>
+          <button onClick={handleDropdownClick} ref={buttonRef}>
+            {dropdowns[dropdownId.current]?.selectedOption ?? 'recent'}
+          </button>
+          {dropdowns[dropdownId.current]?.isVisible && (
+            <Dropdown
+              options={['recent', 'ratingAsc', 'ratingDesc', 'likeCount']}
+              dropdownId={dropdownId.current}
+              parentRef={buttonRef}
+              customVisible={styles.visiBle}
+              customDropdownStyle={styles.dropDown}
+              customItemStyle={styles.dropdownItem}
+              onClose={() => closeDropdown(dropdownId.current)}
+            />
+          )}
+        </div>
+      </div>
+
       {comments.length > 0 ? (
         <div className={styles.insideContain}>
           {comments.map((comment) => (

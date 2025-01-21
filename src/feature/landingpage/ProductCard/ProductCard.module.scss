@@ -14,7 +14,15 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   }
 }
-
+.activeStar {
+  color: $yellow;
+}
+.starContain {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
 .innerContain {
   display: flex;
   flex-direction: column;

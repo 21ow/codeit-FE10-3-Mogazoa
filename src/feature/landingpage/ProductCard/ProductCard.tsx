@@ -1,6 +1,7 @@
 import ImageComponent from '@/shared/Image/Images';
 import { Product } from '@/api/type/Product';
 import Link from 'next/link';
+import Star from '/public/icon/ic-star.svg';
 import styles from './ProductCard.module.scss';
 
 const ProductCard = ({
@@ -32,7 +33,10 @@ const ProductCard = ({
                 <p className={styles.favoriteCount}>찜</p>
                 <p className={styles.favoriteCount}>{favoriteCount}</p>
               </div>
-              <p className={styles.raTing}>{rating?.toFixed(1)}</p>
+              <div className={styles.starContain}>
+                <Star className={styles.activeStar} width={15} height={15} />
+                <p className={styles.raTing}>{rating?.toFixed(1)}</p>
+              </div>
             </div>
           </div>
         </div>
