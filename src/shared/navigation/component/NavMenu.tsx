@@ -3,14 +3,18 @@ import AddItem from '/public/icon/ic-add-item.svg';
 import Compare from '/public/icon/ic-compare.svg';
 import styles from './NavMenu.module.scss';
 
-const NavMenu = () => {
+type NavMenuProps = {
+  onClick?: () => void;
+};
+
+const NavMenu = ({ onClick }: NavMenuProps) => {
   return (
     <div className={styles.NavMenu}>
-      <Link href="/add-product">
+      <Link href="/add-product" onClick={onClick}>
         <AddItem />
         <span>등록하기</span>
       </Link>
-      <Link href="#">
+      <Link href="#" onClick={onClick}>
         <Compare />
         <span>비교하기</span>
       </Link>

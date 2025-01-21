@@ -57,8 +57,8 @@ const MobileMenu = () => {
           }
         >
           <>
-            <Category />
-            <NavMenu />
+            <Category onClick={handleClose} />
+            <NavMenu onClick={handleClose} />
             <div className={styles.mobileUserAcitons}>
               <Link href="#">고객센터</Link>
               {token && (

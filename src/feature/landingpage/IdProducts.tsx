@@ -74,7 +74,6 @@ const IdProducts: React.FC = () => {
         <DataForm product={product} />
       </div>
       <div className={styles.reviewContain}>
-        <h3 className={styles.reviewName}>상품 리뷰</h3>
         <CoCard productId={product.id} />
       </div>
     </div>

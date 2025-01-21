@@ -11,6 +11,7 @@
 
 .content {
   gap: 60px;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 300px auto 300px;
@@ -19,7 +20,7 @@
 
   @include tablet {
     gap: 40px 25px;
-    grid-template-columns: 2fr;
+    grid-template-columns: 180px, 1fr;
     grid-template-rows: repeat(2, auto);
     grid-template-areas:
       'aside article'
@@ -27,6 +28,7 @@
   }
 
   @include mobile {
+    padding: 0 15px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, auto);
     grid-template-areas:
@@ -39,6 +41,7 @@
   grid-area: aside;
   width: 220px;
   height: 100%;
+  margin: 0 auto;
   > div {
     position: sticky;
     top: 145px;
@@ -49,6 +52,10 @@
     }
   }
 
+  @include tablet {
+    width: 160px;
+  }
+
   @include mobile {
     display: none;
   }
@@ -56,6 +63,10 @@
 
 .main {
   grid-area: main;
+
+  @include mobile {
+    margin: 0 auto;
+  }
 }
 
 .article {
@@ -69,6 +80,16 @@
   }
 
   @include tablet {
-    display: none; // 리뷰어 랭킹 반응형 후 삭제될 코드
+    margin-top: 40px;
+    width: 100%;
+    overflow: hidden;
+
+    > div {
+      position: static;
+    }
+  }
+
+  @include mobile {
+    margin-top: 30px;
   }
 }
