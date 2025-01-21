@@ -1,13 +1,13 @@
 'use client';
 
 import classNames from 'classnames';
-import { createQueries } from '@/lib/createQueries';
 import { useQuery } from '@tanstack/react-query';
-import { GetProductsRequest, GetProductsResponse } from '@/api/type/Product';
+import { GetProductsRequest } from '@/api/type/Product';
 import useCategoryStore from '@/store/useCategoryStore';
 import ProductCard from '../ProductCard/ProductCard';
 import Empty from '@/shared/empty/Empty';
 import styles from './BestProducts.module.scss';
+import { productsQuery } from '@/api/query';
 
 const BestProducts = () => {
   const selectedCategory = useCategoryStore((state) => state.selectedCategory);
@@ -17,13 +17,8 @@ const BestProducts = () => {
     category: selectedCategory,
   };
 
-  const bestProductsQuery = createQueries<
-    GetProductsResponse,
-    GetProductsRequest
-  >(`/products`, params);
-
-  const { data } = useQuery(bestProductsQuery.all());
-  const products = data?.list || [];
+  const { data } = useQuery(productsQuery(params).all());
+  const products = (data?.list || []).slice(0, 6);
 
   return (
     <section className={styles.wrapper}>
