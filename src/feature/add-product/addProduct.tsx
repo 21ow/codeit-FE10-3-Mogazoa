@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import useAuthGuard from '@/hook/useAuthGuard';
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import classNames from 'classnames';
+import useAuthGuard from '@/hook/useAuthGuard';
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
@@ -31,7 +32,9 @@ export type CombinedRequest = ProductRequest & {
 const AddProduct = () => {
   useAuthGuard();
 
-  const { register, handleSubmit, getValues, setValue, control } =
+  const router = useRouter();
+
+  const { register, handleSubmit, getValues, setValue, control, reset } =
     useForm<CombinedRequest>();
 
   const params: GetProductsRequest = {
@@ -86,8 +89,16 @@ const AddProduct = () => {
   >({
     mutationFn: (data) =>
       axiosInstance.post(`/products`, data).then((response) => response.data),
-    onSuccess: () => {
-      window.location.reload(); //임시 초기화
+    onSuccess: (data) => {
+      resetDropdowns();
+      reset({
+        categoryId: 0,
+        name: '',
+        description: '',
+        file: undefined,
+        image: '',
+      });
+      router.push(`/product/${data.id}`);
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
@@ -108,11 +119,13 @@ const AddProduct = () => {
   const dropdownId = useRef('selectCategory');
   const divRef = useRef<HTMLDivElement>(null);
 
-  const { dropdowns, openDropdown, closeDropdown } = useDropdownStore();
+  const { dropdowns, openDropdown, closeDropdown, resetDropdowns } =
+    useDropdownStore();
 
   const addDropdown = dropdowns[dropdownId.current];
   const addDropdownView = addDropdown?.isVisible;
   const selectCategory = addDropdown?.selectedOption;
+  console.log(selectCategory);
 
   useEffect(() => {
     if (!data) return;
@@ -120,7 +133,7 @@ const AddProduct = () => {
       (category) => category.name === selectCategory
     );
     if (selectedCategory) {
-      setValue('categoryId', selectedCategory.id);
+      setValue('categoryId', selectedCategory.id ?? 0);
     }
   }, [selectCategory, setValue, data]);
 
