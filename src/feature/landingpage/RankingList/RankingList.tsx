@@ -48,10 +48,11 @@ const RankingList = () => {
                 <ImageComponent
                   src={user.image}
                   alt={user.nickname}
-                  width={50}
-                  height={50}
+                  width={42}
+                  height={42}
                 />
               </div>
+
               <div className={styles.reviewerRankingContent}>
                 <div className={styles.reviewWrapper}>
                   <div
