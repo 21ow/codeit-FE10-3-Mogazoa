@@ -6,7 +6,7 @@ import Button from '@/shared/button/Button';
 import styles from './Category.module.scss';
 
 type CategoryProps = {
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Category = ({ onClick }: CategoryProps) => {
@@ -16,7 +16,7 @@ const Category = ({ onClick }: CategoryProps) => {
 
   const handleCategoryClick = (id: number) => {
     setCategory(id);
-    onClick();
+    if (onClick) onClick();
     router.push('/');
   };
 

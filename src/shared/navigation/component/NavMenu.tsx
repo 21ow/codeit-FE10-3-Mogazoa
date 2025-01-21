@@ -4,7 +4,7 @@ import Compare from '/public/icon/ic-compare.svg';
 import styles from './NavMenu.module.scss';
 
 type NavMenuProps = {
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const NavMenu = ({ onClick }: NavMenuProps) => {
