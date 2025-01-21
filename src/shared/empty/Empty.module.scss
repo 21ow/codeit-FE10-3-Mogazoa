@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700');
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  > h2 {
+    margin-top: 50px;
+  }
+
+  > h3 {
+    margin-top: 20px;
+    color: $dark-gray;
+  }
+}
+
+.symbolWrapper {
+  position: relative;
+  > svg {
+    fill: $indigo;
+    width: 230px;
+    height: auto;
+    opacity: 0.5;
+  }
+
+  > .bold {
+    position: absolute;
+    font-family: 'Fredoka';
+    font-size: 70px;
+    font-weight: 650;
+    color: $gray;
+    top: 20px;
+    right: 0;
+    transform: rotate(10deg);
+  }
+}
