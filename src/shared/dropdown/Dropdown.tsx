@@ -14,6 +14,8 @@ interface DropdownProps {
   isVisible?: boolean;
   customVisible?: string;
   customHidden?: string;
+  customTop?: number;
+  customLeft?: number;
 }
 
 const Dropdown = ({
@@ -26,6 +28,8 @@ const Dropdown = ({
   isVisible = false,
   customVisible = '',
   customHidden = '',
+  customTop,
+  customLeft,
 }: DropdownProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { dropdowns } = useDropdownStore();
@@ -88,8 +92,8 @@ const Dropdown = ({
   const parentRect = parentRef.current?.getBoundingClientRect();
 
   const dropdownStyle: CSSProperties = {
-    top: `${parentRect?.bottom}px`,
-    left: `${parentRect?.left}px`,
+    top: `${(parentRect?.bottom || 0) + (customTop || 0)}px`,
+    left: `${(parentRect?.left || 0) + (customLeft || 0)}px`,
   };
 
   return (

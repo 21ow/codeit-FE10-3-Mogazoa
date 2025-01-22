@@ -1,17 +1,21 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import useAuthGuard from '@/hook/useAuthGuard';
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import classNames from 'classnames';
+import useAuthGuard from '@/hook/useAuthGuard';
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '@/lib/axiosInstance';
 import { AxiosError } from 'axios';
-import { ProductRequest, ProductResponse } from '@/api/type/Product';
+import {
+  GetProductsRequest,
+  ProductRequest,
+  ProductResponse,
+} from '@/api/type/Product';
 import { ImageResponse } from '@/api/type/Image';
-
 import { useQuery } from '@tanstack/react-query';
-import { categoryQuery } from '@/api/query';
+import { categoryQuery, productsQuery } from '@/api/query';
 import useDropdownStore from '@/shared/dropdown/useDropdownStore';
 import Dropdown from '@/shared/dropdown/Dropdown';
 import Input from '@/shared/input/Input';
@@ -28,8 +32,30 @@ export type CombinedRequest = ProductRequest & {
 const AddProduct = () => {
   useAuthGuard();
 
-  const { register, handleSubmit, setValue, control } =
+  const router = useRouter();
+
+  const { register, handleSubmit, getValues, setValue, control, reset } =
     useForm<CombinedRequest>();
+
+  const params: GetProductsRequest = {
+    order: 'reviewCount',
+    category: getValues('categoryId'),
+  };
+
+  const { data: invalidData } = useQuery(productsQuery(params).all());
+  const products = invalidData?.list || [];
+  const [isDuplicate, setIsDuplicate] = useState(false);
+
+  useEffect(() => {
+    if (!data) return;
+
+    const productName = getValues('name');
+    const duplicateProduct = products.find(
+      (product) => product.name === productName
+    );
+
+    setIsDuplicate(!!duplicateProduct);
+  }, [invalidData, getValues]);
 
   const { mutate: imageUpload } = useMutation<
     ImageResponse,
@@ -63,8 +89,16 @@ const AddProduct = () => {
   >({
     mutationFn: (data) =>
       axiosInstance.post(`/products`, data).then((response) => response.data),
-    onSuccess: () => {
-      window.location.reload(); //임시 초기화
+    onSuccess: (data) => {
+      resetDropdowns();
+      reset({
+        categoryId: 0,
+        name: '',
+        description: '',
+        file: undefined,
+        image: '',
+      });
+      router.push(`/product/${data.id}`);
     },
     onError: (error: AxiosError) => {
       const message = (error.response?.data as { message: string })?.message;
@@ -85,11 +119,13 @@ const AddProduct = () => {
   const dropdownId = useRef('selectCategory');
   const divRef = useRef<HTMLDivElement>(null);
 
-  const { dropdowns, openDropdown, closeDropdown } = useDropdownStore();
+  const { dropdowns, openDropdown, closeDropdown, resetDropdowns } =
+    useDropdownStore();
 
   const addDropdown = dropdowns[dropdownId.current];
   const addDropdownView = addDropdown?.isVisible;
   const selectCategory = addDropdown?.selectedOption;
+  console.log(selectCategory);
 
   useEffect(() => {
     if (!data) return;
@@ -97,7 +133,7 @@ const AddProduct = () => {
       (category) => category.name === selectCategory
     );
     if (selectedCategory) {
-      setValue('categoryId', selectedCategory.id);
+      setValue('categoryId', selectedCategory.id ?? 0);
     }
   }, [selectCategory, setValue, data]);
 
@@ -115,6 +151,11 @@ const AddProduct = () => {
 
   const onSubmit: SubmitHandler<CombinedRequest> = async (data) => {
     try {
+      if (isDuplicate) {
+        alert('해당 카테고리에 동일한 상품이 등록되어 있어요.');
+        return;
+      }
+
       const imageData = new FormData();
       const file = data.file?.[0];
       console.log(data);
@@ -143,7 +184,7 @@ const AddProduct = () => {
 
       addProduct(productData);
     } catch (error) {
-      console.error('상품 등록 중 오류 발생:', error);
+      console.error('에러:', error);
     }
   };
 

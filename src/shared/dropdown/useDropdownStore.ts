@@ -10,6 +10,7 @@ interface DropdownState {
   dropdowns: { [key: string]: DropdownContent };
   openDropdown: (id: string, content?: React.ReactNode) => void;
   closeDropdown: (id: string) => void;
+  resetDropdowns: () => void;
 }
 
 const useDropdownStore = create<DropdownState>((set) => ({
@@ -39,6 +40,7 @@ const useDropdownStore = create<DropdownState>((set) => ({
         [id]: { ...state.dropdowns[id], selectedOption: option },
       },
     })),
+  resetDropdowns: () => set({ dropdowns: {} }),
 }));
 
 export default useDropdownStore;

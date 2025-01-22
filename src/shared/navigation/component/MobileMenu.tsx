@@ -1,21 +1,20 @@
 'use client';
 
 import { useRef } from 'react';
-import Link from 'next/link';
-import Logo from '/public/image/img-logo.svg';
 import Menu from '/public/icon/ic-menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
-import { useAuthStore } from '@/store/useAuthStore';
+import LogoLink from '@/shared/logo/logo';
 import UserActions from './UserActions';
 import Category from '@/shared/category/Category';
 import NavMenu from './NavMenu';
+import UserDashboard from './UserDashboard';
 import styles from './MobileMenu.module.scss';
 
 const MobileMenu = () => {
   const modalId = useRef('menu');
-  const { token, clearToken } = useAuthStore();
+
   const { modals, openModal, closeModal } = useModalStore();
 
   const handleOpen = () => {
@@ -24,11 +23,6 @@ const MobileMenu = () => {
 
   const handleClose = () => {
     closeModal(modalId.current);
-  };
-
-  const handleLogout = () => {
-    clearToken();
-    handleClose();
   };
 
   return (
@@ -48,10 +42,7 @@ const MobileMenu = () => {
           customHidden={styles.customHidden}
           customHeader={
             <div className={styles.customHeader}>
-              <Link href="/" className={styles.modalLogo}>
-                <Logo />
-              </Link>
-
+              <LogoLink className={styles.modalLogo} />
               <UserActions />
             </div>
           }
@@ -59,14 +50,7 @@ const MobileMenu = () => {
           <>
             <Category onClick={handleClose} />
             <NavMenu onClick={handleClose} />
-            <div className={styles.mobileUserAcitons}>
-              <Link href="#">고객센터</Link>
-              {token && (
-                <Button className={styles.logoutBtn} onClick={handleLogout}>
-                  로그아웃
-                </Button>
-              )}
-            </div>
+            <UserDashboard onClick={handleClose} />
           </>
         </Modal>
       )}

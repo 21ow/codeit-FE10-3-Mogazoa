@@ -1,5 +1,3 @@
-@use '@/shared/category/Category.module.scss' as actionBtn;
-
 .mobileMenu {
   display: none;
 
@@ -27,7 +25,6 @@
 .customModal {
   width: 270px;
   height: 100%;
-  padding: 16px 26px;
   background-color: $black-450;
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -86,6 +83,7 @@
   background-color: inherit;
   top: 0;
   z-index: 1;
+  padding: 20px 26px;
 }
 
 .modalLogo {
@@ -97,31 +95,8 @@
 }
 
 .customContent {
-  margin: 0; //임시 코드
-}
-
-.mobileUserAcitons {
-  padding: 20px 14px;
+  padding: 20px 26px;
   display: flex;
-  line-height: 40px;
-
-  > a,
-  button {
-    width: 50%;
-    display: inline-flex;
-    justify-content: center;
-
-    &:hover {
-      @include hover-style(
-        $hover-bg: #25252e,
-        $hover-color: $white,
-        $border-radius: 4px,
-        $transition-time: 0.3s
-      );
-    }
-  }
-}
-
-.logoutBtn {
-  @include actionBtn.actionButton-style;
+  flex-direction: column;
+  gap: 20px;
 }
