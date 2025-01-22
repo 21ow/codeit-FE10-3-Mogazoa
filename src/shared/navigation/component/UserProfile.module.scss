@@ -10,7 +10,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 24px 0 20px;
+    margin: 24px 0 0 0;
+    cursor: default;
+
+    &:hover {
+      outline: unset;
+    }
   }
 }
 

@@ -25,7 +25,6 @@
 .customModal {
   width: 270px;
   height: 100%;
-  padding: 16px 26px;
   background-color: $black-450;
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -84,6 +83,7 @@
   background-color: inherit;
   top: 0;
   z-index: 1;
+  padding: 20px 26px;
 }
 
 .modalLogo {
@@ -95,5 +95,8 @@
 }
 
 .customContent {
-  margin: 0; //임시 코드
+  padding: 20px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
