@@ -3,27 +3,42 @@
 import Image from 'next/image';
 import styles from './UserHistory.module.scss';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { userQuery } from '@/api/query';
+import {
+  getUsersLikes,
+  getUsersProducts,
+  getUsersReviews,
+} from '@/api/userApi';
+import classNames from 'classnames';
+import ProductCard from '@/feature/landingpage/ProductCard/ProductCard';
 
-interface UserReviewedProduct {
-  updatedAt?: string;
-  createdAt?: string;
-  writerId?: number;
-  categoryId?: number;
-  favoriteCount?: number;
-  reviewCount?: number;
-  rating?: number;
-  image?: string;
-  name?: string;
-  id?: number;
+interface UserHistoryProps {
+  userId?: string;
 }
 
-interface UserReviewedProductProps {
-  data?: UserReviewedProduct[];
-}
+const UserHistory = ({ userId = '740' }: UserHistoryProps) => {
+  const [isReviewed, setIsReviewed] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const reviewedData = useQuery({
+    queryKey: ['userReviews'],
+    queryFn: () => getUsersReviews(userId),
+  })?.data?.list;
+  const registeredData = useQuery({
+    queryKey: ['userCreatedProducts'],
+    queryFn: () => getUsersProducts(userId),
+  })?.data?.list;
+  const favoriteData = useQuery({
+    queryKey: ['userFavoriteProducts'],
+    queryFn: () => getUsersLikes(userId),
+  })?.data?.list;
 
-// 리뷰 남긴상품, 등록한 상품, 찜한 상품별로 api 요청하고 데이터 처리 필요.
-const UserHistory = ({ data }: UserReviewedProductProps = {}) => {
   const [sort, setSort] = useState('reviewed');
+
+  const reviewedproducts = (reviewedData || []).slice(0, 6);
+  const registeredProducts = (registeredData || []).slice(0, 6);
+  const favoriteProducts = (favoriteData || []).slice(0, 6);
 
   const handleSort = (name: string) => {
     setSort(name);
@@ -51,43 +66,47 @@ const UserHistory = ({ data }: UserReviewedProductProps = {}) => {
           찜한 상품
         </h3>
       </div>
-      <div className={styles.cardContainer}>
-        {data?.map((review) => (
-          <div key={review.id} className={styles.card}>
-            <div className={styles.image}>
-              <Image
-                src={review.image || '/image/catbody.svg'}
-                alt={review.name || '빈 이미지지'}
-                width={245}
-                height={180}
-              />
-            </div>
-            <div className={styles.content}>
-              <div className={styles.productName}>{review.name}</div>
-              <div className={styles.productInfo}>
-                <div className={styles.info}>
-                  <div className={styles.count}>
-                    <p>리뷰</p>
-                    <p>{review.reviewCount}</p>
-                  </div>
-                  <div className={styles.count}>
-                    <p>찜</p>
-                    <p>{review.favoriteCount}</p>
-                  </div>
-                </div>
-                <div className={styles.count}>
-                  <Image
-                    src="/icon/ic-star.svg"
-                    alt="별"
-                    width={16}
-                    height={16}
-                  />
-                  <p>{review.rating}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+      <div
+        className={classNames({
+          [styles.cardContainer]: reviewedproducts?.length,
+        })}
+      >
+        {sort === 'reviewed' &&
+          reviewedproducts?.map((review) => (
+            <ProductCard
+              key={review.id}
+              id={review.id}
+              name={review.name}
+              image={review.image}
+              rating={review.rating}
+              favoriteCount={review.favoriteCount}
+              reviewCount={review.reviewCount}
+            />
+          ))}
+        {sort === 'registered' &&
+          registeredProducts?.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              image={product.image}
+              rating={product.rating}
+              favoriteCount={product.favoriteCount}
+              reviewCount={product.reviewCount}
+            />
+          ))}
+        {sort === 'favorite' &&
+          favoriteProducts?.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              image={product.image}
+              rating={product.rating}
+              favoriteCount={product.favoriteCount}
+              reviewCount={product.reviewCount}
+            />
+          ))}
       </div>
     </div>
   );
