@@ -1,13 +1,13 @@
 'use client';
 
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
-import { GetProductsRequest } from '@/api/type/Product';
 import useCategoryStore from '@/store/useCategoryStore';
+import { useQuery } from '@tanstack/react-query';
+import { productsQuery } from '@/api/query';
+import { GetProductsRequest } from '@/api/type/Product';
 import ProductCard from '../ProductCard/ProductCard';
 import Empty from '@/shared/empty/Empty';
 import styles from './RatingProducts.module.scss';
-import { productsQuery } from '@/api/query';
 
 const RatingProducts = () => {
   const selectedCategory = useCategoryStore((state) => state.selectedCategory);
