@@ -80,8 +80,10 @@ const Dropdown = ({
   }, [isVisible, onClose, customVisible, customHidden, parentRef]);
 
   const handleItemClick = (value: string) => {
-    dropdowns[dropdownId].selectedOption = value;
-    onClose();
+    if (!dropdowns[dropdownId].selectedOption) {
+      dropdowns[dropdownId].selectedOption = value;
+      onClose();
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {

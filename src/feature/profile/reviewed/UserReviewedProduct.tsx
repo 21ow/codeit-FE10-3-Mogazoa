@@ -1,33 +1,19 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './UserReviewedProduct.module.scss';
-
-interface mostFavoriteCategory {
-  name?: string;
-  id?: number;
-}
-
-interface UserReviewedProduct {
-  createdAt?: string;
-  updatedAt?: string;
-  teamId?: string;
-  image?: string;
-  description?: string;
-  nickname?: string;
-  id?: number;
-  mostFavoriteCategory?: mostFavoriteCategory;
-  averageRating?: number;
-  reviewCount?: number;
-  followeesCount?: number;
-  followersCount?: number;
-  isFollowing?: boolean;
-}
+import { getUsersInfo } from '@/api/userApi';
+import { useQuery } from '@tanstack/react-query';
 
 interface UserReviewedProductProps {
-  data?: UserReviewedProduct;
+  userId?: string;
 }
 
-const UserReviewedProduct = ({ data }: UserReviewedProductProps = {}) => {
-  const { averageRating, reviewCount, mostFavoriteCategory } = data || {};
+const UserReviewedProduct = ({ userId = '740' }: UserReviewedProductProps) => {
+  const userData = useQuery({
+    queryKey: ['user'],
+    queryFn: () => getUsersInfo(userId),
+  })?.data;
   return (
     <div className={styles.container}>
       <h3 className={styles.activeHistory}>활동 내역</h3>
@@ -35,8 +21,10 @@ const UserReviewedProduct = ({ data }: UserReviewedProductProps = {}) => {
         <div className={styles.card}>
           <p className={styles.cardTitle}>남긴 별점 평균</p>
           <div className={styles.cardContent}>
-            <Image src="/icon/ic-star.svg" alt="별" width={24} height={24} />
-            <p className={styles.numberStyle}>{averageRating}</p>
+            <Image src="/icon/ic-star2.svg" alt="별" width={24} height={24} />
+            <p className={styles.numberStyle}>
+              {Math.round(Number(userData?.averageRating) * 10) / 10}
+            </p>
           </div>
         </div>
         <div className={styles.card}>
@@ -48,13 +36,13 @@ const UserReviewedProduct = ({ data }: UserReviewedProductProps = {}) => {
               width={24}
               height={24}
             />
-            <p className={styles.numberStyle}>{reviewCount}</p>
+            <p className={styles.numberStyle}>{userData?.reviewCount}</p>
           </div>
         </div>
         <div className={styles.card}>
           <p className={styles.cardTitle}>관심 카테고리</p>
           <div className={styles.categoryChip}>
-            {mostFavoriteCategory?.name}
+            {userData?.mostFavoriteCategory?.name}
           </div>
         </div>
       </div>

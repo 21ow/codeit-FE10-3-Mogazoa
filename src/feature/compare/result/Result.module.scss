@@ -1,0 +1,225 @@
+@use '@/asset/variables' as *;
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 275px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  border: 2px solid $black-200;
+  background: $black-350;
+  width: 940px;
+  height: 300px;
+  animation: borderChange 2s infinite;
+
+  @keyframes borderChange {
+    0% {
+      border: 2px solid $black-200;
+    }
+    50% {
+      border: 2px solid $blue;
+    }
+    100% {
+      border: 2px solid $black-200;
+    }
+  }
+
+  p {
+    color: $gray;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  span {
+    color: $white;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 75px;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid $black-200;
+
+  * {
+    width: 235px;
+  }
+}
+
+.row {
+  display: flex;
+  height: 75px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  * {
+    width: 235px;
+  }
+}
+
+.firstProductWin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $green;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.secondProductWin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $pink;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstWin {
+  color: $green;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.secondWin {
+  color: $pink;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.winPhrase {
+  color: $gray;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 140px;
+  margin-bottom: 80px;
+  color: $white;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.resultBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.winImage {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  outline: 3px solid $green;
+  animation: imageBorderChange 2s infinite, fadeIn 1.5s;
+   
+  @keyframes imageBorderChange {
+    0% {
+      outline: 3px solid $black-200;
+    }
+    50% {
+      outline: 3px solid $blue;
+    }
+    100% {
+      outline: 3px solid $black-200;
+    }
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.winContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.drawContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 140px;
+  margin-bottom: 80px;
+  color: $white;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
