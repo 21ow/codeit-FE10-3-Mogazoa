@@ -1,12 +1,11 @@
 'use client';
 
 import { useRef } from 'react';
-import Link from 'next/link';
-import Logo from '/public/image/img-logo.svg';
 import Menu from '/public/icon/ic-menu.svg';
 import Button from '@/shared/button/Button';
 import useModalStore from '@/shared/modal/useModalStore';
 import Modal from '@/shared/modal/Modal';
+import LogoLink from '@/shared/logo/logo';
 import UserActions from './UserActions';
 import Category from '@/shared/category/Category';
 import NavMenu from './NavMenu';
@@ -43,10 +42,7 @@ const MobileMenu = () => {
           customHidden={styles.customHidden}
           customHeader={
             <div className={styles.customHeader}>
-              <Link href="/" className={styles.modalLogo}>
-                <Logo />
-              </Link>
-
+              <LogoLink className={styles.modalLogo} />
               <UserActions />
             </div>
           }
